@@ -1,0 +1,197 @@
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'SUIT-Regular';
+    font-size: 14px;
+}
+
+a{
+    text-decoration: none;
+}
+
+button {
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: white;
+    cursor: pointer;
+}
+
+
+body {
+    background-image: url(/static/image/background_image.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    
+    margin: 0px auto;
+    width: 1400px;
+}
+
+.login-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin: 0px auto;
+    margin-top: 200px;
+    margin-left:300px;
+    
+    width: 700px;
+    height: 200px;
+
+    background-color: rgba(255, 255, 255, 0.76);
+    box-shadow: 0px 0px 5px 1px white;
+}
+
+.login-left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border: 1px solid white;
+    padding: 10px;
+    width: 47%;
+    height: 50%;
+
+    border-right: 1px solid #dbdbdb;
+}
+
+.login-right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border: 1px solid white;
+    padding: 10px;
+    width: 47%;
+    height: 70%;
+}
+.logo-span{
+    display: flex;
+    flex-direction: row;
+}
+
+.logo-title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-title img{
+    height:30px;
+}
+
+.school-name{
+    margin-top:12px;
+    font-size:4px;
+    font-weight: 900;
+}
+
+.eng-schoolname{
+    margin-bottom: 7px;
+    font-size:1px;
+    font-weight: 900;
+}
+
+.school-system{
+    margin-top:15px;
+    font-size:16px;
+    font-weight: 900;
+
+    color:#0d8f9b;
+}
+
+.login-list li{
+    font-size: 12px;
+    color:#353232;
+}
+
+.login-group{
+    display: flex;
+    flex-direction: row;
+
+    margin-top: 20px;
+    margin-left:10px;
+    margin-bottom:15px;
+}
+
+.login-inputs{
+    margin-top: 4px;
+    margin-bottom:4px;
+
+    height:23px;
+
+    border:1px solid #a0c4e5;
+    box-shadow:0 0 3px rgb(0 0 0 / 26%);
+    
+    outline: none;
+}
+
+.login-id-password{
+    width:200px;
+}
+
+.login-submit{
+    width:100px;
+
+    color:white;
+
+    background-color: #0c5292;
+    border:1px solid #0c5292;
+    border-radius: 5px;
+}
+
+.register-user, .login-find-id, .login-find-pd{
+    font-size:13px;
+    color:#888;
+}
+
+.login-find-id{
+    padding: 0px 20px;
+}
+
+.login-finding {
+    margin-left: 90px;
+}
+
+.login-finding a {
+    padding: 0 10px 0 0;
+    color: #777;
+    height: 26px;
+    line-height: 26px;
+}
+
+.login-finding :nth-child(-n+2)::after {
+    content: "";
+    margin-left: 10px;
+    
+    height: 70%;
+    border-left: 1px solid rgba(59, 59, 59, 0.386);
+}
+
+.login-finding a:hover{
+    text-decoration: underline;
+}
+
+.person-information {
+    margin-left: 175px;
+}
+
+.profile-img img{
+    height: 20px;
+}
+.profile-text {
+    margin-left: 10px;
+}
+
+.error-message{
+    color: red;
+    font-size: 8px;
+}

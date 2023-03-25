@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.koreaitsugang.repository.AccountRepository">
+
+    <resultMap id="userMst" type="com.koreait.koreaitsugang.entity.UserMst">
+        <result property="userId" column="user_id"></result>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="name" column="name"></result>
+        <result property="phone" column="phone"></result>
+        <result property="birthDate" column="birth_date"></result>
+        <result property="email" column="email"></result>
+        <result property="address" column="address"></result>
+        <result property="departmentNumber" column="department_number"></result>
+        <collection property="roleDtl" javaType="list" resultMap="roleDtl"></collection>
+    </resultMap>
+
+    <resultMap id="roleMst" type="com.koreait.koreaitsugang.entity.RoleMst">
+        <result property="roleId" column="role_id"></result>
+        <result property="roleName" column="role_name"></result>
+    </resultMap>
+
+    <resultMap id="roleDtl" type="com.koreait.koreaitsugang.entity.RoleDtl">
+        <result property="roleDtlId" column="role_dtl_id"></result>
+        <result property="userId" column="user_id"></result>
+        <result property="roleId" column="role_id"></result>
+        <collection property="roleMst" resultMap="roleMst"></collection>
+    </resultMap>
+
+    <select id="findUserByUsername" parameterType="String" resultMap="userMst">
+        select
+            um.user_id,
+            um.username,
+            um.password,
+            um.name,
+            um.phone,
+            um.birth_date,
+            um.email,
+            um.address,
+            um.department_number,
+
+            rd.role_id,
+            rm.role_name
+        from
+            user_mst um
+            left outer join role_dtl rd on(rd.user_id = um.user_id)
+            left outer join role_mst rm on(rm.role_id = rd.role_id)
+        where
+            um.username = #{username}
+    </select>
+
+    <select id="findUserByUserId" parameterType="Integer" resultMap="userMst">
+        select
+            um.user_id,
+            um.username,
+            um.password,
+            um.name,
+            um.phone,
+            um.birth_date,
+            um.email,
+            um.address,
+            um.department_number,
+
+            rd.role_id,
+            rm.role_name
+        from
+            user_mst um
+            left outer join role_dtl rd on(rd.user_id = um.user_id)
+            left outer join role_mst rm on(rm.role_id = rd.role_id)
+        where
+            um.user_id = #{userId}
+    </select>
+
+    <update id="updatePassword" parameterType="com.koreait.koreaitsugang.entity.UserMst">
+        update
+            user_mst
+        set
+            password = #{password}
+        where
+            user_id = #{userId}
+    </update>
+
+    <insert id="saveRole" parameterType="com.koreait.koreaitsugang.entity.RoleDtl">
+        insert into role_dtl
+        values (0, #{userId}, #{roleId})
+    </insert>
+
+    <select id="findMypage" parameterType="integer" resultType="com.koreait.koreaitsugang.entity.MypageMst">
+        select
+            um.user_id as userId, um.username, um.name, (
+                                    select
+                                        cm.college_name as collegeName
+                                    from
+                                        college_mst cm
+                                        left outer join department_mst dm on(dm.college_number = cm.college_number)
+            )collegeName, dm.category, um.birth_date as birthDate, um.phone, um.email, um.address
+        from
+            user_mst um
+            left outer join department_mst dm on(dm.department_number = um.department_number)
+            left outer join role_dtl rd on(rd.user_id = um.user_id)
+            left outer join role_mst rm on(rm.role_id = rd.role_id)
+        where
+            um.user_id = #{userId};
+    </select>
+
+    <insert id="registerUserImages" parameterType="list">
+        insert into user_image
+        values
+        <foreach collection="list" item="file" separator=",">
+            (0, #{file.username}, #{file.saveName}, #{file.originName})
+        </foreach>
+    </insert>
+
+    <select id="findUserImageByUsername" resultType="com.koreait.koreaitsugang.entity.UserImage">
+        select
+            ui.image_id as imageId,
+            ui.username,
+            ui.save_name as saveName,
+            ui.origin_name as originName,
+            um.user_id as userId
+        from
+            user_image as ui
+            left outer join user_mst as um on(ui.username = um.username)
+        where
+            um.user_id = #{userId};
+    </select>
+
+    <select id="findUserImageByImageId" resultType="com.koreait.koreaitsugang.entity.UserImage">
+        select
+            image_id as imageId,
+            username as username,
+            save_name as saveName,
+            origin_name as originName
+        from
+            user_image
+        where
+            image_id = #{imageId}
+    </select>
+
+    <select id="findUserImageAll" resultType="com.koreait.koreaitsugang.entity.UserImage">
+        select
+            ui.image_id as imageId, ui.username, ui.save_name as saveName, ui.origin_name as originName, um.user_id as userId
+        from
+            user_image as ui
+            left outer join user_mst as um on(ui.username = um.username)
+        where
+            um.user_id = #{userId};
+    </select>
+
+    <update id="updateUserByUsername" parameterType="com.koreait.koreaitsugang.web.dto.MypageMstReqDto">
+        update
+            user_mst um
+        set
+            um.birth_date = #{birthDate}, um.phone = #{phone}, um.email = #{email}, um.address = #{address}
+        where
+            um.username = #{username};
+    </update>
+
+    <delete id="deleteUserImage">
+        delete
+        from
+            user_image
+        where
+            image_id = #{imageId}
+    </delete>
+
+    <select id="loadUserInformation" parameterType="integer" resultType="com.koreait.koreaitsugang.entity.MypageMst">
+        select
+            um.user_id as userId,
+            um.username,
+            um.name, (
+                    select
+                            cm.college_name as collegeName
+                    from
+                        college_mst cm
+                        left outer join department_mst dm on(dm.college_number = cm.college_number)
+                    )collegeName,
+            dm.category, sm.grade
+        from
+            user_mst um
+            left outer join department_mst dm on(dm.department_number = um.department_number)
+            left outer join student_mst sm on(sm.user_id = um.user_id)
+            left outer join role_dtl rd on(rd.user_id = um.user_id)
+            left outer join role_mst rm on(rm.role_id = rd.role_id)
+        where
+            um.user_id = #{userId};
+    </select>
+</mapper>

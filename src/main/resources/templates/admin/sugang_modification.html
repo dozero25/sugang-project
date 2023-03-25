@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="/static/css/admin/left_aside.css">
+    <link rel="stylesheet" href="/static/css/admin/sugang_modification.css">
+    <title>강의정보 수정</title>
+</head>
+<body>
+    <main class="main-container">
+        <aside class="left-aside">
+            <div class="aside-title">
+                <h1 class="title-text-h1">관리자 시스템</h1>
+            </div>
+            <nav class="main-menu">
+                <h2 class="title-text-h2">수강정보관리</h2>
+                <ul class="sub-menu">
+                    <a href="/templates/admin/sugang_information.html"><li>강의정보 조회</li></a>
+                    <a href="/templates/admin/sugang_register.html"><li>강의정보 등록</li></a>
+                </ul>
+                <h2 class="title-text-h2">회원정보관리</h2>
+                <ul class="sub-menu">
+                    <a href="/templates/admin/user_information.html"><li>회원정보 조회</li></a>
+                    <a href="/templates/admin/user_register.html"><li>학생정보 등록</li></a>
+                    <a href="/templates/admin/professor_register.html"><li>교수정보 등록</li></a>
+                </ul>
+            </nav>
+        </aside>
+        <div class="content-container">
+            <h1 class="content-title">강의정보 수정</h1>
+            <div class="content-main">
+                <div class="content-items">
+                    <div class="content-top">
+                        <div class="lnb-inner">
+                            <h1>
+                                <img src="/static/image/logo.png" alt="코리아IT 대학교 수강신청">
+                            </h1>
+                            <span class="school-name">코리아IT 대학교 <li>KOREA-IT UNIVERSITY</li></span>
+                        </div>
+                    </div>
+                    <div class="content-bottom">
+                        <div class="content-left">
+                            <div class="item-group">
+                                <label class="modification-label">과목코드</label>
+                                <input type="text" class="modification-input" disabled>
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">연도</label>
+                                <input type="text" class="modification-input">
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">학기</label>
+                                <input type="text" class="modification-input">
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">단과대학</label>
+                                <input type="text" class="modification-input">
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">학과</label>
+                                <select class="modification-input category-select">
+                                    <option value="">전체조회</option>
+                                    <option value="컴퓨터공학과">컴퓨터공학과</option>
+                                    <option value="AI자동화설계공학과">AI자동화설계공학과</option>
+                                    <option value="자동차공학과">자동차공학과</option>
+                                    <option value="전기공학과">전기공학과</option>
+                                    <option value="기계공학과">기계공학과</option>
+                                    <option value="전자공학과">전자공학과</option>
+                                    <option value="로봇공학과">로봇공학과</option>
+                                    <option value="자율융합공학과">자율융합공학과</option>
+                                    <option value="조선해양공학과">조선해양공학과</option>
+                                    <option value="냉동공조공학과">냉동공조공학과</option>
+                                    <option value="항만물류학과">항만물류학과</option>
+                                    <option value="의용공학과">의용공학과</option>
+                                </select>
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">학년</label>
+                                <input type="text" class="modification-input">
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">이수구분</label>
+                                <input type="text" class="modification-input">
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">과목명</label>
+                                <input type="text" class="modification-input">
+                                <div class="error-message"></div>
+                            </div>
+                        </div>
+                        <div class="content-right">
+                            
+                            <div class="item-group">
+                                <label class="modification-label">분반</label>
+                                <input type="text" class="modification-input">
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">학점</label>
+                                <input type="text" class="modification-input">
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">교수ID</label>
+                                <input type="text" class="modification-input">
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">교수명</label>
+                                <input type="text" class="modification-input">
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">시간</label>
+                                <input type="text" class="modification-input">
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">강의실</label>
+                                <input type="text" class="modification-input">
+                                <div class="error-message"></div>
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">최대정원</label>
+                                <input type="text" class="modification-input">
+                                <div class="error-message"></div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    <button class="modification-button">수정하기</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="/static/js/admin/sugang_modification.js"></script>  
+</body>
+</html>

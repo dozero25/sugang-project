@@ -1,0 +1,165 @@
+* {
+    padding: 0px;
+    
+    list-style-type:none; 
+    text-decoration: none;
+}
+
+.main-container {
+    display: flex;
+    
+    margin: 50px auto 0px;
+    width: 1400px;
+    height: 900px;
+
+    background-color: white;
+    box-shadow: 1px 1px 5px 1px black;
+}
+
+.content-container {
+    width: 1200px;
+    height: 900px;
+}
+
+.content-title {
+    padding: 70px 70px 20px;
+    height: 10px;
+    font-size: 20px;
+}
+
+.content-main {
+    width: 100%;
+}
+
+* {
+    font-family: 'SUIT-Regular';
+    font-size: 14px;
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #3e3e3e;
+    border-radius: 5px;
+}
+
+.item-group {
+    font-size: 40px;
+}
+
+.content-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-top, .content-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border: 1px solid #202020 ;
+    padding: 30px;
+    width: 500px;
+    height: 100%;
+}
+
+.lnb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+img {
+    margin: 20px 0px;
+    margin-right: 0px;
+    height: 60px;
+}
+
+.lnb-inner {
+    display: flex;
+    height: 100px;
+}
+
+.lnb-inner span {
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 30px;
+    margin-right: 20px;
+    height: 40px;
+    
+    font-weight: 600;
+}
+
+.school-name {
+    margin-left: 5px;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.school-name a {
+    color: black;
+}
+
+.school-name li {
+    font-size: 15px;
+
+}
+
+.content-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.content-left, .content-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 20px;
+    width: 500px;
+    height: 100%;
+}
+
+.item-group {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.register-label {
+    padding-bottom: 1px;
+
+    font-weight: 600;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+}
+
+.register-button {
+    margin-top: 40px;
+    margin-left: 230px;
+
+    width: 100px;
+    height: 30px;
+
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.register-button:hover {
+    background-color: #3e3e3e;
+    color: white;
+
+    font-weight: 600;
+}

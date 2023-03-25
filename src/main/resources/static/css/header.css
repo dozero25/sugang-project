@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    list-style-type:none; 
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.lnb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 60px;
+}
+
+.wrap {
+    width: 1400px;
+    min-width: 1400px;
+    margin: 0 auto;
+}
+
+img {
+    margin: 20px 0px;
+    margin-right: 0px;
+    height: 50px;
+}
+
+.lnb-inner {
+    display: flex;
+}
+
+.lnb-inner span {
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 30px;
+    margin-right: 20px;
+    height: 40px;
+    
+    font-weight: 600;
+}
+
+.school-name {
+    margin-left: 5px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.school-name a {
+    color: black;
+}
+
+.school-name li {
+    font-size: 10px;
+
+}
+
+.sugang-date {
+    font-size: 25px;
+    color: #0f4496;
+}
+
+.user-info {
+    float: right;
+}
+
+.user-info ul li {
+    float: left;
+}
+
+.user-info li:nth-child(-n+3)::after {
+    content: "";
+    margin-left: 10px;
+    
+    height: 70%;
+    border-left: 1px solid rgba(59, 59, 59, 0.386);
+}
+
+.user-info ul li.user a {
+    padding-right: 10px ;
+    font-size: 16px;
+    color: #0f397a;
+    font-weight: bold;
+}
+
+.user-info ul li.user span {
+    padding-left: 3px;
+    font-weight: normal;
+    font-size: 13px;
+}
+
+.user-info ul li {
+    padding: 0 10px 0 0;
+    color: #777;
+    height: 26px;
+    line-height: 26px;
+}
+
+.menulist{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;     
+
+    background-color: #1764dc;
+    height: 38px;
+    width: 100%;
+}
+
+.menulist a:hover{
+    margin: 0;
+    background-color: #0f397a;
+    color: white;
+    font-weight: 600;
+}
+
+.menulist li {
+    display : inline-block;
+}
+
+.menulist li:first-child a {
+    border-left: 1px solid #427fdd;
+}
+
+.menulist li a {
+    font-size: 16px;    
+
+    width: 139px;
+    height: 18px;
+    color: #fff;
+    padding: 10px 0px;
+    display: block;
+    border-right: 1px solid #427fdd;
+}
+

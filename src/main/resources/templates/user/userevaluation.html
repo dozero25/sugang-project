@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/user/userevaluation.css">
+</head>
+<body>
+    <header>
+        <div class="lnb wrap">
+            <div class="lnb-inner">
+                <h1>
+                    <img src="/static/image/logo.png" alt="코리아IT 대학교 수강신청">
+                </h1>
+                <span class="school-name">코리아IT 대학교 <li>KOREA-IT UNIVERSITY</li></span>
+                <span class="sugang-date">강의 평가 목록</span>
+            </div>
+            <div class="user-info">
+                <ul>
+                    <li class="user"><a href="">김지향<span>19120012</span></a></li>
+                    <li>공과대학</li>
+                    <li>메카트로닉스공학부</li>
+                    <li>4학년</li>
+                </ul>
+            </div>
+        </div>
+        <div class="menulist wrap">
+            <li><a href="/templates/announcement.html">공지사항</a></li>
+            <li><a href="">강의시간표</a></li>
+            <li><a href="">수강신청</a></li>
+            <li><a href="">수강확정/대기내역</a></li>
+            <li><a href="">학점이수현황</a></li>
+            <li><a href="">재수강신청</a></li>
+            <li><a href="">재수강내역</a></li>
+            <li><a href="">강의평가</a></li>
+            <li><a href="">매뉴얼</a></li>
+            <li><a href="">로그아웃</a></li>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <form action="">
+            <h1 class="main-h1">강의 평가</h1>
+            <table class="testing-table">
+                <thead>
+                    <tr>
+                        <th colspan="2">유 형</th>
+                        <th>문항 번호</th>
+                        <th>문 항</th>
+                        <th>비 고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="14">공통 문항</td>
+                        <td>학생 자가 평가</td>
+                        <td>1</td>
+                        <td>나는 이 과목에 흥미를 가지고 적극적으로 참여하였다.<br>
+                            <label><input type="radio" name="test-1" value="5">5. 매우 그렇다</label>
+                            <label><input type="radio" name="test-1" value="4">4. 그렇다</label>
+                            <label><input type="radio" name="test-1" value="3">3. 보통</label>
+                            <label><input type="radio" name="test-1" value="2">2. 그렇지않다</label>
+                            <label><input type="radio" name="test-1" value="1">1. 전혀 그렇지않다</label>
+                        </td>
+                        <td>평가 미반영</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">수업 목표</td>
+                        <td>2</td>
+                        <td>강의계획서는 수업에 관한 정보(교과목표, 주별 강의계획, 교수학습방법, 성적평가방법 등)를 명확하게 제시하
+                            고 있습니까?<br>
+                            <label><input type="radio" name="test-2" value="5">5. 매우 그렇다</label>
+                            <label><input type="radio" name="test-2" value="4">4. 그렇다</label>
+                            <label><input type="radio" name="test-2" value="3">3. 보통</label>
+                            <label><input type="radio" name="test-2" value="2">2. 그렇지않다</label>
+                            <label><input type="radio" name="test-2" value="1">1. 전혀 그렇지않다</label>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>교수님은 매주 수업 시 학습목표(수행준거)를 명확하게 제시 하였습니까?<br>
+                            <label><input type="radio" name="test-3" value="5">5. 매우 그렇다</label>
+                            <label><input type="radio" name="test-3" value="4">4. 그렇다</label>
+                            <label><input type="radio" name="test-3" value="3">3. 보통</label>
+                            <label><input type="radio" name="test-3" value="2">2. 그렇지않다</label>
+                            <label><input type="radio" name="test-3" value="1">1. 전혀 그렇지않다</label>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">수업 운영</td>
+                        <td>4</td>
+                        <td>교수님은 규정된 수업시간(결강, 휴보강 관련)을 준수하였습니까?<br>
+                            <label><input type="radio" name="test-4" value="5">5. 매우 그렇다</label>
+                            <label><input type="radio" name="test-4" value="4">4. 그렇다</label>
+                            <label><input type="radio" name="test-4" value="3">3. 보통</label>
+                            <label><input type="radio" name="test-4" value="2">2. 그렇지않다</label>
+                            <label><input type="radio" name="test-4" value="1">1. 전혀 그렇지않다</label>
+                        </td>
+                        <td>평가 미반영</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>교수님은 수업에 대한 출석을 철저히 관리하였습니까?<br>
+                            <label><input type="radio" name="test-5" value="5">5. 매우 그렇다</label>
+                            <label><input type="radio" name="test-5" value="4">4. 그렇다</label>
+                            <label><input type="radio" name="test-5" value="3">3. 보통</label>
+                            <label><input type="radio" name="test-5" value="2">2. 그렇지않다</label>
+                            <label><input type="radio" name="test-5" value="1">1. 전혀 그렇지않다</label>
+                        </td>
+                        <td>평가 미반영</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">수업 방법</td>
+                        <td>6</td>
+                        <td>교과목과 실제 수업내용은 일치하였습니까?<br>
+                            <label><input type="radio" name="test-6" value="5">5. 매우 그렇다</label>
+                            <label><input type="radio" name="test-6" value="4">4. 그렇다</label>
+                            <label><input type="radio" name="test-6" value="3">3. 보통</label>
+                            <label><input type="radio" name="test-6" value="2">2. 그렇지않다</label>
+                            <label><input type="radio" name="test-6" value="1">1. 전혀 그렇지않다</label>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>교수님의 강의는 이해하기 쉽고 전달이 잘 되었습니까?<br>
+                            <label><input type="radio" name="test-7" value="5">5. 매우 그렇다</label>
+                            <label><input type="radio" name="test-7" value="4">4. 그렇다</label>
+                            <label><input type="radio" name="test-7" value="3">3. 보통</label>
+                            <label><input type="radio" name="test-7" value="2">2. 그렇지않다</label>
+                            <label><input type="radio" name="test-7" value="1">1. 전혀 그렇지않다</label>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>교수님은 수업에 학생의 관심과 참여를 유도하기 위해 노력하였습니까?<br>
+                            <label><input type="radio" name="test-8" value="5">5. 매우 그렇다</label>
+                            <label><input type="radio" name="test-8" value="4">4. 그렇다</label>
+                            <label><input type="radio" name="test-8" value="3">3. 보통</label>
+                            <label><input type="radio" name="test-8" value="2">2. 그렇지않다</label>
+                            <label><input type="radio" name="test-8" value="1">1. 전혀 그렇지않다</label>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>수업에 사용된 학습매체(교재, 유인물, 사진, 동영상 등)가 수업의 이해도를 높이는데 도움이 되었습니까?<br>
+                            <label><input type="radio" name="test-9" value="5">5. 매우 그렇다</label>
+                            <label><input type="radio" name="test-9" value="4">4. 그렇다</label>
+                            <label><input type="radio" name="test-9" value="3">3. 보통</label>
+                            <label><input type="radio" name="test-9" value="2">2. 그렇지않다</label>
+                            <label><input type="radio" name="test-9" value="1">1. 전혀 그렇지않다</label>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">수업 평가</td>
+                        <td>10</td>
+                        <td>강의내용이 평가(이론시험, 실습, 구두평가, 보고서 등)에 적절히 반영되었습니까?<br>
+                            <label><input type="radio" name="test-10" value="5">5. 매우 그렇다</label>
+                            <label><input type="radio" name="test-10" value="4">4. 그렇다</label>
+                            <label><input type="radio" name="test-10" value="3">3. 보통</label>
+                            <label><input type="radio" name="test-10" value="2">2. 그렇지않다</label>
+                            <label><input type="radio" name="test-10" value="1">1. 전혀 그렇지않다</label>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>교수님의 성적평가 기준은 합리적이었습니까?<br>
+                            <label><input type="radio" name="test-11" value="5">5. 매우 그렇다</label>
+                            <label><input type="radio" name="test-11" value="4">4. 그렇다</label>
+                            <label><input type="radio" name="test-11" value="3">3. 보통</label>
+                            <label><input type="radio" name="test-11" value="2">2. 그렇지않다</label>
+                            <label><input type="radio" name="test-11" value="1">1. 전혀 그렇지않다</label>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>이 수업이 역량(직무역량) 달성에 도움이 되었습니까?<br>
+                            <label><input type="radio" name="test-12" value="5">5. 매우 그렇다</label>
+                            <label><input type="radio" name="test-12" value="4">4. 그렇다</label>
+                            <label><input type="radio" name="test-12" value="3">3. 보통</label>
+                            <label><input type="radio" name="test-12" value="2">2. 그렇지않다</label>
+                            <label><input type="radio" name="test-12" value="1">1. 전혀 그렇지않다</label>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>강의 만족도</td>
+                        <td>13</td>
+                        <td>이 강의에 대해 만족하며, 동기나 후배에게 추천하고 싶습니까?<br>
+                            <label><input type="radio" name="test-13" value="5">5. 매우 그렇다</label>
+                            <label><input type="radio" name="test-13" value="4">4. 그렇다</label>
+                            <label><input type="radio" name="test-13" value="3">3. 보통</label>
+                            <label><input type="radio" name="test-13" value="2">2. 그렇지않다</label>
+                            <label><input type="radio" name="test-13" value="1">1. 전혀 그렇지않다</label>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>서술형</td>
+                        <td>14</td>
+                        <td>이 강좌에서 특별히 좋았던 점과 개선할 점은 무엇입니까?<br>
+                            <textarea name="" id="" cols="100" rows="5" placeholder="200자내로 작성"></textarea>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="submit-button">제출하기</button>
+        </form>
+    </div>
+</body>
+</html>

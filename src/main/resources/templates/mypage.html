@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/mypage.css">
+</head>
+<body>
+    <main>
+        <header class="header-container">
+            <div class="lnb wrap">
+                    <div class="lnb-inner">
+                        <h1>
+                            <a href="/templates/announcement.html"><img src="/static/image/logo.png" alt="코리아IT 대학교 수강신청"></a>
+                        </h1>
+                        <span class="school-name"><a href="/templates/announcement.html">코리아IT 대학교 <li>KOREA-IT UNIVERSITY</li></span></a>
+                        <span class="sugang-date">회원정보 수정</span>
+                    </div>
+                    <div class="user-info">
+                        <ul>
+                            <li class="user"><a href="">김지향<span>19120012</span></a></li>
+                            <li>공과대학</li>
+                            <li>메카트로닉스공학부</li>
+                            <li>4학년</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                <div class="menulist wrap">
+                    <li class="on"><a href="/templates/announcement.html">공지사항</a></li>
+                    <li><a href="">강의시간표</a></li>
+                    <li><a href="">장바구니</a></li>
+                    <li><a href="">수강신청</a></li>
+                    <li><a href="">학점이수현황</a></li>
+                    <li><a href="">재수강신청</a></li>
+                    <li><a href="">재수강내역</a></li>
+                    <li><a href="">강의평가</a></li>
+                    <li><a href="">매뉴얼</a></li>
+                    <li><a href="">로그아웃</a></li>
+            </div>
+            </div>
+        </header>
+        <div class="my-page">
+            <div class="container">
+                <div class="content-left">
+                    <form class="img-form">
+                        <div class="img-container">
+                            <img src="/static/image/profile_noimg.jpg" class="person-img">
+                        </div>
+                        
+                        <button type="button" class="img-add-button">+</button>
+                        <input type="file" name="file" class="img-file">    
+                    </form>
+                </div>
+                <div class="content-right">
+                    <div class="user-modify">
+                        
+                    </div>
+                    <div class="button-group">
+                        <div class="button-group">
+                        <button type="submit" class="modification-button">저장하기</button>
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </main>
+    <script src="/static/js/account/principal.js"></script>
+    <script src="/static/js/mypage.js"></script>
+    <script src="/static/js/header.js"></script>
+</body>
+</html>

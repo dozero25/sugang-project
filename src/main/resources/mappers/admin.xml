@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.koreaitsugang.repository.admin.SubjectRepository">
+
+    <select id="majorCategory" resultType="String">
+        select
+            category
+        from
+            department_mst;
+    </select>
+
+    <select id="getSearchUserTotalCount" parameterType="com.koreait.koreaitsugang.web.dto.admin.AdminSearchReqDto" resultType="integer">
+        select
+            count(*)
+        from
+            user_mst as um
+            left outer join department_mst as dm
+            on um.department_number = dm.department_number
+        where
+        1 = 1
+        <if test="searchValue != null and searchValue != ''">
+            and (um.username like concat('%' #{searchValue}, '%')
+            or um.name like concat('%', #{searchValue}, '%'))
+        </if>
+        <if test="category != null">
+            and category = #{category}
+        </if>
+        <if test='limit == "Y"'>
+            limit #{index}, #{count}
+        </if>
+    </select>
+
+    <select id="getSearchUser" parameterType="com.koreait.koreaitsugang.web.dto.admin.AdminSearchReqDto" resultType="com.koreait.koreaitsugang.entity.UserMst">
+        select
+            dm.category,
+            um.username,
+            um.name,
+            um.password,
+            um.phone,
+            um.birth_date as birthDate,
+            um.email
+        from
+            user_mst as um
+            left outer join department_mst as dm
+            on um.department_number = dm.department_number
+        where
+        1 = 1
+        <if test="searchValue != null and searchValue != ''">
+            and(um.username like concat('%' #{searchValue}, '%')
+            or um.name like concat('%', #{searchValue}, '%'))
+        </if>
+        <if test="category != '전체조회' and category != null">
+            and category = #{category}
+        </if>
+        <if test='limit == "Y"'>
+            limit #{index}, #{count}
+        </if>
+    </select>
+
+    <delete id="deleteUser">
+        delete
+        from
+            user_mst
+        where
+            username = #{username}
+    </delete>
+
+    <delete id="deleteUsers" parameterType="list">
+        delete
+        from
+            user_mst
+        where
+            username in
+            <foreach collection="list" item="username" open="(" close=")" separator=",">
+                #{username}
+            </foreach>
+    </delete>
+
+    <insert id="registerUserImage" parameterType="list">
+        insert into user_image
+        values
+        <foreach collection="list" item="file" separator=",">
+            (0, #{file.username}, #{file.saveName}, #{file.originName})
+        </foreach>
+    </insert>
+
+    <insert id="saveStudent" parameterType="com.koreait.koreaitsugang.web.dto.admin.AddStudentReqDto" useGeneratedKeys="true" keyProperty="userId">
+        insert into user_mst
+        values
+            (0, #{username}, #{password},#{name},#{phone},#{birthDate},#{email},#{address},#{departmentNumber})
+    </insert>
+
+    <insert id="saveStudentMst" parameterType="com.koreait.koreaitsugang.web.dto.admin.AddStudentReqDto">
+        insert into student_mst
+        values
+            (0, #{userId}, #{grade})
+    </insert>
+
+    <select id="findUsername" parameterType="String" resultType="com.koreait.koreaitsugang.entity.UserMst">
+        select
+            username
+        from
+            user_mst
+        where
+            username = #{username}
+    </select>
+
+    <insert id="saveProfessor" parameterType="com.koreait.koreaitsugang.web.dto.admin.AddProfessorReqDto" useGeneratedKeys="true" keyProperty="userId">
+        insert into user_mst
+        values
+            (0, #{username}, #{password},#{name},#{phone},#{birthDate},#{email},#{address},#{departmentNumber})
+    </insert>
+
+    <insert id="saveProfessorMst" parameterType="com.koreait.koreaitsugang.web.dto.admin.AddProfessorReqDto">
+        insert into professor_mst
+        values
+            (0, #{userId})
+    </insert>
+
+    <select id="findUsernameByUsername" resultType="com.koreait.koreaitsugang.entity.UserMst">
+        select
+            um.user_id as userId,
+            um.username,
+            um.password,
+            um.name,
+            um.phone,
+            um.email,
+            um.address,
+            sm.grade,
+            um.birth_date as birthDate,
+            dm.category,
+            um.department_number as departmentNumber
+        from
+            user_mst as um
+            left outer join department_mst as dm
+            on (um.department_number = dm.department_number)
+            left outer join student_mst as sm
+            on (um.user_id = sm.user_id)
+        where
+            um.username = #{username};
+    </select>
+
+    <select id="findUserImageByUsername" resultType="com.koreait.koreaitsugang.entity.UserImage">
+        select
+            image_id as imageId,
+            username,
+            save_name as saveName,
+            origin_name as originName
+        from
+            user_image
+        where
+            username = #{username}
+    </select>
+
+    <select id="findUserImageByImageId" resultType="com.koreait.koreaitsugang.entity.UserImage">
+        select
+            image_id as imageId,
+            username,
+            save_name as saveName,
+            origin_name as originName
+        from
+            user_image
+        where
+            image_id = #{imageId}
+    </select>
+
+    <delete id="deleteUserImage">
+        delete
+        from
+            user_image
+        where
+            username = #{username}
+    </delete>
+
+<!--    <update id="updateStudentByUsername" parameterType="com.koreait.koreaitsugang.web.dto.admin.UpdateStudentReqDto">-->
+<!--        update user_mst-->
+<!--        set-->
+<!--            password = #{password},-->
+<!--            name = #{name},-->
+<!--            phone = #{phone},-->
+<!--            email = #{email},-->
+<!--            address = #{address},-->
+<!--            birth_date = #{birthDate},-->
+<!--            department_number = #{departmentNumber}-->
+<!--        where-->
+<!--            username = #{username}-->
+<!--    </update>-->
+
+    <update id="updateStudentByUsername" parameterType="com.koreait.koreaitsugang.web.dto.admin.UpdateStudentReqDto">
+        update user_mst as um
+        left outer join department_mst as dm
+        on(dm.department_number = um.department_number)
+        set
+            um.password = #{password},
+            um.name = #{name},
+            um.phone = #{phone},
+            um.birth_date = #{birthDate},
+            um.email = #{email},
+            um.address = #{address},
+            um.department_number = #{departmentNumber}
+        where
+            um.username = #{username}
+    </update>
+
+    <update id="updateStudentmstByUseranme" parameterType="com.koreait.koreaitsugang.web.dto.admin.UpdateStudentReqDto">
+        update student_mst
+        set
+            grade = #{grade}
+        where
+            user_id = #{userId}
+    </update>
+
+    <select id="searchSugang" parameterType="com.koreait.koreaitsugang.web.dto.SearchReqDto" resultType="com.koreait.koreaitsugang.entity.SubjectMst">
+        select
+            category,
+            classification,
+            subject_code as subjectCode,
+            subject_name as subjectName,
+            credit,
+            professor_name as professorName,
+            building,
+            lecture_time as lectureTime
+        from
+            subject_mst
+        where
+            1=1
+        <if test='searchValue != null and searchValue !=""'>
+            and (
+            subject_name like CONCAT('%', #{searchValue}, '%')
+            or professor_name like CONCAT('%', #{searchValue}, '%')
+            or classification like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
+        <if test='category != null and category !=""'>
+            and category = #{category}
+        </if>
+        order by subjectCode
+        <if test='limit == "Y"'>
+            limit #{index}, #{count}
+        </if>
+    </select>
+
+    <select id="findBySubjectCode" parameterType="integer" resultType="com.koreait.koreaitsugang.entity.SubjectMst">
+        SELECT
+            subject_code as subjectCode,
+            subject_year as subjectYear,
+            subject_semester as subjectSemester,
+            college_name as collegeName,
+            category as category,
+            subject_grade as subjectGrade,
+            classification as classification,
+            subject_name as subjectName,
+            subject_class as subjectClass,
+            credit as credit,
+            professor_id as professorId,
+            professor_name as professorName,
+            lecture_time as lectureTime,
+            building,
+            max_person as maxPerson
+        from
+            subject_mst
+        where
+            subject_code = #{subjectCode};
+    </select>
+    <select id="getSubjectTotalCount" parameterType="com.koreait.koreaitsugang.web.dto.SearchNumberListReqDto" resultType="Integer">
+        select
+            count(*)
+        from
+            subject_mst
+        where
+        1 = 1
+        <if test='searchValue != null and searchValue != ""'>
+            and (
+            subject_name like CONCAT('%', #{searchValue}, '%')
+            or professor_name like CONCAT('%', #{searchValue}, '%')
+            or classification like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
+        <if test='category != null and category != ""'>
+            and category = #{category}
+        </if>
+    </select>
+    <delete id="deleteBySubjectCode" parameterType="list">
+        delete
+        from
+            subject_mst
+        where
+            subject_code in
+            <foreach collection="list" item="subjectCode" open="(" close=")" separator=",">
+                #{subjectCode}
+            </foreach>
+    </delete>
+    <insert id="saveSubject" parameterType="com.koreait.koreaitsugang.web.dto.SubjectReqDto">
+        insert into subject_mst
+        values (0,#{subjectYear},#{subjectSemester},#{collegeName},#{category},#{subjectGrade},#{classification},#{subjectName},#{subjectClass},#{credit},#{professorId},#{professorName},#{lectureTime},#{building},#{maxPerson})
+    </insert>
+    <update id="updateSubjectBySubjectCode" parameterType="com.koreait.koreaitsugang.web.dto.SubjectReqDto">
+        update subject_mst
+        set
+            subject_code = #{subjectCode},
+            subject_year = #{subjectYear},
+            subject_semester = #{subjectSemester},
+            college_name = #{collegeName},
+            category = #{category},
+            subject_grade = #{subjectGrade},
+            classification = #{classification},
+            subject_name = #{subjectName},
+            subject_class = #{subjectClass},
+            credit = #{credit},
+            professor_id = #{professorId},
+            professor_name = #{professorName},
+            lecture_time = #{lectureTime},
+            building = #{building},
+            max_person = #{maxPerson}
+        where
+            subject_code = #{subjectCode};
+
+    </update>
+
+</mapper>

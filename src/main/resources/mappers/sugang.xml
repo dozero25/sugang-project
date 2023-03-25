@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.koreaitsugang.repository.SugangRepository">
+
+    <select id="searchCategory" parameterType="string" resultType="com.koreait.koreaitsugang.entity.ClassificationView">
+        select
+            classification_id,
+            classification
+        from
+            classification_view
+    </select>
+
+    <select id="searchTotalCourse"
+            parameterType="com.koreait.koreaitsugang.web.dto.SearchSugangReqDto"
+            resultType="integer">
+        select
+            count(*)
+        from
+            subject_mst
+        where
+            1 = 1
+            <if test='classification != null and classification !=""'>
+                and classification = #{classification}
+            </if>
+            <if test='searchValue != null and searchValue != ""'>
+                and subject_code like #{searchValue}
+            </if>
+    </select>
+
+    <select id="searchCourse"
+            parameterType="com.koreait.koreaitsugang.web.dto.SearchSugangReqDto"
+            resultType="com.koreait.koreaitsugang.entity.OpenCourse">
+        select
+            classification,
+            subject_code as subjectCode,
+            subject_name as subjectName,
+            credit,
+            professor_name as professorName,
+            lecture_time as lectureTime,
+            building
+        from
+            subject_mst
+        where
+            1 = 1
+            <if test='searchValue != null and searchValue != ""'>
+                and subject_code like #{searchValue}
+            </if>
+            <if test='classification != null'>
+                and classification in
+                <foreach collection="classification" item="categoryName" open="(" close=")" separator=",">
+                    #{categoryName}
+                </foreach>
+            </if>
+            <if test='limit == "Y"'>
+                limit #{index}, #{count}
+            </if>
+    </select>
+
+    <select id="availabilityApply" resultType="integer">
+        select
+            *
+        from
+            pocket_mst
+        where
+            subject_code = #{subjectCode}
+            and user_id = #{userId}
+    </select>
+
+    <select id="loadUserId" resultType="integer">
+        select
+            user_id
+        from
+            pocket_mst
+        where
+            user_id = #{userId}
+    </select>
+
+    <insert id="saveCourse"
+            parameterType="com.koreait.koreaitsugang.entity.PocketMst">
+        insert into pocket_mst
+        values (0, #{subjectCode}, #{userId})
+    </insert>
+
+    <delete id="deleteCourse"
+            parameterType="com.koreait.koreaitsugang.entity.PocketMst">
+        delete from pocket_mst
+        where
+            subject_code = #{subjectCode}
+    </delete>
+
+    <select id="loadCourse"
+            parameterType="list"
+            resultType="com.koreait.koreaitsugang.entity.OpenCourse">
+        select
+        sm.classification,
+        sm.subject_code as subjectCode,
+        sm.subject_name as subjectName,
+        sm.credit,
+        sm.professor_name as professorName,
+        sm.lecture_time as lectureTime,
+        sm.building,
+        pm.user_id as userId
+        from
+        subject_mst sm
+        inner join pocket_mst pm on (pm.subject_code = sm.subject_code)
+        where
+        pm.user_id = #{userId}
+    </select>
+
+    <select id="findCourse"
+            parameterType="integer"
+            resultType="com.koreait.koreaitsugang.entity.OpenCourse">
+        select
+            sm.classification,
+            sm.subject_code as subjectCode,
+            sm.subject_name as subjectName,
+            sm.credit,
+            sm.professor_name as professorName,
+            sm.lecture_time as lectureTime,
+            sm.building,
+            pm.user_id as userId
+        from
+            subject_mst sm
+            inner join pocket_mst pm on (pm.subject_code = sm.subject_code)
+        where
+            sm.subject_code = #{subjectCode}
+    </select>
+</mapper>

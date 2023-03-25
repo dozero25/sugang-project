@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="/static/css/admin/left_aside.css">
+    <link rel="stylesheet" href="/static/css/admin/sugang_information.css">
+    <title>강의정보 조회</title>
+</head>
+<body>
+    <main class="main-container">
+        <aside class="left-aside">
+            <div class="aside-title">
+                <h1 class="title-text-h1">관리자 시스템</h1>
+            </div>
+            <nav class="main-menu">
+                <h2 class="title-text-h2">수강정보관리</h2>
+                <ul class="sub-menu">
+                    <a href="https://localhost:8000/admin/search"><li>강의정보 조회</li></a>
+                    <a href="https://localhost:8000/admin/sugang"><li>강의정보 등록</li></a>
+                </ul>
+                <h2 class="title-text-h2">회원정보관리</h2>
+                <ul class="sub-menu">
+                    <a href="https://localhost:8000/admin/usersearch"><li>회원정보 조회</li></a>
+                    <a href="https://localhost:8000/admin/userregister"><li>학생정보 등록</li></a>
+                    <a href="https://localhost:8000/admin/professorregister"><li>교수정보 등록</li></a>
+                </ul>
+            </nav>
+        </aside>
+        <div class="content-container">
+            <h1 class="content-title">강의정보 조회</h1>
+            <div class="content-main">
+                <div class="content-items">
+                    <div class="left-items">
+                        <button type="button" class="delete-button">삭제</button>
+                    </div>
+                    <div class="right-items">
+                        <select class="category-select">
+                            <!-- <option value="">전체조회</option>
+                            <option value="컴퓨터공학과">컴퓨터공학과</option>
+                            <option value="AI자동화설계공학과">AI자동화설계공학과</option>
+                            <option value="자동차공학과">자동차공학과</option>
+                            <option value="전기공학과">전기공학과</option>
+                            <option value="기계공학과">기계공학과</option>
+                            <option value="전자공학과">전자공학과</option>
+                            <option value="로봇공학과">로봇공학과</option>
+                            <option value="자율융합공학과">자율융합공학과</option>
+                            <option value="조선해양공학과">조선해양공학과</option>
+                            <option value="냉동공조공학과">냉동공조공학과</option>
+                            <option value="항만물류학과">항만물류학과</option>
+                            <option value="의용공학과">의용공학과</option> -->
+                        </select>
+                        <input type="search" class="search-input">
+                        <button type="button" class="search-button">검색</button>
+                    </div>
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="content-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" class="delete-checkall"></th>
+                            <th>학과</th>
+                            <th>이수구분</th>
+                            <th>과목번호</th>
+                            <th>과목명</th>
+                            <th>학점</th>
+                            <th>담당교수</th>
+                            <th>강의실</th>
+                            <th>시간</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>컴퓨터공학과</td>
+                            <td>사회문화</td>
+                            <td>1</td>
+                            <td>한국문화</td>
+                            <td>2</td>
+                            <td>이리경</td>
+                            <td>동411</td>
+                            <td>월0203</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>컴퓨터공학과</td>
+                            <td>사회문화</td>
+                            <td>1</td>
+                            <td>한국문화</td>
+                            <td>2</td>
+                            <td>이리경</td>
+                            <td>동411</td>
+                            <td>월0203</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>컴퓨터공학과</td>
+                            <td>사회문화</td>
+                            <td>1</td>
+                            <td>한국문화</td>
+                            <td>2</td>
+                            <td>이리경</td>
+                            <td>동411</td>
+                            <td>월0203</td>
+                        </tr>
+                       
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="page-controller">
+                <a href="" class="disabled">이전</a>
+                <ul class="page-numbers">
+                    <a href=""><li>1</li></a>
+                    <a href=""><li>2</li></a>
+                    <a href=""><li>3</li></a>
+                    <a href=""><li>4</li></a>
+                    <a href=""><li>5</li></a>
+                </ul>
+                <a href="">다음</a>
+            </div>
+        </div>
+    </main> 
+    <script src="/static/js/admin/sugang_information.js"></script>   
+</body>
+</html>

@@ -1,0 +1,108 @@
+.announcement-btn {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 0 0;
+    padding: 0;
+}
+
+.announcement-btn a:hover {
+    background-color: #0f397a;
+    color: #fff;
+}
+
+.announcement-btn li a {
+    width: 300px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+
+    font-size: 17px;
+    font-weight: 600;
+    height: 36px;
+    background-color: #454d59;
+    border-radius: 3px;
+    padding: 6px 0;
+    color: #fff;
+}
+
+.announcement-btn li {
+    float: left;
+    width: 300px;
+    margin-left: 1%;
+    list-style: none;
+    text-align: center;
+}
+
+.gap {
+    display: block;
+    height: 25px;
+    clear: both;
+}
+
+.upDivStyle03, .downDivStyle03 {
+    display: flex;
+    justify-content: center;
+}
+
+.divStyle03L, .listStyle01, .divStyle03C, .divStyle03R {
+    margin-bottom: 0;
+}
+
+.SubTitle {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.SubTitle img {
+    margin: 0 5px 0 0;
+    height: 18px;
+
+}
+
+.divStyle03L {
+    margin: 0 70px 0 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: justify;
+    width: 420px;
+    float: left;
+    position: relative;
+}
+
+.divStyle03C {
+    margin: 0 70px 0 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: justify;
+    width: 420px;
+    float: left;
+    position: relative;
+}
+
+.divStyle03R {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: justify;
+    width: 350px;
+    float: left;
+    position: relative;
+}
+
+.clearfloat {
+    clear: both;
+}
+
+.line {
+    text-align: center;
+    margin: 25px auto;
+    width: 1400px;
+    color: #999999;
+    border-style: dotted;
+}
+

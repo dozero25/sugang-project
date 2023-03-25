@@ -1,0 +1,30 @@
+server:
+  port: 8000
+
+spring:
+  mvc:
+    static-path-pattern: /static/**
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://doyoung.c3yf6hovsgph.ap-northeast-2.rds.amazonaws.com:3306/sugang
+    username: admin
+    password: 1q2w3e4r
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+
+mybatis:
+  mapper-locations:
+    - /mappers/*
+
+#file:
+#  path: C:/koreaITproject/KoreaIT_Sugang/images/
+#    - /mappers/*.xml
+
+file:
+  path: C:/koreaIT project/KoreaIT_Sugang/upload/
+
+

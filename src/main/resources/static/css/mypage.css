@@ -1,0 +1,125 @@
+.my-page {
+    padding: 40px 600px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    width: 800px;
+    height: 770px;
+    border-radius: 5px;
+    background-color: #6a8cc0;
+}
+
+
+
+.content-left, .content-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 40px;
+}
+
+.img-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    width: 400px;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 0;
+    height: 220px;
+
+    overflow: hidden;
+}
+
+.person-img {
+    height: 200px;
+}
+
+.img-add-button {
+    width: 140px;
+    height: 25px;
+
+    font-size: 20px;
+    font-weight: 600;
+
+    border-radius: 20px;
+    cursor: pointer;
+    
+    color: white;
+    border: 1px solid #1764dc;
+    background-color: #6a8cc0;
+}
+
+.img-add-button:hover {
+    background-color: #1764dc;
+}
+
+.img-file {
+    display: none;
+}
+
+
+.item-group {
+    flex-direction: column;
+}
+
+.modification-label {
+    margin-bottom: 5px;
+    padding-left: 3px;
+
+    font-size: 16px;
+    color: white;
+}
+
+.modification-input {
+    display: flex;
+    text-align: center;
+    width: 230px;
+    height: 35px;
+    margin: 5px 0 20px 0;
+    border: 0;
+
+    border-radius: 30px;
+}
+
+.modification-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #1764dc;
+}
+
+.button-group {
+    padding-left:120px;
+    padding-top: 15px;
+    font-size: 16px;
+}
+
+.modification-button {
+    width: 120px;
+    height: 30px;
+    border: 1px solid #1764dc;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+
+    color: white;
+    background-color: #6a8cc0;
+}
+
+.modification-button:hover {
+    background-color: #1764dc;
+}
+
+
+
+
