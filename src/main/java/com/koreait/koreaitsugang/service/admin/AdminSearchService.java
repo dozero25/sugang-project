@@ -31,6 +31,7 @@ public class AdminSearchService {
     private String filePath;
     @Autowired
     private SubjectRepository subjectRepository;
+
     public List<SubjectMst> searchSugang(SearchReqDto searchReqDto) {
         searchReqDto.setIndex();
         return subjectRepository.searchSugang(searchReqDto);
@@ -40,6 +41,7 @@ public class AdminSearchService {
         List<String> category = subjectRepository.majorCategory();
         return category;
     }
+
     public int UserTotalCounts(AdminSearchReqDto adminSearchReqDto) {
         int usercount = subjectRepository.getSearchUserTotalCount(adminSearchReqDto);
         System.out.println(usercount);
