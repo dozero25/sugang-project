@@ -199,7 +199,7 @@ class SearchService {
         const responseData = SearchApi.getInstance().getOpenCourse(searchObj);
         const openTable = document.querySelector(".opened-table tbody");
 
-        this.clearCourseList();
+        openTable.innerHTML = ``;
 
         responseData.forEach((data, index) => {
             subjectCode.push(data);
@@ -244,7 +244,7 @@ class SearchService {
 
             preButton.onclick = () => {
                 searchObj.page--;
-                this.loadOpenCourse(searchObj);
+                this.loadOpenCourse();
             }
         }
 
@@ -254,7 +254,7 @@ class SearchService {
 
             nextButton.onclick = () => {
                 searchObj.page++;
-                this.loadOpenCourse(searchObj);
+                this.loadOpenCourse();
             }
         }
 
@@ -278,7 +278,7 @@ class SearchService {
             if(pageNumber != searchObj.page) {
                 button.onclick = () => {
                     searchObj.page = pageNumber;
-                    this.loadOpenCourse(searchObj);
+                    this.loadOpenCourse();
                 }
             }
         });
@@ -334,6 +334,7 @@ class ComponentEvent {
                 else {
                     const index = searchObj.classification.indexOf(radio.value);
                     searchObj.classification.splice(index, 1);
+                    SearchService.getInstance().clearCourseList();
                 }
             }
         });
@@ -348,7 +349,6 @@ class ComponentEvent {
             button.onclick = () => {
                 subjectCode[index].userId = PrincipalApi.getInstance().getPrincipal().user.userId;
                 const applyData = SearchApi.getInstance().applyCourse(subjectCode[index]);
-                console.log(applyData);
 
                 inputCourseTable.innerHTML += `
                 <tr>
@@ -362,8 +362,9 @@ class ComponentEvent {
                     <td>N</th>
                 </tr>
                 `;
+                SearchService.getInstance().loadOpenCourse();
                 SearchService.getInstance().loadCourseList();
-                SearchService.getInstance().loadOpenCourse();  
+
             }
         });
     }
@@ -377,7 +378,7 @@ class ComponentEvent {
                 subjectCode[index].userId = PrincipalApi.getInstance().getPrincipal().user.userId;
                 const deleteData = SearchApi.getInstance().deleteCourse(subjectCode[index]);
 
-                outCourseTable.remove = `
+                outCourseTable.outerHTML = `
                 <tr id="confirmed-body">
                     <td><button type="button" class="delete-button">삭제</button></td>
                     <td>${deleteData.classification}</td>
