@@ -1,93 +1,9 @@
-* {
-    margin: 0;
-    padding: 0;
-
-    list-style-type:none; 
-    text-decoration: none;
-
-    font-size: 13px;
-}
-
 .container {
     display: flex;
     flex-direction: row;
 
     width: 100%;
-}
-
-.table-container {
-    width: 1050px;
-    height: 900px;
-
-    margin-left: 237px;    
-}
-
-.title-item {
-    padding: 2px;
-}
-
-.search {
-    position: relative;
-
-    border: 1px solid #e1e1e1;
-    padding: 2px 5px;
-    margin: 5px 0px 0px 0px;
-
-    min-height: 25px;
-    line-height: 25px;
-    vertical-align: middle;
-
-    background-color: #ffffff;    
-}
-
-.search-title {
-    padding: 3px 5px 3px 5px;  
-}
-
-.title-text{
-    font-size: 15px;
-    font-weight: 400;
-}
-
-.info-radio {
-    margin: 0px 5px;
-}
-
-.info-text {
-    margin: 0px 13px 0px 0px;
     font-size: 13px;
-    cursor: pointer;
-}
-
-.subject-code-info {
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.subject-code-select {
-    width: 70px;
-    padding: 5px;
-}
-
-.subject-code-select:focus {
-    outline: none;
-    box-shadow: 0 0 0 1px #2804f7;
-}
-* {
-    margin: 0;
-    padding: 0;
-
-    list-style-type:none; 
-    text-decoration: none;
-
-    font-size: 13px;
-}
-
-.container {
-    display: flex;
-    flex-direction: row;
-
-    width: 100%;
 }
 
 .table-container {
@@ -144,8 +60,8 @@
 }
 
 .subject-code-info {
-    font-size: 13px;
-    font-weight: 600;
+    margin-right: 5px;
+    font-size: 14px;
 }
 
 .subject-code-select {
@@ -162,7 +78,7 @@
     padding: 5px 10px; 
     font-size: 13px;
     background-color: #2804f7;
-    border: 2px solid #2804f7;
+    border: 1px solid #2804f7;
     border-radius: 2px;
 
     color: white;
@@ -173,7 +89,7 @@
 .select-button:hover {
     background-color: white;
     color: #2804f7;
-    border: 2px solid #2804f7;
+    border: 1px solid #2804f7;
     
     border-radius: 2px;
     font-weight: 600;
@@ -280,25 +196,6 @@ hr {
 
     border-top: #aaa dotted 1px;
     border-bottom: #fff dotted 1px;
-}
-
-.ok-sugang {
-    margin: 0px 10px;
-    padding: 5px 10px;
-    border: 1px solid #2804f7;
-    border-radius: 2px;
-
-    color: #2804f7;
-    font-weight: 600;
-
-    background-color: #ffffff;
-
-    cursor: pointer;
-}
-
-.ok-sugang:hover {
-    background-color: #2804f7;
-    color: #ffffff;
 }
 
 .proposal-text {
@@ -493,6 +390,10 @@ hr {
     font-weight: 600;
 }
 
+.course-count{
+    margin-left: 5px;
+}
+
 .table {
     border: 1px solid #dbdbdb;
 }
@@ -661,8 +562,6 @@ hr {
 }
 
 .grade-container {
-    margin-top: 39px;
-
     width: 320px;
     height: 100px;
 }
@@ -692,6 +591,8 @@ hr {
 .schedule-text {
     font-size: 17px;
     font-weight: 600;
+
+    margin-bottom: 5px;
 
     color: #2804f7;
 }
