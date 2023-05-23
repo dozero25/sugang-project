@@ -17,7 +17,7 @@ html {
     height: 100%;
 }
 
-ol, ul{
+ol, ul, li{
     list-style-type: none;
 }
 
@@ -29,8 +29,4 @@ a {
 table {
     border-collapse: collapse;
     border-spacing: 0;
-}
-
-input, textarea, select {
-    box-sizing: border-box;
 }
