@@ -8,7 +8,6 @@ table, tbody, tfoot, thead, tr, th, td,
 article, aside, footer, header, nav, main {
     margin: 0;
     padding: 0;
-    border: 0;
     box-sizing: border-box;
 }
 

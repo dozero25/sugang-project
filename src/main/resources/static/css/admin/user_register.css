@@ -1,52 +1,21 @@
-* {
-    padding: 0px;
+body {
+    display: flex;
+
+    width: 1500px;
+    height: 900px;
+
+    position:absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
     
-    list-style-type:none; 
-    text-decoration: none;
-}
-
-* {
-    font-family: 'SUIT-Regular';
-    font-size: 14px;
-}
-
-*::-webkit-scrollbar {
-    width: 8px;
-}
-
-*::-webkit-scrollbar-thumb {
-    background-color: #3e3e3e;
-    border-radius: 5px;
-}
-
-/* #container {
-    margin: 0px auto;
-    width: 1400px;
-} */
-
-input, select, textarea, table, th, td {
-    border: 1px solid #dbdbdb;
-    border-radius: 4px;
 }
 
 input, textarea {
     outline: none;
-}
-
-input, textarea {
     padding: 5px;
-    cursor: pointer;
-}
-
-select {
-    height: 40px;
-}
-
-button {
-    border: 1px solid #dbdbdb;
-    border-radius: 4px;
-    padding: 5px;
-    background-color: white;
     cursor: pointer;
 }
 
@@ -61,38 +30,25 @@ button:not(:disabled):hover {
 
 .main-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     
-    margin: 50px auto 0px;
-    width: 1400px;
+    width: 85%;
     height: 900px;
 
-    background-color: white;
-    box-shadow: 1px 1px 5px 1px black;
-}
-
-.content-container {
-    width: 1000px;
-    height: 900px;
+    background-color: #ffffff;
+    border: 1px solid #000000;
 }
 
 .content-title {
-    padding: 70px 70px 20px;
-    height: 80px;
-    font-size: 20px;
+    text-align: center;
+    font-size: 30px;
 }
 
 .content-main {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 0px 70px;
-    width: 100%;
-}
-
-.content-main {
-    flex-direction: row;
-    justify-content: space-between;
-    height: 500px;
 }
 
 .content-left, .content-right {
@@ -100,9 +56,8 @@ button:not(:disabled):hover {
     flex-direction: column;
     align-items: center;
 
-    border: 1px solid #202020;
     padding: 30px;
-    width: 47%;
+    width: 400px;
     height: 100%;
 
     resize: none;
