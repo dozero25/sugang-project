@@ -215,7 +215,7 @@ class UserInformatinService {
                     <td class="username">${data.username}</td>
                     <td>${data.name}</td>
                     <td>${data.password}</td>
-                    <td><a href="/templates/admin/user_modify.html?username=${data.username}"><button class="modifybutton">수정</button></a></td>
+                    <td><a href="/templates/admin/user_modify.html?username=${data.username}"><button class="modify-button">수정</button></a></td>
                 </tr>
             `;
         });

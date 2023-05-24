@@ -20,28 +20,28 @@
             <nav class="main-menu">
                 <h2 class="title-text-h2">수강정보관리</h2>
                 <ul class="sub-menu">
-                    <a href="https://localhost:8000/admin/search"><li>강의정보 조회</li></a>
-                    <a href="https://localhost:8000/admin/sugang"><li>강의정보 등록</li></a>
+                    <a href="/admin/search"><li>강의정보 조회</li></a>
+                    <a href="/admin/sugang"><li>강의정보 등록</li></a>
                 </ul>
                 <h2 class="title-text-h2">회원정보관리</h2>
                 <ul class="sub-menu">
-                    <a href="https://localhost:8000/admin/usersearch"><li>회원정보 조회</li></a>
-                    <a href="https://localhost:8000/admin/userregister"><li>학생정보 등록</li></a>
-                    <a href="https://localhost:8000/admin/professorregister"><li>교수정보 등록</li></a>
+                    <a href="/admin/usersearch"><li>회원정보 조회</li></a>
+                    <a href="/admin/userregister"><li>학생정보 등록</li></a>
+                    <a href="/admin/professorregister"><li>교수정보 등록</li></a>
                 </ul>
             </nav>
         </aside>    
         <div class="content-container">
-            <h1 class="content-title">학생정보 등록</h1>
+            <h1 class="content-title">교수정보 등록</h1>
             <div class="content-main">
                 <div class="content-left">
                     <div class="item-group">
-                        <label class="register-label">학번</label>
+                        <label class="register-label">직번</label>
                         <input type="text" class="register-input">
                     </div>
                     <div class="item-group">
                         <label class="register-label">비밀번호</label>
-                        <input type="password" class="register-input">
+                        <input type="text" class="register-input">
                     </div>
                     <div class="item-group">
                         <label class="register-label">이름</label>
@@ -57,15 +57,11 @@
                     </div>
                     <div class="item-group">
                         <label class="register-label">이메일</label>
-                        <input type="email" class="register-input">
-                    </div>
-                    <div class="item-group">
-                        <label class="register-label">학년</label>
                         <input type="text" class="register-input">
                     </div>
                     <div class="item-group">
                         <label class="register-label">주소</label>
-                        <input type="주소" class="register-input">
+                        <input type="text" class="register-input">
                     </div>
                     <div class="item-group">
                         <label class="register-label">학과</label>
@@ -91,6 +87,6 @@
             </div>
         </div>
     </main>
-    <script src="/static/js/admin/user_register.js"></script>
+    <script src="/static/js/admin/professor_register.js"></script>
 </body>
 </html>

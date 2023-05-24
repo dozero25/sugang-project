@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/static/css/common.css">
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/admin/left_aside.css">
-    <link rel="stylesheet" href="/static/css/admin/user_register.css">
+    <link rel="stylesheet" href="/static/css/admin/student_modify.css">
     <title></title>
 </head>
 <body>
@@ -20,56 +20,65 @@
             <nav class="main-menu">
                 <h2 class="title-text-h2">수강정보관리</h2>
                 <ul class="sub-menu">
-                    <a href="https://localhost:8000/admin/search"><li>강의정보 조회</li></a>
-                    <a href="https://localhost:8000/admin/sugang"><li>강의정보 등록</li></a>
+                    <a href="/admin/search"><li>강의정보 조회</li></a>
+                    <a href="/admin/sugang"><li>강의정보 등록</li></a>
                 </ul>
                 <h2 class="title-text-h2">회원정보관리</h2>
                 <ul class="sub-menu">
-                    <a href="https://localhost:8000/admin/usersearch"><li>회원정보 조회</li></a>
-                    <a href="https://localhost:8000/admin/userregister"><li>학생정보 등록</li></a>
-                    <a href="https://localhost:8000/admin/professorregister"><li>교수정보 등록</li></a>
+                    <a href="/admin/usersearch"><li>회원정보 조회</li></a>
+                    <a href="/admin/userregister"><li>학생정보 등록</li></a>
+                    <a href="/admin/professorregister"><li>교수정보 등록</li></a>
                 </ul>
             </nav>
         </aside>    
         <div class="content-container">
-            <h1 class="content-title">교수정보 등록</h1>
+            <h1 class="content-title">학생정보 수정</h1>
             <div class="content-main">
                 <div class="content-left">
                     <div class="item-group">
-                        <label class="register-label">직번</label>
-                        <input type="text" class="register-input">
+                        <label class="modification-label">학번</label>
+                        <input type="text" class="modification-input">
+                        <div class="error-message"></div>
                     </div>
                     <div class="item-group">
-                        <label class="register-label">비밀번호</label>
-                        <input type="text" class="register-input">
+                        <label class="modification-label">비밀번호</label>
+                        <input type="password" class="modification-input">
                     </div>
                     <div class="item-group">
-                        <label class="register-label">이름</label>
-                        <input type="text" class="register-input">
+                        <label class="modification-label">이름</label>
+                        <input type="text" class="modification-input">
+                        <div class="error-message"></div>
                     </div>
                     <div class="item-group">
-                        <label class="register-label">핸드폰</label>
-                        <input type="text" class="register-input">
+                        <label class="modification-label">핸드폰</label>
+                        <input type="text" class="modification-input">
                     </div>
                     <div class="item-group">
                         <label class="register-label">생년월일</label>
-                        <input type="text" class="register-input">
+                        <input type="text" class="modification-input">
                     </div>
                     <div class="item-group">
                         <label class="register-label">이메일</label>
-                        <input type="text" class="register-input">
+                        <input type="email" class="modification-input">
+                    </div>
+                    <div class="item-group">
+                        <label class="register-label">학년</label>
+                        <input type="text" class="modification-input">
                     </div>
                     <div class="item-group">
                         <label class="register-label">주소</label>
-                        <input type="text" class="register-input">
+                        <input type="주소" class="modification-input">
                     </div>
+                    
+                    
                     <div class="item-group">
-                        <label class="register-label">학과</label>
-                        <select class="register-input category-select">
+                        <label class="modification-label">학과</label>
+                        <select class="modification-input category-select">
                             
                         </select>
+                        <div class="error-message"></div>
                     </div>
-                    <button class="register-button">등록하기</button>
+                    <button class="modify-button">수정하기</button>
                 </div>
                 <div class="content-right">
                     <form class="img-form">
@@ -79,7 +88,7 @@
                             <img src="/static/image/profile_noimg.jpg" class="user-img">
                         </div>
                         <div class="button-group">
-                            <button type="button" class="img-register-button" disabled>이미지 등록</button>
+                            <button type="button" class="img-modify-button" disabled>이미지 등록</button>
                             <button type="button" class="img-cancel-button" disabled>취소</button>
                         </div>
                     </form>
@@ -87,6 +96,6 @@
             </div>
         </div>
     </main>
-    <script src="/static/js/admin/professor_register.js"></script>
+    <script src="/static/js/admin/student_modify.js"></script>
 </body>
 </html>
