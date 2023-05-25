@@ -8,31 +8,33 @@
     <link rel="stylesheet" href="/static/css/common.css">
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/admin/left_aside.css">
-    <link rel="stylesheet" href="/static/css/admin/student_modify.css">
-    <title></title>
+    <link rel="stylesheet" href="/static/css/admin/user_modify.css">
+    <title>회원정보 수정</title>
 </head>
 <body>
+    <aside class="left-aside">
+        <div class="aside-title">
+            <h1 class="title-text-h1">관리자 시스템</h1>
+        </div>
+        <nav class="main-menu">
+            <h2 class="title-text-h2">수강정보관리</h2>
+            <ul class="sub-menu">
+                <a href="/admin/search"><li>강의정보 조회</li></a>
+                <a href="/admin/sugang"><li>강의정보 등록</li></a>
+            </ul>
+            <h2 class="title-text-h2">회원정보관리</h2>
+            <ul class="sub-menu">
+                <a href="/admin/usersearch"><li>회원정보 조회</li></a>
+                <a href="/admin/userregister"><li>학생정보 등록</li></a>
+                <a href="/admin/professorregister"><li>교수정보 등록</li></a>
+            </ul>
+        </nav>
+    </aside>    
     <main class="main-container">
-        <aside class="left-aside">
-            <div class="aside-title">
-                <h1 class="title-text-h1">관리자 시스템</h1>
-            </div>
-            <nav class="main-menu">
-                <h2 class="title-text-h2">수강정보관리</h2>
-                <ul class="sub-menu">
-                    <a href="/admin/search"><li>강의정보 조회</li></a>
-                    <a href="/admin/sugang"><li>강의정보 등록</li></a>
-                </ul>
-                <h2 class="title-text-h2">회원정보관리</h2>
-                <ul class="sub-menu">
-                    <a href="/admin/usersearch"><li>회원정보 조회</li></a>
-                    <a href="/admin/userregister"><li>학생정보 등록</li></a>
-                    <a href="/admin/professorregister"><li>교수정보 등록</li></a>
-                </ul>
-            </nav>
-        </aside>    
         <div class="content-container">
-            <h1 class="content-title">학생정보 수정</h1>
+            <div class="title-box">
+                <h1 class="content-title">학생정보 수정</h1>
+            </div>
             <div class="content-main">
                 <div class="content-left">
                     <div class="item-group">
@@ -54,23 +56,21 @@
                         <input type="text" class="modification-input">
                     </div>
                     <div class="item-group">
-                        <label class="register-label">생년월일</label>
+                        <label class="modification-label">생년월일</label>
                         <input type="text" class="modification-input">
                     </div>
                     <div class="item-group">
-                        <label class="register-label">이메일</label>
+                        <label class="modification-label">이메일</label>
                         <input type="email" class="modification-input">
                     </div>
                     <div class="item-group">
-                        <label class="register-label">학년</label>
+                        <label class="modification-label">학년</label>
                         <input type="text" class="modification-input">
                     </div>
                     <div class="item-group">
-                        <label class="register-label">주소</label>
+                        <label class="modification-label">주소</label>
                         <input type="주소" class="modification-input">
                     </div>
-                    
-                    
                     <div class="item-group">
                         <label class="modification-label">학과</label>
                         <select class="modification-input category-select">
@@ -96,6 +96,6 @@
             </div>
         </div>
     </main>
-    <script src="/static/js/admin/student_modify.js"></script>
+    <script src="/static/js/admin/user_modify.js"></script>
 </body>
 </html>
