@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,35 +12,40 @@
     <title>강의정보 등록</title>
 </head>
 <body>
+    <aside class="left-aside">
+        <div class="aside-title">
+            <h1 class="title-text-h1">관리자 시스템</h1>
+        </div>
+        <nav class="main-menu">
+            <h2 class="title-text-h2">수강정보관리</h2>
+            <ul class="sub-menu">
+                <a href="/admin/search"><li>강의정보 조회</li></a>
+                <a href="/admin/sugang"><li>강의정보 등록</li></a>
+            </ul>
+            <h2 class="title-text-h2">회원정보관리</h2>
+            <ul class="sub-menu">
+                <a href="/admin/usersearch"><li>회원정보 조회</li></a>
+                <a href="/admin/userregister"><li>학생정보 등록</li></a>
+                <a href="/admin/professorregister"><li>교수정보 등록</li></a>
+            </ul>
+        </nav>
+    </aside>
     <main class="main-container">
-        <aside class="left-aside">
-            <div class="aside-title">
-                <h1 class="title-text-h1">관리자 시스템</h1>
-            </div>
-            <nav class="main-menu">
-                <h2 class="title-text-h2">수강정보관리</h2>
-                <ul class="sub-menu">
-                    <a href="/admin/search"><li>강의정보 조회</li></a>
-                    <a href="/admin/sugang"><li>강의정보 등록</li></a>
-                </ul>
-                <h2 class="title-text-h2">회원정보관리</h2>
-                <ul class="sub-menu">
-                    <a href="/admin/usersearch"><li>회원정보 조회</li></a>
-                    <a href="/admin/userregister"><li>학생정보 등록</li></a>
-                    <a href="/admin/professorregister"><li>교수정보 등록</li></a>
-                </ul>
-            </nav>
-        </aside>
         <div class="content-container">
-            <h1 class="content-title">강의정보 등록</h1>
+            <div class="title-box">
+                <h1 class="content-title">강의정보 등록</h1>
+            </div>
             <div class="content-main">
                 <div class="content-items">
                     <div class="content-top">
                         <div class="lnb-inner">
-                            <h1>
+                            <div class="inb-logo">
                                 <img src="/static/image/logo.png" alt="코리아IT 대학교 수강신청">
-                            </h1>
-                            <span class="school-name">코리아IT 대학교 <li>KOREA-IT UNIVERSITY</li></span>
+                            </div>
+                            <div class="school-name">코리아IT 대학교
+                                <div class="school-name-en">KOREA-IT UNIVERSITY</div>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="content-bottom">
@@ -133,7 +138,9 @@
                             </div>
                         </div>
                     </div>
-                    <button class="register-button">등록하기</button>
+                    <div class="registerbtn-box">
+                        <button class="register-button">등록하기</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -13,6 +13,11 @@ body {
     
 }
 
+input, select, textarea, table, th, td {
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+}
+
 input, select, textarea {
     padding: 5px;
     outline: 0;
@@ -98,6 +103,7 @@ input, select, textarea {
 
 .content-table thead th {
     padding: 10px 15px;
+    height: 60px;
 }
 
 .content-table th, .content-table td{
@@ -168,7 +174,7 @@ input, select, textarea {
     border-radius: 4px;
     width: 30px;
     height: 30px;
-    color: black;
+    color: #000000;
 
     font-weight: 600;
     font-size: 12px;
@@ -180,11 +186,11 @@ input, select, textarea {
 
 .page-controller a:hover {
     background-color: #202020;
-    color: white;
+    color: #ffffff;
 }
 
 .page-controller .disabled {
     background-color: #202020;
-    color: white;
+    color: #ffffff;
     cursor: default;
 }
