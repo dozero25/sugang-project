@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/admin/left_aside.css">
     <link rel="stylesheet" href="/static/css/admin/user_register.css">
-    <title></title>
+    <title>회원정보 등록</title>
 </head>
 <body>
     <aside class="left-aside">
@@ -32,12 +32,15 @@
     </aside>    
     <main class="main-container">
         <div class="content-container">
-            <h1 class="content-title">학생정보 등록</h1>
+            <div class="title-box">
+                <h1 class="content-title">학생정보 등록</h1>
+            </div>
             <div class="content-main">
                 <div class="content-left">
                     <div class="item-group">
                         <label class="register-label">학번</label>
                         <input type="text" class="register-input">
+                        <div class="error-message"></div>
                     </div>
                     <div class="item-group">
                         <label class="register-label">비밀번호</label>
@@ -46,6 +49,7 @@
                     <div class="item-group">
                         <label class="register-label">이름</label>
                         <input type="text" class="register-input">
+                        <div class="error-message"></div>
                     </div>
                     <div class="item-group">
                         <label class="register-label">핸드폰</label>
@@ -72,6 +76,7 @@
                         <select class="register-input category-select">
                             
                         </select>
+                        <div class="error-message"></div>
                     </div>
                     <button class="register-button">등록하기</button>
                 </div>

@@ -13,9 +13,20 @@ body {
     
 }
 
-input, textarea {
+input, select, textarea, table, th, td {
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+}
+
+input, select, textarea {
     outline: none;
     padding: 5px;
+    cursor: pointer;
+}
+
+button {
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
     cursor: pointer;
 }
 
@@ -24,8 +35,10 @@ button:disabled {
 }
 
 button:not(:disabled):hover {
-    background-color: #fafafa;
-    color: #3e3e3e;
+    border: 1px solid #8b8b8b;
+    background-color: #8b8b8b;
+    color: #ffffff;
+    font-weight: 700;
 }
 
 .main-container {
@@ -38,6 +51,10 @@ button:not(:disabled):hover {
 
     background-color: #ffffff;
     border: 1px solid #000000;
+}
+
+.title-box {
+    margin: 15px 0px;
 }
 
 .content-title {
