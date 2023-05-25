@@ -203,11 +203,11 @@ class StudentModifyService{
         const responeseData = StudentModifyApi.getInstance().getUserAndImage();
 
         console.log(responeseData);
-        if(responeseData.username == null){
-            alert("해당 유저는 등록되지 않은 유저입니다.");
-            history.back();
-            return;
-        }
+        // if(responeseData.username == null){
+        //     alert("해당 유저는 등록되지 않은 유저입니다.");
+        //     history.back();
+        //     return;
+        // }
 
         const modificationInputs = document.querySelectorAll(".modification-input");
         modificationInputs[0].value = responeseData.username.username;

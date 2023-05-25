@@ -134,7 +134,7 @@ class SugangInformationService{
             sugangListBody.innerHTML += `
                 <tr>
                     <td><input type="checkbox" class="delete-checkbox"></td>
-                    <td class="category"><a href="/templates/admin/sugang_modification.html?subjectCode=${data.subjectCode}">${data.category}</td></a>
+                    <td class="category"><a href="/admin/sugang/${data.subjectCode}">${data.category}</td></a>
                     <td>${data.classification}</td>
                     <td class="subject-code">${data.subjectCode}</td>
                     <td>${data.subjectName}</td>
