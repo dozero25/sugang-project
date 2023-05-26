@@ -1,5 +1,7 @@
 .container {
     display: flex;
+    justify-content: center;
+
     flex-direction: row;
 
     width: 100%;
@@ -9,8 +11,6 @@
 .table-container {
     width: 1050px;
     height: 900px;
-
-    margin-left: 250px;
 }
 
 .title-item {
@@ -63,6 +63,7 @@
     margin-right: 5px;
     font-size: 14px;
 }
+
 
 .subject-code-select {
     width: 70px;
@@ -340,7 +341,7 @@ hr {
 
     text-align: center;
 
-    border-collapse: collapse; 
+    border-collapse: collapse;
 }
 
 .class-text {
