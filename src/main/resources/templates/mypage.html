@@ -19,7 +19,7 @@
                         <a href="/templates/announcement.html"><img src="/static/image/logo.png" alt="코리아IT 대학교 수강신청"></a>
                     </h1>
                     <span class="school-name"><a href="/templates/announcement.html">코리아IT 대학교 <li>KOREA-IT UNIVERSITY</li></span></a>
-                    <span class="sugang-date">회원정보 수정</span>
+                    <span class="sugang-date">마이페이지</span>
                 </div>
                 <div class="user-info">
                     <ul>
@@ -47,51 +47,54 @@
                         <div class="img-container">
                             <img src="/static/image/profile_noimg.jpg" class="person-img">
                         </div>
-                        
                         <button type="button" class="img-add-button">+</button>
                         <input type="file" name="file" class="img-file">    
                     </form>
                 </div>
                 <div class="content-right">
                     <div class="user-modify">
-                        <div class="item-group">
-                            <label class="modification-label">학번</label>
-                            <input type="text" class="modification-input" value="${responseData.mypageMst.username}" disabled>
+                        <div>
+                            <div class="item-group">
+                                <label class="modification-label">학번</label>
+                                <input type="text" class="modification-input" style="cursor: default;"  value="학번" disabled>
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">성명</label>
+                                <input type="text" class="modification-input" value="성명" disabled>
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">단과대학</label>
+                                <input type="text" class="modification-input" value="단과대학" disabled>
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">학부(과)</label>
+                                <input type="text" class="modification-input" value="학부" disabled>
+                            </div>
                         </div>
-                        <div class="item-group">
-                            <label class="modification-label">성명</label>
-                            <input type="text" class="modification-input" value="${responseData.mypageMst.name}" disabled>
+                        <div>
+                            <div class="item-group">
+                                <label class="modification-label">생년월일</label>
+                                <input type="text" class="modification-input" value="$생년월일">
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">휴대전화</label>
+                                <input type="text" class="modification-input" value="휴대전화">
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">E-MAIL</label>
+                                <input type="text" class="modification-input" value="메일">
+                            </div>
+                            <div class="item-group">
+                                <label class="modification-label">주소</label>
+                                <input type="text" class="modification-input" value="주">
+                            </div>
                         </div>
-                        <div class="item-group">
-                            <label class="modification-label">단과대학</label>
-                            <input type="text" class="modification-input" value="${responseData.mypageMst.collegeName}" disabled>
-                        </div>
-                        <div class="item-group">
-                            <label class="modification-label">학부(과)</label>
-                            <input type="text" class="modification-input" value="${responseData.mypageMst.category}" disabled>
-                        </div>
-                        <div class="item-group">
-                            <label class="modification-label">생년월일</label>
-                            <input type="text" class="modification-input" value="${responseData.mypageMst.birthDate}">
-                        </div>
-                        <div class="item-group">
-                            <label class="modification-label">휴대전화</label>
-                            <input type="text" class="modification-input" value="${responseData.mypageMst.phone}">
-                        </div>
-                        <div class="item-group">
-                            <label class="modification-label">E-MAIL</label>
-                            <input type="text" class="modification-input" value="${responseData.mypageMst.email}">
-                        </div>
-                        <div class="item-group">
-                            <label class="modification-label">주소</label>
-                            <input type="text" class="modification-input" value="${responseData.mypageMst.address}">
-                        </div>
-                    </div>
-                    <div class="button-group">
-                        <button type="submit" class="modification-button">저장하기</button>
                     </div>
                 </div>
-            </div>   
+            </div>
+            <div class="button-group">
+                <button type="submit" class="modification-button">저장하기</button>
+            </div>
         </div>
     </main>
     <script src="/static/js/account/principal.js"></script>

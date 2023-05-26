@@ -1,25 +1,35 @@
+body {
+    width: 100%;
+}
 .my-page {
-    padding: 40px 600px;
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 1000px;
+    height: 500px;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px 5px #dbdbdb ;
+
+    align-items: center;
 }
 
 .container {
     display: flex;
     flex-direction: row;
-    margin-top: 30px;
-    width: 800px;
-    height: 770px;
-    border-radius: 5px;
-    background-color: #6a8cc0;
-}
-
-
-
-.content-left, .content-right {
-    display: flex;
-    flex-direction: column;
     align-items: center;
 
-    margin-top: 40px;
+    height: 77%;
+
+    margin-top: 25px;
+}
+
+.content-left {
+    width: 400px;
 }
 
 .img-form {
@@ -35,19 +45,19 @@
     justify-content: center;
     align-items: center;
 
-    margin-bottom: 0;
     height: 220px;
 
     overflow: hidden;
 }
 
 .person-img {
+    width: 200px;
     height: 200px;
 }
 
 .img-add-button {
     width: 140px;
-    height: 25px;
+    height: 30px;
 
     font-size: 20px;
     font-weight: 600;
@@ -57,17 +67,21 @@
     
     color: white;
     border: 1px solid #1764dc;
-    background-color: #6a8cc0;
+    background-color: #1764dc;
 }
 
 .img-add-button:hover {
-    background-color: #1764dc;
+    border: 1px solid #0f397a;
+    background-color: #0f397a;
 }
 
 .img-file {
     display: none;
 }
 
+.user-modify {
+    display: flex;
+}
 
 .item-group {
     flex-direction: column;
@@ -78,7 +92,7 @@
     padding-left: 3px;
 
     font-size: 16px;
-    color: white;
+    color: #303030;
 }
 
 .modification-input {
@@ -86,9 +100,10 @@
     text-align: center;
     width: 230px;
     height: 35px;
-    margin: 5px 0 20px 0;
+    margin: 5px 10px 20px 10px;
     border: 0;
 
+    background-color: #f5f5f5;
     border-radius: 30px;
 }
 
@@ -98,14 +113,15 @@
 }
 
 .button-group {
-    padding-left:120px;
-    padding-top: 15px;
+    display: flex;
+    height: 23%;
     font-size: 16px;
 }
 
 .modification-button {
     width: 120px;
-    height: 30px;
+    height: 50px;
+
     border: 1px solid #1764dc;
     border-radius: 3px;
     font-size: 16px;
@@ -113,11 +129,14 @@
     cursor: pointer;
 
     color: white;
-    background-color: #6a8cc0;
+    background-color: #1764dc;
+
+    margin: 0 auto;
 }
 
 .modification-button:hover {
-    background-color: #1764dc;
+    border: 1px solid #0f397a;
+    background-color: #0f397a;
 }
 
 

@@ -147,37 +147,41 @@ class MypageLoadService{
         
         const modificationInputs = document.querySelector(".user-modify");
             modificationInputs.innerHTML = `
-                <div class="item-group">
-                    <label class="modification-label">학번</label>
-                    <input type="text" class="modification-input" value="${responseData.mypageMst.username}" disabled>
+                <div>
+                    <div class="item-group">
+                        <label class="modification-label">학번</label>
+                        <input type="text" class="modification-input" style="cursor: default;" value="${responseData.mypageMst.username}" disabled>
+                    </div>
+                    <div class="item-group">
+                        <label class="modification-label">성명</label>
+                        <input type="text" class="modification-input" style="cursor: default;" value="${responseData.mypageMst.name}" disabled>
+                    </div>
+                    <div class="item-group">
+                        <label class="modification-label">단과대학</label>
+                        <input type="text" class="modification-input" style="cursor: default;" value="${responseData.mypageMst.collegeName}" disabled>
+                    </div>
+                    <div class="item-group">
+                        <label class="modification-label">학부(과)</label>
+                        <input type="text" class="modification-input" style="cursor: default;" value="${responseData.mypageMst.category}" disabled>
+                    </div>
                 </div>
-                <div class="item-group">
-                    <label class="modification-label">성명</label>
-                    <input type="text" class="modification-input" value="${responseData.mypageMst.name}" disabled>
-                </div>
-                <div class="item-group">
-                    <label class="modification-label">단과대학</label>
-                    <input type="text" class="modification-input" value="${responseData.mypageMst.collegeName}" disabled>
-                </div>
-                <div class="item-group">
-                    <label class="modification-label">학부(과)</label>
-                    <input type="text" class="modification-input" value="${responseData.mypageMst.category}" disabled>
-                </div>
-                <div class="item-group">
-                    <label class="modification-label">생년월일</label>
-                    <input type="text" class="modification-input" value="${responseData.mypageMst.birthDate}">
-                </div>
-                <div class="item-group">
-                    <label class="modification-label">휴대전화</label>
-                    <input type="text" class="modification-input" value="${responseData.mypageMst.phone}">
-                </div>
-                <div class="item-group">
-                    <label class="modification-label">E-MAIL</label>
-                    <input type="text" class="modification-input" value="${responseData.mypageMst.email}">
-                </div>
-                <div class="item-group">
-                    <label class="modification-label">주소</label>
-                    <input type="text" class="modification-input" value="${responseData.mypageMst.address}">
+                <div>
+                    <div class="item-group">
+                        <label class="modification-label">생년월일</label>
+                        <input type="text" class="modification-input" value="${responseData.mypageMst.birthDate}">
+                    </div>
+                    <div class="item-group">
+                        <label class="modification-label">휴대전화</label>
+                        <input type="text" class="modification-input" value="${responseData.mypageMst.phone}">
+                    </div>
+                    <div class="item-group">
+                        <label class="modification-label">E-MAIL</label>
+                        <input type="text" class="modification-input" value="${responseData.mypageMst.email}">
+                    </div>
+                    <div class="item-group">
+                        <label class="modification-label">주소</label>
+                        <input type="text" class="modification-input" value="${responseData.mypageMst.address}">
+                    </div>
                 </div>
             `;
         
