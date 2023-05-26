@@ -75,10 +75,6 @@ input, select, textarea {
     align-items: center;
 }
 
-.content-table th, .content-table td {
-    text-align: center;
-}
-
 .content-items {
     display: flex;
     justify-content: space-between;

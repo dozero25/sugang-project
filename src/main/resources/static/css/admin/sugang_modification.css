@@ -1,52 +1,72 @@
-* {
-    padding: 0px;
+body {
+    display: flex;
+
+    width: 1500px;
+    height: 900px;
+
+    position:absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
     
-    list-style-type:none; 
-    text-decoration: none;
+}
+
+input, select, textarea, table, th, td {
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+}
+
+input, select, textarea {
+    outline: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+button {
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: default;
+}
+
+button:not(:disabled):hover {
+    border: 1px solid #8b8b8b;
+    background-color: #8b8b8b;
+    color: #ffffff;
+    font-weight: 700;
 }
 
 .main-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     
-    margin: 50px auto 0px;
-    width: 1400px;
+    width: 85%;
     height: 900px;
 
-    background-color: white;
-    box-shadow: 1px 1px 5px 1px black;
+    background-color: #ffffff;
+    border: 1px solid #000000;
 }
 
-.content-container {
-    width: 1200px;
-    height: 900px;
+.title-box {
+    margin: 15px 0px;
 }
 
 .content-title {
-    padding: 70px 70px 20px;
-    height: 10px;
-    font-size: 20px;
-}
-
-.content-main {
-    width: 100%;
-}
-
-* {
-    font-family: 'SUIT-Regular';
-    font-size: 14px;
-}
-
-*::-webkit-scrollbar {
-    width: 8px;
-}
-
-*::-webkit-scrollbar-thumb {
-    background-color: #3e3e3e;
-    border-radius: 5px;
+    font-size: 30px;
+    text-align: center;
 }
 
 .item-group {
-    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .content-main {
@@ -60,68 +80,56 @@
     flex-direction: column;
     align-items: center;
 
-    border: 1px solid #202020 ;
+    border: 1px solid #dbdbdb ;
     padding: 30px;
     width: 500px;
     height: 100%;
 }
 
-.lnb {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 img {
-    margin: 20px 0px;
-    margin-right: 0px;
+    width: 60px;
     height: 60px;
 }
 
 .lnb-inner {
     display: flex;
-    height: 100px;
-}
-
-.lnb-inner span {
     justify-content: center;
     align-items: center;
 
-    margin-top: 30px;
-    margin-right: 20px;
-    height: 40px;
-    
-    font-weight: 600;
+    height: 100px;
+    width: 100%;
 }
 
 .school-name {
-    margin-left: 5px;
+    margin-left: 10px;
     font-size: 19px;
-    cursor: pointer;
+    font-weight: 600;
 }
-
-.school-name a {
-    color: black;
-}
-
-.school-name li {
-    font-size: 15px;
-
+.school-name-en {
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .content-bottom {
     flex-direction: row;
-    justify-content: space-between;
+    height: 550px;
 }
 
-.content-left, .content-right {
+.content-inner-bottom {
+    display: flex;
+}
+
+.content-left .content-right {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    padding: 20px;
+    
     width: 500px;
-    height: 100%;
+    height: 80%;
+}
+
+.content-right {
+    margin-left: 15px;
 }
 
 .item-group {
@@ -133,17 +141,28 @@ img {
 }
 
 .modification-label {
-    padding-bottom: 1px;
-
+    padding-bottom: 5px;
     font-weight: 600;
 }
 
-.modification-button {
-    margin-top: 15px;
-    margin-left: 230px;
+.modification-input {
+    width: 200px;
+}
 
-    width: 100px;
-    height: 30px;
+.item-group select{
+    width: 212px;
+}
+
+.modifybtn-box {
+    display: flex;
+    margin-top: 10px;
+}
+
+.modification-button {
+    margin: 0 auto;    
+
+    width: 200px;
+    height: 50px;
 
     border-radius: 5px;
     background-color: white;
