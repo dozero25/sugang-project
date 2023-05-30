@@ -16,9 +16,10 @@ class HeaderApi {
             type: "get",
             url: `  ${PrincipalApi.getInstance().getPrincipal().user.userId != null
                         ? `
-                        http://localhost:8000/api/account/${PrincipalApi.getInstance().getPrincipal().user.userId}`
+                        http://localhost:8000/api/account/${PrincipalApi.getInstance().getPrincipal().user.userId}
+                        `
                         : `
-                        http://localhost:8000/announcement.html
+                        http://localhost:8000/index.html
                         `
                     }`
                     ,
@@ -52,9 +53,9 @@ class HeaderService {
         <div class="lnb wrap">
             <div class="lnb-inner">
                 <h1>
-                    <a href="/announcement"><img src="/static/image/logo.png" alt="코리아IT 대학교 수강신청"></a>
+                    <a href="/index"><img src="/static/image/logo.png" alt="코리아IT 대학교 수강신청"></a>
                 </h1>
-                <span class="school-name"><a href="/announcement">코리아IT 대학교 <li>KOREA-IT UNIVERSITY</li></span></a>
+                <span class="school-name"><a href="/index">코리아IT 대학교 <li>KOREA-IT UNIVERSITY</li></span></a>
                 <span class="sugang-date">2023학년도 1학기 수강신청</span>
             </div>
             <div class="user-info">
@@ -77,14 +78,14 @@ class HeaderService {
             </div>
         </div>
         <div class="menulist wrap">
-            <li class="on"><a href="/announcement">공지사항</a></li>
+            <li class="on"><a href="http://localhost:8000/announcement">공지사항</a></li>
             <li><a href="http://localhost:8000/course">장바구니</a></li>
             <li><a href="">수강신청</a></li>
             ${principal == null
                 ?`
-                <li><a href="/user/login">로그인</a></li>    
+                <li><a href="http://localhost:8000/account/login">로그인</a></li>    
                 `:`
-                <li><a href="/logout">로그아웃</a></li>
+                <li><a href="http://localhost:8000/account/login  ">로그아웃</a></li>
             `}
         </div>
             `;

@@ -173,6 +173,7 @@ body {
 }
 
 .error-message{
+    /* display: none; */
     color: red;
     font-size: 8px;
 }
