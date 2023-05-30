@@ -16,6 +16,7 @@ public interface AccountRepository {
     public UserMst findUserByUsername(String username);
 
     public int updatePassword(UserMst user);
+    
     public int saveRole(RoleDtl roleDtl);
 
     public MypageMst findMypage(int userId);

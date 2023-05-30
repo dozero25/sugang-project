@@ -43,8 +43,8 @@ public class AccountService {
     }
 
 
-    public UserMst getUser(int userId){
-        return accountRepository.findUserByUserId(userId);
+    public UserMst getUser(String username){
+        return accountRepository.findUserByUsername(username);
     }
 
     public void modifyUSer(MypageMstReqDto mypageMstReqDto){
