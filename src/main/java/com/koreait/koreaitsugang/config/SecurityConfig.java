@@ -8,8 +8,11 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.util.matcher.AndRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @Configuration
@@ -26,15 +29,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.httpBasic().disable();
         http.authorizeRequests()
-                .antMatchers("/mypage/**")
-                .authenticated()
-                .antMatchers("/admin/**")
-                .hasRole("ADMIN")
+                .antMatchers("/mypage/**", "/index").authenticated()
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest()
                 .permitAll()
                 .and()
@@ -42,8 +44,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/account/login")
                 .loginProcessingUrl("/account/login")
                 .failureForwardUrl("/account/login/error")
-                .defaultSuccessUrl("/announcement");
-
+                .defaultSuccessUrl("/index")
+                .permitAll()
+                .and()
+                .logout()
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/account/login")
+                .invalidateHttpSession(true);
     }
 
 }
