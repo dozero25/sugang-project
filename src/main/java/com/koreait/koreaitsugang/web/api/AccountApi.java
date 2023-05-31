@@ -53,13 +53,15 @@ public class AccountApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<? extends CMRespDto<? extends UserMst>> getUser(@PathVariable int userId){
+    @GetMapping("/user/{username}")
+    public ResponseEntity<? extends CMRespDto<? extends UserMst>> getUser(@PathVariable String username, @AuthenticationPrincipal PrincipalDetails principalDetails){
+
+
         return ResponseEntity
                 .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Success", accountService.getUser(userId)));
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Success", accountService.getUser(username)));
     }
-
+    @ParamsAspect
     @GetMapping("/principal")
     public ResponseEntity<CMRespDto<? extends PrincipalDetails>> getPrincipalDetails(@AuthenticationPrincipal PrincipalDetails principalDetails) {
 
@@ -67,7 +69,12 @@ public class AccountApi {
             principalDetails.getAuthorities().forEach(role -> {
                 log.info("로그인된 사용자의 권한 : {}", role.getAuthority());
             });
+        } else {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new CMRespDto<>(HttpStatus.OK.value(), "failed", null));
         }
+
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Success", principalDetails));

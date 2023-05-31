@@ -26,7 +26,6 @@ public class ParamsAop {
 
         Object[] args = proceedingJoinPoint.getArgs();
 
-
         for (Object arg : args) {
             log.info("{}", arg);
         }

@@ -20,9 +20,9 @@ public class PrincipalDetailsService implements UserDetailsService {
 
     @ParamsAspect
     @Override
-    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        UserMst user = accountRepository.findUserByUsername(userId);
+        UserMst user = accountRepository.findUserByUsername(username);
 
         if (user == null) {
             throw new UsernameNotFoundException("회원정보를 확인할 수 없음");

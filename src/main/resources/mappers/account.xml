@@ -139,9 +139,13 @@
             image_id = #{imageId}
     </select>
 
-    <select id="findUserImageAll" resultType="com.koreait.koreaitsugang.entity.UserImage">
+    <select id="findUserImageAll" resultType="com.koreait.koreaitsugang.web.dto.UserImageDto">
         select
-            ui.image_id as imageId, ui.username, ui.save_name as saveName, ui.origin_name as originName, um.user_id as userId
+            ui.image_id as imageId,
+            ui.username,
+            ui.save_name as saveName,
+            ui.origin_name as originName,
+            um.user_id as userId
         from
             user_image as ui
             left outer join user_mst as um on(ui.username = um.username)
