@@ -10,7 +10,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="" method="post">
+    <form th:action="@{/login-proc}" method="post">
         <div class="login-page">
             <div class="login-box">
                 <div class="login-left">
@@ -34,7 +34,7 @@
                 <div class="login-right">
                     <div class="login-group">
                         <div class="login-id-password">
-                            <input type="text" id="login-username" class="login-inputs" name="userid" placeholder="아이디" required>
+                            <input type="text" id="login-username" class="login-inputs" name="username" placeholder="아이디" required>
                             <input type="password" id="login-password" class="login-inputs" name="password" placeholder="비밀번호" required>
                         </div>
                         <button type="submit" class="login-submit">로그인</button>
