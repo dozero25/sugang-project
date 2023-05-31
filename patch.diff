@@ -1,0 +1,15 @@
+diff --git a/src/main/java/com/koreait/koreaitsugang/config/SecurityConfig.java b/src/main/java/com/koreait/koreaitsugang/config/SecurityConfig.java
+index 1ce916f..297fa5c 100644
+--- a/src/main/java/com/koreait/koreaitsugang/config/SecurityConfig.java
++++ b/src/main/java/com/koreait/koreaitsugang/config/SecurityConfig.java
+@@ -82,7 +82,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
+                 .maximumSessions(1)
+                 .maxSessionsPreventsLogin(false)
+                 .sessionRegistry(sessionRegistry());
++<<<<<<< HEAD
+         asdfasdfsdf
++=======
++>>>>>>> 3f2ad60 (: 로그인 오류 후 다시 로그인 할 때 username을 못 가져오는 오류 수정)
+     }
+ 
+ 
