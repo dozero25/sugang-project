@@ -23,7 +23,7 @@ body {
     flex-direction: row;
     align-items: center;
 
-    height: 77%;
+    height: 75%;
 
     margin-top: 25px;
 }
@@ -112,9 +112,8 @@ body {
     box-shadow: 0 0 0 3px #1764dc;
 }
 
-.button-group {
+.modif-btn-box {
     display: flex;
-    height: 23%;
     font-size: 16px;
 }
 
@@ -138,6 +137,29 @@ body {
     border: 1px solid #0f397a;
     background-color: #0f397a;
 }
+.close-btn-box {
+    display: flex;
+    justify-content: right;
+
+    margin: 0px 20px 15px 0px;
+}
+
+.close-button {
+    border: 1px solid #dfdfdf;
+    background-color: #dbdbdb;
+    border-radius: 50%;
+
+    width: 30px;
+    height: 30px;
+
+    font-size: 20px;
+    color: #303030;
+}
+
+.close-button:hover {
+    background-color: #b6b6b6;
+}
+
 
 
 
