@@ -86,7 +86,6 @@ class HeaderService {
                 <li><a href="http://localhost:8000/admin/main">관리자</a></li>
                 `:`
                 <li style="display: none"><a href="http://localhost:8000/admin/main">관리자</a></li>
-        
             ` 
             }
             ${principal == null
