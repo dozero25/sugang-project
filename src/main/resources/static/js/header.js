@@ -81,11 +81,19 @@ class HeaderService {
             <li class="on"><a href="http://localhost:8000/announcement">공지사항</a></li>
             <li><a href="http://localhost:8000/course">장바구니</a></li>
             <li><a href="">수강신청</a></li>
+            ${principal.user.roleDtl[0].roleId == 3
+                ?`
+                <li><a href="http://localhost:8000/admin/main">관리자</a></li>
+                `:`
+                <li style="display: none"><a href="http://localhost:8000/admin/main">관리자</a></li>
+        
+            ` 
+            }
             ${principal == null
                 ?`
                 <li><a href="http://localhost:8000/account/login">로그인</a></li>    
                 `:`
-                <li><a href="http://localhost:8000/account/login  ">로그아웃</a></li>
+                <li><a href="http://localhost:8000/account/login">로그아웃</a></li>
             `}
         </div>
             `;

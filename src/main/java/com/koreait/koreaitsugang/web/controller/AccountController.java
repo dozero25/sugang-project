@@ -16,7 +16,6 @@ public class AccountController {
         return "user/login";
     }
 
-
     @GetMapping("/login/error")
     public String loginError() {
         return "user/login_error";

@@ -34,8 +34,5 @@ public class UserMst {
     private int grade;
 
     private List<RoleDtl> roleDtl;
-
-    private int roleId;
-
 }
 

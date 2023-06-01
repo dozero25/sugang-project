@@ -177,7 +177,7 @@ class SearchService {
             if(responseData.length -1 == index) {
                 classificationList.innerHTML += `
                     <input type="radio" class="info-radio" name="openCourse" id="${classificationObj}" value="${classificationObj}">
-                    <label for="장바구니">장바구니</label>
+                    <label for="${classificationObj}">장바구니</label>
                 `;
             }
         });
