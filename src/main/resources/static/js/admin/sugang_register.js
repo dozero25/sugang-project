@@ -1,4 +1,5 @@
 window.onload = () => {
+    AsideService.getInstance().loadAside();
     SugangRegisterService.getInstance().loadCategories();
     ComponentEvent.getInstance().addClickEventRegisterButton();
 }

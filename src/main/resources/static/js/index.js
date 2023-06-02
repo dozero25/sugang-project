@@ -1,3 +1,3 @@
 window.onload = () => {
-    HeaderService.getInstance().loadHeader();
+    HeaderService.getInstance().loadHeader(); 
 }

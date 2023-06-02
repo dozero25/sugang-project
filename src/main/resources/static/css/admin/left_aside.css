@@ -57,3 +57,25 @@
 .sub-menu a li:hover {
     background-color: #505050;
 }
+
+.title-backhome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+
+    bottom: 1px;
+
+    border: 1px solid #202020;
+    width: 222px;
+    height: 60px;
+
+    background-color: #ffffff;
+}
+
+.backhome-text{
+    font-size: 20px;
+    font-weight: 600;
+    color: #202020;
+}

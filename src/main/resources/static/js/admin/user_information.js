@@ -1,4 +1,5 @@
 window.onload = () => {
+    AsideService.getInstance().loadAside();
     UserInformatinService.getInstance().loadCategories();
     UserInformatinService.getInstance().loadUserList();
     ComponentEvent.getInstance().addClickEventSearchButton();
