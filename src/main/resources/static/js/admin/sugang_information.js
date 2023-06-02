@@ -1,4 +1,5 @@
 window.onload = () => {
+    AsideService.getInstance().loadAside();
     SugangInformationService.getInstance().loadSugangList();
     SugangInformationService.getInstance().loadCategories();
     ComponentEvent.getInstance().addClickEventSearchButton();

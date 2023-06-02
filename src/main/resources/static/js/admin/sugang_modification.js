@@ -1,6 +1,6 @@
 window.onload = () => {
+    AsideService.getInstance().loadAside();
     SugangModificationService.getInstance().setSubjectCode();
-
     ComponentEvent.getInstance().addClickEventModificationButton();
     SugangModificationService.getInstance().loadSubject();
 }

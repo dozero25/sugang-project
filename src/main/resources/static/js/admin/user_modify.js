@@ -1,5 +1,5 @@
 window.onload = () => {
-
+    AsideService.getInstance().loadAside();
     StudentModifyService.getInstance().setUsername();
     StudentModifyService.getInstance().loadCategories();
     StudentModifyService.getInstance().loadUserAndImageData();

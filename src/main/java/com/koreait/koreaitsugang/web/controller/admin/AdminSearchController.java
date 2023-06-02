@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminSearchController {
 
     @GetMapping("/main")
-    public String adminMain(){return "admin/adminhome";}
+    public String adminMain(){return "admin/adminmain";}
 
     @GetMapping("/usersearch")
     public String userInformation(){
