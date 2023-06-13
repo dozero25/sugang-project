@@ -1,6 +1,7 @@
 package com.koreait.koreaitsugang.repository.admin;
 
 
+import com.koreait.koreaitsugang.entity.RoleDtl;
 import com.koreait.koreaitsugang.entity.SubjectMst;
 import com.koreait.koreaitsugang.entity.UserImage;
 import com.koreait.koreaitsugang.entity.UserMst;

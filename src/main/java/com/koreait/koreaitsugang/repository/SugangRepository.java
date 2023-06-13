@@ -1,6 +1,7 @@
 package com.koreait.koreaitsugang.repository;
 
 import com.koreait.koreaitsugang.entity.ClassificationView;
+import com.koreait.koreaitsugang.entity.CreditMst;
 import com.koreait.koreaitsugang.entity.OpenCourse;
 import com.koreait.koreaitsugang.entity.PocketMst;
 import com.koreait.koreaitsugang.web.dto.SearchNumberListReqDto;
@@ -20,7 +21,6 @@ public interface SugangRepository {
 
     public List<OpenCourse> searchCourse(SearchSugangReqDto searchSugangReqDto);
 
-
     public int loadUserId(int userId);
 
     public int availabilityApply(int subjectCode);
@@ -32,4 +32,6 @@ public interface SugangRepository {
     public List<OpenCourse> loadCourse(int userId);
 
     public OpenCourse findCourse(int subjectCode);
+
+    public CreditMst loadCredit(int userId);
 }

@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.validation.Valid;
+import java.net.URI;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
@@ -110,7 +112,7 @@ public class AdminSearchApi {
     public ResponseEntity<CMRespDto<?>> registerStudent(@Valid @RequestBody AddStudentReqDto addStudentReqDto, BindingResult bindingResult){
         adminSearchService.registerStudent(addStudentReqDto);
         return ResponseEntity
-                .created(null)
+                .created(URI.create(""+addStudentReqDto.getUserId()))
                 .body(new CMRespDto<>(HttpStatus.CREATED.value(), "Successfully", true));
     }
 
@@ -120,7 +122,7 @@ public class AdminSearchApi {
     public ResponseEntity<CMRespDto<?>> registerProfessor(@Valid @RequestBody AddProfessorReqDto addProfessorReqDto, BindingResult bindingResult){
         adminSearchService.registerProfessor(addProfessorReqDto);
         return ResponseEntity
-                .created(null)
+                .created(URI.create(""+addProfessorReqDto.getUserId()))
                 .body(new CMRespDto<>(HttpStatus.CREATED.value(), "Successfully", true));
     }
 

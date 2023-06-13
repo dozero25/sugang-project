@@ -6,14 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class StudentDtl {
-
-    private int studentId;
+public class CreditMst {
 
     private int userId;
 
-    private int grade;
+    private double pastCredit;
+    private double pastAvg;
+    private double maxCredit;
+    private double presentCredit;
+
 }

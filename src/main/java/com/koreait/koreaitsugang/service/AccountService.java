@@ -42,7 +42,6 @@ public class AccountService {
         return accountRepository.saveRole(roleDtl);
     }
 
-
     public UserMst getUser(String username){
         return accountRepository.findUserByUsername(username);
     }
