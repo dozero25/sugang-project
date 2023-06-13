@@ -3,6 +3,7 @@ package com.koreait.koreaitsugang.service.admin;
 import com.koreait.koreaitsugang.entity.UserImage;
 import com.koreait.koreaitsugang.entity.UserMst;
 import com.koreait.koreaitsugang.exception.CustomValidationException;
+import com.koreait.koreaitsugang.repository.AccountRepository;
 import com.koreait.koreaitsugang.web.dto.DeleteSubjectsReqDto;
 import com.koreait.koreaitsugang.web.dto.admin.*;
 import com.koreait.koreaitsugang.entity.SubjectMst;
@@ -12,6 +13,7 @@ import com.koreait.koreaitsugang.web.dto.SearchReqDto;
 import com.koreait.koreaitsugang.web.dto.SubjectReqDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,6 +33,9 @@ public class AdminSearchService {
     private String filePath;
     @Autowired
     private SubjectRepository subjectRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     public List<SubjectMst> searchSugang(SearchReqDto searchReqDto) {
         searchReqDto.setIndex();
@@ -111,16 +116,26 @@ public class AdminSearchService {
         }
     }
 
-    public void registerStudent(AddStudentReqDto addStudentReqDto) {
+    public AddStudentReqDto registerStudent(AddStudentReqDto addStudentReqDto) {
         System.out.println("학생등록");
+        addStudentReqDto.setPassword(new BCryptPasswordEncoder().encode(addStudentReqDto.getPassword()));
         subjectRepository.saveStudent(addStudentReqDto);
         subjectRepository.saveStudentMst(addStudentReqDto);
+
+        accountRepository.saveRoleStudent(addStudentReqDto);
+
+        return addStudentReqDto;
     }
 
-    public void registerProfessor(AddProfessorReqDto addProfessorReqDto) {
+    public AddProfessorReqDto registerProfessor(AddProfessorReqDto addProfessorReqDto) {
         System.out.println("교수등록");
+        addProfessorReqDto.setPassword(new BCryptPasswordEncoder().encode(addProfessorReqDto.getPassword()));
         subjectRepository.saveProfessor(addProfessorReqDto);
         subjectRepository.saveProfessorMst(addProfessorReqDto);
+
+        accountRepository.saveRoleProfessor(addProfessorReqDto);
+
+        return addProfessorReqDto;
     }
 
     public Map<String, Object> getUsernameAndImage(String username) {

@@ -127,4 +127,17 @@
         where
             sm.subject_code = #{subjectCode}
     </select>
+
+    <select id="loadCredit" parameterType="integer" resultType="com.koreait.koreaitsugang.entity.CreditMst">
+        select
+            user_id as userId,
+            past_credit as pastCredit,
+            past_avg as pastAvg,
+            max_credit as maxCredit,
+            present_credit as presentCredit
+        from
+            credit_mst
+        where
+            user_id = #{userId};
+    </select>
 </mapper>

@@ -80,4 +80,12 @@ public class SugangApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", searchService.loadCourses(principalDetails.getUser().getUserId())));
     }
 
+    @ParamsAspect
+    @GetMapping("/credit")
+    public ResponseEntity<CMRespDto<?>> loadCredit(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", searchService.loadCredit(principalDetails.getUser().getUserId())));
+    }
+
 }
