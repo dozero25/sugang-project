@@ -1,6 +1,9 @@
 window.onload = () => {
     AsideService.getInstance().loadAside();
+    AsideService.getInstance().asideMenuEvent();
+
     UserRegisterService.getInstance().loadCategories();
+
     ComponentEvent.getInstance().addClickEventRegisterButton();
     ComponentEvent.getInstance().addClickEventImgAddButton();
     ComponentEvent.getInstance().addChangeEventImgFile();

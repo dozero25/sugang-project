@@ -1,8 +1,11 @@
 window.onload = () => {
     AsideService.getInstance().loadAside();
+    AsideService.getInstance().asideMenuEvent();
+    
     SugangModificationService.getInstance().setSubjectCode();
-    ComponentEvent.getInstance().addClickEventModificationButton();
     SugangModificationService.getInstance().loadSubject();
+
+    ComponentEvent.getInstance().addClickEventModificationButton();
 }
 
 const subjectObj = {
