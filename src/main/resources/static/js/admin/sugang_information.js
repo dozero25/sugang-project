@@ -1,7 +1,10 @@
 window.onload = () => {
     AsideService.getInstance().loadAside();
+    AsideService.getInstance().asideMenuEvent();
+    
     SugangInformationService.getInstance().loadSugangList();
     SugangInformationService.getInstance().loadCategories();
+    
     ComponentEvent.getInstance().addClickEventSearchButton();
     ComponentEvent.getInstance().addClickEventDeleteButton();
     ComponentEvent.getInstance().addClickEventDeleteCheckAll();

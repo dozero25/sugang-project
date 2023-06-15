@@ -4,6 +4,7 @@ window.onload = () => {
     SearchService.getInstance().loadCategories();
     SearchService.getInstance().clearCourseList();
     SearchService.getInstance().loadCourseList();
+    SearchService.getInstance().loadCredit();
 
     ComponentEvent.getInstance().addClickEventCategoryRadios();
     ComponentEvent.getInstance().addClickEventSearchButton();
@@ -45,7 +46,7 @@ class SearchApi {
             error: error => {
                 console.log(error);
             }
-        });
+        }); 
         return returnData;
     }
 
@@ -148,6 +149,25 @@ class SearchApi {
                 responseData = response.data;
             },
             error: error => {
+                console.log(error);
+            }
+        });
+        return responseData;
+    }
+
+    getLoadCreditInfo(){
+        let responseData = null;
+
+        $.ajax({
+            async:false,
+            type:"get",
+            url:"/api/sugang/credit",
+            data:"json",
+            success : response => {
+                console.log(response);
+                responseData = response.data;
+            },
+            error : error => {
                 console.log(error);
             }
         });
@@ -307,6 +327,52 @@ class SearchService {
             `;
         });
         
+    }
+
+    loadCredit(){
+        const responseData = SearchApi.getInstance().getLoadCreditInfo();
+
+        const openCreditTable = document.querySelector(".grade-container");
+
+        openCreditTable.innerHTML = ``;
+
+        openCreditTable.innerHTML += `
+        <table class="grade-table">
+                <tr>
+                    <td class="grade-text-first">
+                        직전학기 신청학점
+                    </td>
+                    <td>
+                        ${responseData.pastCredit}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="grade-text-first">
+                        직전학기 평균학점
+                    </td>
+                    <td>
+                        ${responseData.pastAvg}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="grade-text-first">
+                        총 취득학점
+                    </td>
+                    <td>
+                        ${responseData.maxCredit}
+                    </td>
+                </tr>
+                <tr>
+                    <td  class="grade-text-first">
+                        신청가능학점
+                    </td>
+                    <td>
+                        ${responseData.presentCredit}
+                    </td>
+                </tr>
+            </table>
+        
+        `;
     }
 }
 
