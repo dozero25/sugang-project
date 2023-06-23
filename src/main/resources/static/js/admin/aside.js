@@ -36,8 +36,7 @@ class AsideService{
             </ul>
             <h3 class="title-text-credit">학생학점관리</h3>
             <ul class="sub-menu3">
-                <a href="/admin/"><li>학생 학점 조회</li></a>
-                <a href="/admin/"><li>학생 학점 등록</li></a>
+                <a href="/admin/creditsearch"><li>학생 학점 조회</li></a>
             </ul>
         </nav>
         <div class="title-backhome">
@@ -52,7 +51,7 @@ class AsideService{
         $('.main-menu .sub-menu3').hide();
     
         $('.title-text-sugang').mouseover(function(){
-            $('.sub-menu1').slideDown().delay(3000);
+            $('.sub-menu1').slideDown().delay(2000);
         });
 
         $('.title-text-sugang').mouseout(function(){
@@ -60,7 +59,7 @@ class AsideService{
         });
 
         $('.title-text-sp').mouseover(function(){
-            $('.sub-menu2').slideDown().delay(3000);
+            $('.sub-menu2').slideDown().delay(2000);
         });
 
         $('.title-text-sp').mouseout(function(){
@@ -68,7 +67,7 @@ class AsideService{
         });
 
         $('.title-text-credit').mouseover(function(){
-            $('.sub-menu3').slideDown().delay(3000);
+            $('.sub-menu3').slideDown().delay(2000);
         });
 
         $('.title-text-credit').mouseout(function(){

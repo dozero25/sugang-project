@@ -92,8 +92,8 @@ input, select, textarea {
 }
 
 .delete-button:hover {
-    background-color: #d40000;
-    border: 1px solid #d40000;
+    background-color: #990101;
+    border: 1px solid #990101;
     color: #ffffff;
 }
 
@@ -111,12 +111,12 @@ input, select, textarea {
 }
 
 .content-table tbody td:nth-child(1) {
-    width: 6%;
+    width: 5%;
     height: 50px;
 }
 
 .content-table tbody td:nth-child(2) {
-    width: 20%;
+    width: 19%;
 }
 
 .content-table tbody td:nth-child(3) {
@@ -128,11 +128,11 @@ input, select, textarea {
 }
 
 .content-table tbody td:nth-child(5) {
-    width: 19%;
+    width: 22%;
 }
 
 .content-table tbody td:nth-child(6) {
-    width: 8%;
+    width: 7%;
 }
 
 .content-table tbody td:nth-child(7) {
