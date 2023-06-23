@@ -47,4 +47,10 @@ public class AdminSearchController {
         return "admin/sugang/modification";
   }
 
+    @GetMapping("/creditsearch")
+    public String creditinfo(){ return "admin/credit/creditinfo";}
+
+    @GetMapping("/creditregister")
+    public String creditreg(){ return "admin/credit/creditreg";}
+
 }
