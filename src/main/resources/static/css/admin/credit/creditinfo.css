@@ -131,8 +131,30 @@ button:disabled {
     width: 900px;
 }
 
-.content-table td:nth-child(n) {
-    width: 16%;
+.content-table td {
+    padding: 15px 0;
+}
+
+.content-table td:nth-child(1) {
+    width: 10%;
+}
+.content-table td:nth-child(2) {
+    width: 15%;
+}
+.content-table td:nth-child(3) {
+    width: 15%;
+}
+.content-table td:nth-child(4) {
+    width: 15%;
+}
+.content-table td:nth-child(5) {
+    width: 15%;
+}
+.content-table td:nth-child(6) {
+    width: 15%;
+}
+.content-table td:nth-child(7) {
+    width: 15%;
 }
 
 .page-controller {
