@@ -1,4 +1,4 @@
-package com.koreait.koreaitsugang.entity;
+package com.koreait.koreaitsugang.web.dto.admin;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,11 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreditMst {
+public class CreditInsertDto {
 
     private int userId;
-
-    private String username;
 
     private double pastCredit;
     private double pastAvg;

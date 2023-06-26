@@ -24,22 +24,6 @@ input, select, textarea {
     cursor: pointer;
 }
 
-button {
-    border: 1px solid #dbdbdb;
-    border-radius: 4px;
-}
-
-button:disabled {
-    cursor: default;
-}
-
-button:not(:disabled):hover {
-    border: 1px solid #8b8b8b;
-    background-color: #8b8b8b;
-    color: #ffffff;
-    font-weight: 700;
-}
-
 .main-container {
     display: flex;
     justify-content: center;
@@ -74,45 +58,6 @@ button:not(:disabled):hover {
     width: 100%;
 }
 
-.delete-button {
-    border: 1px solid #fd3131;
-    border-radius: 4px;
-    background-color: #fd3131;
-    color: #ffffff;
-    font-weight: 600;
-    padding: 10px 14px;
-}
-
-.delete-button:hover {
-    background-color: #d40000;
-    border: 1px solid #d40000;
-    color: #ffffff;
-}
-
-.category-select {
-    height: 40px;
-    font-size: 16px;
-}
-
-.search-input {
-    height: 40px;
-}
-
-.search-button {
-    padding: 10px 20px;
-    border: 1px solid #dbdbdb;
-    border-radius: 4px;
-    font-size: 14px;
-    color: black;
-}
-
-.search-button:hover {
-    border: 1px solid #8b8b8b;
-    background-color: #8b8b8b;
-    color: #ffffff;
-    font-weight: 700;
-}
-
 .table-container {
     width: 900px;
 }
@@ -124,6 +69,51 @@ button:not(:disabled):hover {
 
 .content-table th, .content-table td{
     text-align: center;
+    width: 900px;
+}
+
+.content-table tbody td {
+    border: 1px solid #dbdbdb;
+    padding: 10px 15px;
+    height: 50px;
+}
+
+.register-input {
+    border: none;
+    width: 100px
+}
+
+.btn-box {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.reg-button {
+    border: 1px solid #0c39ff;
+    border-radius: 4px;
+    background-color: #0c39ff;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 10px 14px;
+}
+
+.reg-button:hover {
+    background-color: #00115f;
+    border: 1px solid #00115f;
+}
+
+.can-button {
+    border: 1px solid #fd3131;
+    border-radius: 4px;
+    background-color: #fd3131;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 10px 14px;
+}
+
+.can-button:hover {
+    background-color: #990101;
+    border: 1px solid #990101;
 }
 
 
