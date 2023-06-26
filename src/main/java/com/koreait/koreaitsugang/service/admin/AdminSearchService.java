@@ -123,9 +123,9 @@ public class AdminSearchService {
         addStudentReqDto.setPassword(new BCryptPasswordEncoder().encode(addStudentReqDto.getPassword()));
         adminRepository.saveStudent(addStudentReqDto);
         adminRepository.saveStudentMst(addStudentReqDto);
-        adminRepository.insertSubCredit(addStudentReqDto.getUserId());
-
         accountRepository.saveRoleStudent(addStudentReqDto);
+
+        adminRepository.insertSubCredit(addStudentReqDto.getUserId());
 
         return addStudentReqDto;
     }

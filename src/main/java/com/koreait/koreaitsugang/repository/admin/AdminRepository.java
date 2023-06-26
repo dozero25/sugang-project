@@ -58,7 +58,7 @@ public interface AdminRepository {
 
     public int updateSubjectBySubjectCode(SubjectReqDto subjectReqDto);
 
-    public Double insertSubCredit(int userId);
+    public int insertSubCredit(int userId);
 
     public CreditMst loadCredit(int userId);
 
