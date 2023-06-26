@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminSearchController {
 
     @GetMapping("/main")
-    public String adminMain(){return "admin/adminhome";}
+    public String adminMain(){return "admin/adminmain";}
 
     @GetMapping("/usersearch")
     public String userInformation(){
@@ -46,5 +46,12 @@ public class AdminSearchController {
     public String sugangModify(@PathVariable int subjectCode) {
         return "admin/sugang/modification";
   }
+
+    @GetMapping("/creditsearch")
+    public String creditinfo(){ return "admin/credit/creditinfo";}
+
+    @GetMapping("/creditregister")
+    public String creditreg(){ return "admin/credit/creditreg";}
+
 
 }

@@ -1,6 +1,7 @@
 package com.koreait.koreaitsugang.service;
 
 import com.koreait.koreaitsugang.entity.ClassificationView;
+import com.koreait.koreaitsugang.entity.CreditMst;
 import com.koreait.koreaitsugang.entity.OpenCourse;
 import com.koreait.koreaitsugang.entity.PocketMst;
 import com.koreait.koreaitsugang.exception.CustomApplyCountException;
@@ -68,5 +69,9 @@ public class SugangService {
 
             throw new CustomApplyCountException(errorMap);
         }
+    }
+
+    public CreditMst loadCredit(int userId){
+        return sugangRepository.loadCredit(userId);
     }
 }

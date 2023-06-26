@@ -68,8 +68,8 @@ input, select, textarea {
 }
 
 .delete-button:hover {
-    background-color: #d40000;
-    border: 1px solid #d40000;
+    background-color: #990101;
+    border: 1px solid #990101;
     color: #ffffff;
 }
 

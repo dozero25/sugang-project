@@ -29,9 +29,11 @@
     padding: 20px 0px;
     background-color: #101010;
     color: #ffffff;
+
+    cursor: pointer;
 }
 
-.title-text-h2 {
+.title-text-sugang, .title-text-sp, .title-text-credit{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -43,7 +45,7 @@
     font-size: 18px;
 }
 
-.sub-menu a li {
+.sub-menu1 a li, .sub-menu2 a li, .sub-menu3 a li {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,6 +56,28 @@
     color: #ffffff;
 }
 
-.sub-menu a li:hover {
+.sub-menu1 a li:hover, .sub-menu2 a li:hover, .sub-menu3 a li:hover {
     background-color: #505050;
+}
+
+.title-backhome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+
+    bottom: 1px;
+
+    border: 1px solid #202020;
+    width: 222px;
+    height: 60px;
+
+    background-color: #ffffff;
+}
+
+.backhome-text{
+    font-size: 20px;
+    font-weight: 600;
+    color: #202020;
 }

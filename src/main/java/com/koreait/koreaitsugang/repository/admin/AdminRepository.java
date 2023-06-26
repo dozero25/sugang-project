@@ -1,22 +1,17 @@
 package com.koreait.koreaitsugang.repository.admin;
 
 
-import com.koreait.koreaitsugang.entity.SubjectMst;
-import com.koreait.koreaitsugang.entity.UserImage;
-import com.koreait.koreaitsugang.entity.UserMst;
+import com.koreait.koreaitsugang.entity.*;
 import com.koreait.koreaitsugang.web.dto.SearchNumberListReqDto;
 import com.koreait.koreaitsugang.web.dto.SearchReqDto;
 import com.koreait.koreaitsugang.web.dto.SubjectReqDto;
-import com.koreait.koreaitsugang.web.dto.admin.AddProfessorReqDto;
-import com.koreait.koreaitsugang.web.dto.admin.AddStudentReqDto;
-import com.koreait.koreaitsugang.web.dto.admin.AdminSearchReqDto;
-import com.koreait.koreaitsugang.web.dto.admin.UpdateStudentReqDto;
+import com.koreait.koreaitsugang.web.dto.admin.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
-public interface SubjectRepository {
+public interface AdminRepository {
 
 
     public List<String> majorCategory();
@@ -62,4 +57,14 @@ public interface SubjectRepository {
     public int saveSubject(SubjectReqDto subjectReqDto);
 
     public int updateSubjectBySubjectCode(SubjectReqDto subjectReqDto);
+
+    public Double insertSubCredit(int userId);
+
+    public CreditMst loadCredit(int userId);
+
+    public List<CreditMst> loadAllCredit();
+
+    public void insertCredit(CreditInsertDto creditInsertDto);
+
+    public List<Integer> selOnlyUserId();
 }

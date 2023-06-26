@@ -35,7 +35,10 @@
             um.username,
             um.password,
             um.name,
-            um.phone,
+            CASE LENGTH(um.phone)
+                WHEN 11 THEN CONCAT(LEFT(um.phone, 3), '-', MID(um.phone, 4, 4), '-', RIGHT(um.phone, 4))
+                WHEN 10 THEN CONCAT(LEFT(um.phone, 3), '-', MID(um.phone, 4, 3), '-', RIGHT(um.phone, 4))
+                END x,
             um.birth_date,
             um.email,
             um.address,
@@ -57,7 +60,10 @@
             um.username,
             um.password,
             um.name,
-            um.phone,
+            CASE LENGTH(um.phone)
+                WHEN 11 THEN CONCAT(LEFT(um.phone, 3), '-', MID(um.phone, 4, 4), '-', RIGHT(um.phone, 4))
+                WHEN 10 THEN CONCAT(LEFT(um.phone, 3), '-', MID(um.phone, 4, 3), '-', RIGHT(um.phone, 4))
+                END x,
             um.birth_date,
             um.email,
             um.address,
@@ -77,14 +83,23 @@
         update
             user_mst
         set
-            password = #{password}
-        where
+            password = #{passw
             user_id = #{userId}
     </update>
 
     <insert id="saveRole" parameterType="com.koreait.koreaitsugang.entity.RoleDtl">
         insert into role_dtl
         values (0, #{userId}, #{roleId})
+    </insert>
+
+    <insert id="saveRoleStudent" parameterType="com.koreait.koreaitsugang.web.dto.admin.AddStudentReqDto">
+        insert into role_dtl
+        values (0, #{userId}, 1)
+    </insert>
+
+    <insert id="saveRoleProfessor" parameterType="com.koreait.koreaitsugang.web.dto.admin.AddProfessorReqDto">
+        insert into role_dtl
+        values (0, #{userId}, 2)
     </insert>
 
     <select id="findMypage" parameterType="integer" resultType="com.koreait.koreaitsugang.entity.MypageMst">
