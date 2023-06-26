@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="/static/css/common.css">
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/admin/left_aside.css">
-    <link rel="stylesheet" href="/static/css/admin/credit/creditinfo.css">
-    <link rel="stylesheet" href="/static/js/admin/credit/creditinfo.js">
+    <link rel="stylesheet" href="/static/css/admin/credit/creditreg.css">
     <title>학점 등록</title>
 </head>
 <body>
@@ -22,49 +21,39 @@
             </div>
             <div class="content-main">
                 <div class="content-items">
-                    <div class="left-items">
-                        <button type="button" class="delete-button">삭제</button>
-                    </div>
-                    <div class="right-items">
-                        <select class="category-select">
-                        </select>
-                        <input type="search" class="search-input">
-                        <button type="button" class="search-button">검색</button>
-                    </div>
+                    
                 </div>
             </div>
             <div class="table-container">
                 <table class="content-table">
                     <thead>
                         <tr>
-                            
+                            <th>선택</th>
+                            <th>번호</th>
+                            <th>직전학기<br>신청학점</th>
+                            <th>직전학기<br>평균학점</th>
+                            <th>총 취득학점</th>
+                            <th>신청가능학점</th>
+                            <th>취득학점</th>         
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            
-                        </tr>
-                        <tr>
-                            
-                        </tr>
-                        <tr>
-                            
-                        </tr>
-                       
+                        <td>
+                            <select type="text" class="register-input user-select">
+
+                            </select>
+                        </td>
+                        <td><input type="text" class="register-input"></td>
+                        <td><input type="text" class="register-input"></td>
+                        <td><input type="text" class="register-input"></td>
+                        <td><input type="text" class="register-input"></td>
+                        <td><input type="text" class="register-input"></td>
                     </tbody>
                 </table>
             </div>
-            
-            <div class="page-controller">
-                <a href="" class="disabled">이전</a>
-                <ul class="page-numbers">
-                    <a href=""><li>1</li></a>
-                    <a href=""><li>2</li></a>
-                    <a href=""><li>3</li></a>
-                    <a href=""><li>4</li></a>
-                    <a href=""><li>5</li></a>
-                </ul>
-                <a href="">다음</a>
+            <div class="btn-box">
+                <button type="submit" class="reg-button">등록</button>
+                <button type="reset" class="can-button">취소</button>
             </div>
         </div>
     </main>
