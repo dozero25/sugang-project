@@ -16,11 +16,11 @@ const creditObj = {
     subCredit : ""
 }
 
-class regCreditApi{
+class RegCreditApi{
     static #instance = null;
     static getInstance(){
         if(this.#instance == null) {
-            this.#instance = new regCreditApi();
+            this.#instance = new RegCreditApi();
         }
         return this.#instance;
     }
@@ -86,10 +86,10 @@ class RegCreditService{
     }
 
     loadUserIdList(){
-        const responeseData = RegCreditService.getInstance().getUserIdList();
+        const responeseData = RegCreditApi.getInstance().getUserIdList();
 
         const userList = document.querySelector(".user-select");
-
+        userList.innerHTML = `<option value="">전체 조회</option>`;
         responeseData.forEach((data) => {
             userList.innerHTML += `
                 <option value="${data}">${data}</option>  
@@ -113,7 +113,7 @@ class ComponentEvent {
 
         registerButton.onclick = () => {
             RegCreditService.getInstance().setCreditObjValues();
-            const successFlag = regCreditApi.getInstance().registerCreditInfo();
+            const successFlag = RegCreditApi.getInstance().registerCreditInfo();
             
             if(successFlag) {
                 alert("등록이 완료되었습니다.");

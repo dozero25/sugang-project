@@ -13,7 +13,6 @@ import java.util.List;
 @Mapper
 public interface AdminRepository {
 
-
     public List<String> majorCategory();
 
     public int getSearchUserTotalCount(AdminSearchReqDto adminSearchReqDto);
@@ -62,9 +61,15 @@ public interface AdminRepository {
 
     public CreditMst loadCredit(int userId);
 
-    public List<CreditMst> loadAllCredit();
+    public List<CreditMst> loadAllCredit(CreditUserCountDto creditUserCountDto);
 
     public void insertCredit(CreditInsertDto creditInsertDto);
 
     public List<Integer> selOnlyUserId();
+
+    public int getUserCreditTotalCount(CreditUserCountDto creditUserCountDto);
+
+    public int deleteCreditUser(int userId);
+
+    public int deleteCreditAllUser(List<Integer> userId);
 }

@@ -4,7 +4,6 @@ import com.koreait.koreaitsugang.aop.annotation.ParamsAspect;
 import com.koreait.koreaitsugang.aop.annotation.ValidAspect;
 import com.koreait.koreaitsugang.entity.CreditMst;
 import com.koreait.koreaitsugang.entity.UserMst;
-import com.koreait.koreaitsugang.security.PrincipalDetails;
 import com.koreait.koreaitsugang.service.admin.AdminSearchService;
 import com.koreait.koreaitsugang.web.dto.CMRespDto;
 import com.koreait.koreaitsugang.web.dto.admin.*;
@@ -13,7 +12,6 @@ import com.koreait.koreaitsugang.web.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
@@ -208,11 +205,12 @@ public class AdminSearchApi {
     }
 
     @ParamsAspect
+    @ValidAspect
     @GetMapping("/all/credit")
-    public ResponseEntity<CMRespDto<?>> loadAllCredit() {
+    public ResponseEntity<CMRespDto<List<CreditMst>>> loadAllCredit(@Valid CreditUserCountDto creditUserCountDto, BindingResult bindingResult) {
         return ResponseEntity
                 .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", adminSearchService.loadAllCredit()));
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", adminSearchService.loadAllCredit(creditUserCountDto)));
     }
 
     @ParamsAspect
@@ -230,6 +228,31 @@ public class AdminSearchApi {
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", adminSearchService.selOnlyUserId()));
+    }
+
+    @GetMapping("/credit/totalCount")
+    public ResponseEntity<CMRespDto<?>> getUserCreditTotalCount(CreditUserCountDto creditUserCount){
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", adminSearchService.getUserCreditTotalCount(creditUserCount)));
+    }
+
+    @ParamsAspect
+    @DeleteMapping("/credit/delete/{userId}")
+    public ResponseEntity<CMRespDto<?>> deleteCreditUser(@PathVariable int userId){
+        adminSearchService.deleteCreditUser(userId);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully",true));
+    }
+
+    @ParamsAspect
+    @DeleteMapping("/credit/deletes")
+    public ResponseEntity<CMRespDto<?>> deleteCreditAllUser(@RequestBody DeleteCreditUserReqDto deleteCreditUserReqDto){
+        adminSearchService.deleteCreditAllUser(deleteCreditUserReqDto);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully",true));
     }
 }
 
