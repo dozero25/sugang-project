@@ -50,8 +50,7 @@ public class AdminSearchService {
     }
 
     public int UserTotalCounts(AdminSearchReqDto adminSearchReqDto) {
-        int usercount = adminRepository.getSearchUserTotalCount(adminSearchReqDto);
-        System.out.println(usercount);
+        adminRepository.getSearchUserTotalCount(adminSearchReqDto);
         return adminRepository.getSearchUserTotalCount(adminSearchReqDto);
     }
 
@@ -123,9 +122,9 @@ public class AdminSearchService {
         addStudentReqDto.setPassword(new BCryptPasswordEncoder().encode(addStudentReqDto.getPassword()));
         adminRepository.saveStudent(addStudentReqDto);
         adminRepository.saveStudentMst(addStudentReqDto);
-        adminRepository.insertSubCredit(addStudentReqDto.getUserId());
-
         accountRepository.saveRoleStudent(addStudentReqDto);
+
+        adminRepository.insertSubCredit(addStudentReqDto.getUserId());
 
         return addStudentReqDto;
     }
@@ -207,11 +206,17 @@ public class AdminSearchService {
     }
 
     public CreditMst loadCredit(int userId){
+
         return adminRepository.loadCredit(userId);
     }
 
-    public List<CreditMst> loadAllCredit(){
-        return adminRepository.loadAllCredit();
+    public int getUserCreditTotalCount(CreditUserCountDto creditUserCount){
+        return adminRepository.getUserCreditTotalCount(creditUserCount);
+    }
+
+    public List<CreditMst> loadAllCredit(CreditUserCountDto creditUserCountDto){
+        creditUserCountDto.setIndex();
+        return adminRepository.loadAllCredit(creditUserCountDto);
     }
 
     public void insertCredit(CreditInsertDto creditInsertDto){
@@ -231,4 +236,11 @@ public class AdminSearchService {
         return adminRepository.selOnlyUserId();
     }
 
+    public void deleteCreditUser(int userId ) {
+        adminRepository.deleteCreditUser(userId);
+    }
+
+    public void deleteCreditAllUser(DeleteCreditUserReqDto deleteCreditUserReqDto) {
+        adminRepository.deleteCreditAllUser(deleteCreditUserReqDto.getUserIds());
+    }
 }

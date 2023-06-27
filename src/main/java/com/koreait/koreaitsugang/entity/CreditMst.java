@@ -20,5 +20,4 @@ public class CreditMst {
     private double maxCredit;
     private double presentCredit;
     private double subCredit;
-
 }
