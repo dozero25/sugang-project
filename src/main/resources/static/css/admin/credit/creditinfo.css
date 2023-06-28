@@ -71,14 +71,11 @@ button:disabled {
     border: 1px solid #0c39ff;
     border-radius: 4px;
     background-color: #0c39ff;
-    
+    color: #ffffff;
     font-weight: 600;
     padding: 10px 14px;
 }
 
-.reg-button a {
-    color: #ffffff;
-}
 .reg-button:hover {
     background-color: #00115f;
     border: 1px solid #00115f;

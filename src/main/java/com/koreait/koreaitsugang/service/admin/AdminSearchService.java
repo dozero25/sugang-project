@@ -240,7 +240,7 @@ public class AdminSearchService {
         adminRepository.deleteCreditUser(userId);
     }
 
-    public void deleteCreditAllUser(DeleteCreditUserReqDto deleteCreditUserReqDto) {
-        adminRepository.deleteCreditAllUser(deleteCreditUserReqDto.getUserIds());
+    public void deleteCreditByUserId(DeleteCreditUserReqDto deleteCreditUserReqDto) {
+        adminRepository.deleteCreditByUserId(deleteCreditUserReqDto.getUserIds());
     }
 }

@@ -249,7 +249,7 @@ public class AdminSearchApi {
     @ParamsAspect
     @DeleteMapping("/credit/deletes")
     public ResponseEntity<CMRespDto<?>> deleteCreditAllUser(@RequestBody DeleteCreditUserReqDto deleteCreditUserReqDto){
-        adminSearchService.deleteCreditAllUser(deleteCreditUserReqDto);
+        adminSearchService.deleteCreditByUserId(deleteCreditUserReqDto);
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully",true));

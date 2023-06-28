@@ -170,7 +170,8 @@ class CreditInfoService{
             creditList.innerHTML += `
                 <tr>
                     <td><input type="checkbox" class="delete-checkbox"></td>
-                    <td class="userId">${data.username}</td>
+                    <td class="userId" style=display:none>${data.userId}</td>
+                    <td <a href="">${data.username}</a></td>
                     <td>${data.pastCredit}</td>
                     <td>${data.pastAvg}</td>
                     <td>${data.maxCredit}</td>
@@ -186,7 +187,6 @@ class CreditInfoService{
     removeCreditUsers(deleteArray){
         let successFlag = InfoCreditApi.getInstance().deleteCreditUsers(deleteArray);
         console.log(successFlag);
-        console.log(successFlag.value);
         if(successFlag) {
             searchObj.page = 1;
             this.loadAllCreditList();
@@ -236,7 +236,6 @@ class ComponentEvent{
                 });
     
                 CreditInfoService.getInstance().removeCreditUsers(deleteArray);
-                CreditInfoService.getInstance().loadAllCreditList();
             }
         }
     }
