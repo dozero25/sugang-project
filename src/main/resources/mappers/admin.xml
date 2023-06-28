@@ -336,9 +336,7 @@
             cm.sub_credit as subCredit
         from
             credit_mst cm
-        left outer join user_mst um on(um.user_id = cm.user_id)
-        where
-        1 = 1
+        inner join user_mst um on(um.user_id = cm.user_id)
         <if test="searchValue != null and searchValue != ''">
             and (
             um.username like CONCAT('%', #{searchValue}, '%')
@@ -352,7 +350,11 @@
     <insert id="insertCredit" parameterType="com.koreait.koreaitsugang.web.dto.admin.CreditInsertDto" keyProperty="userId">
         insert into
         credit_mst
-        values (#{userId}, #{pastCredit}, #{pastAvg}, #{maxCredit}, #{presentCredit}, #{subCredit})
+        values
+        (#{userId}, #{pastCredit}, #{pastAvg}, #{maxCredit}, #{presentCredit}, #{subCredit})
+<!--        <foreach collection="list" item="file" separator=",">-->
+<!--            -->
+<!--        </foreach>-->
     </insert>
 
     <select id="selOnlyUserId" parameterType="List" resultType="Integer">
@@ -391,12 +393,12 @@
         user_id = #{userId}
     </delete>
 
-    <delete id="deleteCreditAllUser" parameterType="list">
+    <delete id="deleteCreditByUserId" parameterType="list">
         delete
         from
-        credit_mst
+            credit_mst
         where
-        user_id in
+            user_id in
         <foreach collection="list" item="userId" open="(" close=")" separator=",">
             #{userId}
         </foreach>

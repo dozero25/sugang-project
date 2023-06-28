@@ -71,5 +71,5 @@ public interface AdminRepository {
 
     public int deleteCreditUser(int userId);
 
-    public int deleteCreditAllUser(List<Integer> userId);
+    public int deleteCreditByUserId(List<Integer> userId);
 }
