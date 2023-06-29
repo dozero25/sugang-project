@@ -8,12 +8,12 @@ window.onload = () => {
 }
 
 const creditObj = {
-    userId : "",
-    pastCredit : "",
-    pastAvg : "",
-    maxCredit : "",
-    presentCredit : "",
-    subCredit : ""
+    userId : 0,
+    pastCredit : 0,
+    pastAvg : 0,
+    maxCredit : 0,
+    presentCredit : 0,
+    subCredit : 0
 }
 
 class RegCreditApi{

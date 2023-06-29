@@ -63,7 +63,7 @@ public interface AdminRepository {
 
     public List<CreditMst> loadAllCredit(CreditUserCountDto creditUserCountDto);
 
-    public void insertCredit(CreditInsertDto creditInsertDto);
+    public void insertCredit(CreditReqDto creditReqDto);
 
     public List<Integer> selOnlyUserId();
 
@@ -72,4 +72,6 @@ public interface AdminRepository {
     public int deleteCreditUser(int userId);
 
     public int deleteCreditByUserId(List<Integer> userId);
+
+    public int updateCreditByUserId(CreditReqDto creditReqDto);
 }

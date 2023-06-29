@@ -314,18 +314,21 @@
 
     <select id="loadCredit" parameterType="integer" resultType="com.koreait.koreaitsugang.entity.CreditMst">
         select
-        user_id as userId,
-        past_credit as pastCredit,
-        past_avg as pastAvg,
-        max_credit as maxCredit,
-        present_credit as presentCredit
+        cm.user_id as userId,
+        um.username as username,
+        cm.past_credit as pastCredit,
+        cm.past_avg as pastAvg,
+        cm.max_credit as maxCredit,
+        cm.present_credit as presentCredit,
+        cm.sub_credit as subCredit
         from
-        credit_mst
+        credit_mst cm
+        inner join user_mst um on(um.user_id = cm.user_id)
         where
-        user_id = #{userId};
+        cm.user_id = #{userId};
     </select>
 
-    <select id="loadAllCredit" parameterType="com.koreait.koreaitsugang.web.dto.admin.CreditInsertDto" resultType="com.koreait.koreaitsugang.entity.CreditMst">
+    <select id="loadAllCredit" parameterType="com.koreait.koreaitsugang.web.dto.admin.CreditReqDto" resultType="com.koreait.koreaitsugang.entity.CreditMst">
         select
             cm.user_id as userId,
             um.username as username,
@@ -347,14 +350,11 @@
         </if>
     </select>
 
-    <insert id="insertCredit" parameterType="com.koreait.koreaitsugang.web.dto.admin.CreditInsertDto" keyProperty="userId">
+    <insert id="insertCredit" parameterType="com.koreait.koreaitsugang.web.dto.admin.CreditReqDto" keyProperty="userId">
         insert into
         credit_mst
         values
         (#{userId}, #{pastCredit}, #{pastAvg}, #{maxCredit}, #{presentCredit}, #{subCredit})
-<!--        <foreach collection="list" item="file" separator=",">-->
-<!--            -->
-<!--        </foreach>-->
     </insert>
 
     <select id="selOnlyUserId" parameterType="List" resultType="Integer">
@@ -403,4 +403,17 @@
             #{userId}
         </foreach>
     </delete>
+
+    <update id="updateCreditByUserId" parameterType="com.koreait.koreaitsugang.web.dto.admin.CreditReqDto">
+        update
+        credit_mst
+        set
+        past_credit = #{pastCredit},
+        past_avg = #{pastAvg},
+        max_credit = #{maxCredit},
+        present_credit = #{presentCredit},
+        sub_credit = #{subCredit}
+        where
+        user_id = #{userId}
+    </update>
 </mapper>

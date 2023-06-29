@@ -78,7 +78,7 @@ input, select, textarea {
     height: 50px;
 }
 
-.register-input {
+.register-input, .modificatoin-input {
     border: none;
     width: 100px
 }

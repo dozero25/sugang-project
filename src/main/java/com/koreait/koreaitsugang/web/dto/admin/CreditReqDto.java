@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreditInsertDto {
+public class CreditReqDto {
 
     private int userId;
 
