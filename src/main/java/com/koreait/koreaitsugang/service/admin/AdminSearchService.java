@@ -205,9 +205,11 @@ public class AdminSearchService {
         }
     }
 
-    public CreditMst loadCredit(int userId){
+    public Map<String, Object> loadCredit(int userId){
+        Map<String, Object> result = new HashMap<>();
+        result.put("creditMst", adminRepository.loadCredit(userId));
 
-        return adminRepository.loadCredit(userId);
+        return result;
     }
 
     public int getUserCreditTotalCount(CreditUserCountDto creditUserCount){
@@ -219,12 +221,12 @@ public class AdminSearchService {
         return adminRepository.loadAllCredit(creditUserCountDto);
     }
 
-    public void insertCredit(CreditInsertDto creditInsertDto){
-        insertCreidtErrorIndo(creditInsertDto);
-        adminRepository.insertCredit(creditInsertDto);
+    public void insertCredit(CreditReqDto creditReqDto){
+        insertCreidtErrorIndo(creditReqDto);
+        adminRepository.insertCredit(creditReqDto);
     }
-    private void insertCreidtErrorIndo(CreditInsertDto creditInsertDto){
-        if(creditInsertDto.getMaxCredit() > creditInsertDto.getSubCredit()) {
+    private void insertCreidtErrorIndo(CreditReqDto creditReqDto){
+        if(creditReqDto.getMaxCredit() > creditReqDto.getSubCredit()) {
             Map<String, String> errorMap = new HashMap<>();
             errorMap.put("creditInsertDto", "총 학점은 총 신청 학점보다 작을 수 없습니다.");
 
@@ -242,5 +244,9 @@ public class AdminSearchService {
 
     public void deleteCreditByUserId(DeleteCreditUserReqDto deleteCreditUserReqDto) {
         adminRepository.deleteCreditByUserId(deleteCreditUserReqDto.getUserIds());
+    }
+
+    public void modifyCreditByUserId(CreditReqDto creditReqDto){
+        adminRepository.updateCreditByUserId(creditReqDto);
     }
 }

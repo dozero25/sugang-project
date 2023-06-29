@@ -196,9 +196,15 @@ public class AdminSearchApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
     }
 
-    @ParamsAspect
-    @GetMapping("/credit")
-    public ResponseEntity<CMRespDto<?>> loadCredit(int userId) {
+    @GetMapping("/creditModify/{userId}")
+    public ResponseEntity<CMRespDto<Map<String, Object>>> loadCredit(@PathVariable("userId") int userId) {
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", adminSearchService.loadCredit(userId)));
+    }
+
+    @PostMapping("/creditUser/{userId}")
+    public ResponseEntity<CMRespDto<Map<String, Object>>> loadCreditUser(@PathVariable("userId") int userId) {
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", adminSearchService.loadCredit(userId)));
@@ -206,7 +212,7 @@ public class AdminSearchApi {
 
     @ParamsAspect
     @ValidAspect
-    @GetMapping("/all/credit")
+    @PostMapping("/all/credit")
     public ResponseEntity<CMRespDto<List<CreditMst>>> loadAllCredit(@Valid CreditUserCountDto creditUserCountDto, BindingResult bindingResult) {
         return ResponseEntity
                 .ok()
@@ -215,8 +221,8 @@ public class AdminSearchApi {
 
     @ParamsAspect
     @PostMapping("/get/credit")
-    public ResponseEntity<CMRespDto<?>> insertCredit(@RequestBody CreditInsertDto creditInsertDto) {
-        adminSearchService.insertCredit(creditInsertDto);
+    public ResponseEntity<CMRespDto<?>> insertCredit(@RequestBody CreditReqDto creditReqDto) {
+        adminSearchService.insertCredit(creditReqDto);
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
@@ -253,6 +259,16 @@ public class AdminSearchApi {
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully",true));
+    }
+
+    @ParamsAspect
+    @ValidAspect
+    @PutMapping("/credit/{userId}")
+    public ResponseEntity<CMRespDto<?>> modifyCredit(@PathVariable("userId") int subjectCode, @Valid @RequestBody CreditReqDto creditReqDto, BindingResult bindingResult){
+        adminSearchService.modifyCreditByUserId(creditReqDto);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
     }
 }
 

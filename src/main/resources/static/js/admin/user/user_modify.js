@@ -17,7 +17,7 @@ window.onload = () => {
 const stuObj = {
     username : "",
     category : "",
-    username : "",
+    name : "",
     password : "",
     name : "",
     phone : "",
@@ -375,7 +375,7 @@ class ComponentEvent {
         const imgCancelButton = document.querySelector(".img-cancel-button");
         
         imgCancelButton.onclick = () => {
-            if(confirm("정말로 이미지 수정을 취소하시겠습니까?")){
+            if(confirm("이미지 수정을 취소하시겠습니까?")){
                 location.reload();
             }
         }

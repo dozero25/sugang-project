@@ -4,6 +4,7 @@ window.onload = () => {
 
     CreditInfoService.getInstance().loadAllCreditList();
 
+    // ComponentEvent.getInstance().addClickEventCreditUsername();
     ComponentEvent.getInstance().addClickEventSearchButton();
     ComponentEvent.getInstance().addClickEventDeleteButton();
     ComponentEvent.getInstance().addClickEventDeleteCheckAll();
@@ -18,6 +19,16 @@ let searchObj = {
     count : 10
 }
 
+let creditObj = {
+    userId : 0,
+    username: "",
+    pastCredit : 0,
+    pastAvg : 0,
+    maxCredit :  0,
+    presentCredit : 0,
+    subCredit : 0
+}
+
 class InfoCreditApi{
     static #instance = null;
     static getInstance(){
@@ -26,13 +37,33 @@ class InfoCreditApi{
         }
         return this.#instance;
     }
+
+    // getOneCreditUser(){
+    //     let returnData = null;
+
+    //     $.ajax({
+    //         async: false,
+    //         type: "post",
+    //         url: `http://localhost:8000/api/admin/creditUser/${creditObj.userId}`,
+    //         data: creditObj,
+    //         dataType: "json",
+    //         success: response => {
+    //             console.log(response);
+    //             returnData = response.data;
+    //         },
+    //         error: error => {
+    //             console.log(error);
+    //         }
+    //     });
+    //     return returnData;
+    // }
     
     getAllCreditList(searchObj){
         let returnData = null;
 
         $.ajax({
             async: false,
-            type: "get",
+            type: "post",
             url: "http://localhost:8000/api/admin/all/credit",
             data: searchObj,
             dataType: "json",
@@ -170,8 +201,8 @@ class CreditInfoService{
             creditList.innerHTML += `
                 <tr>
                     <td><input type="checkbox" class="delete-checkbox"></td>
-                    <td class="userId" style=display:none>${data.userId}</td>
-                    <td <a href="">${data.username}</a></td>
+                    <td class="userId" style=display:none></td>
+                    <td><a href="/admin/credit">${data.username}</a></td>
                     <td>${data.pastCredit}</td>
                     <td>${data.pastAvg}</td>
                     <td>${data.maxCredit}</td>
@@ -179,6 +210,7 @@ class CreditInfoService{
                     <td>${data.subCredit - data.maxCredit}</td>
                 </tr>        
             `;
+            // <td><button class="searchUserUpdateCredit">${data.username}</button></td>
         });
         this.loadSearchNumberList();
         ComponentEvent.getInstance().addClickEventDeleteCheckbox();
@@ -202,6 +234,17 @@ class ComponentEvent{
         }
         return this.#instance;
     }
+
+    // addClickEventCreditUsername(){
+    //     const search = InfoCreditApi.getInstance().getOneCreditUser();
+    //     const searchButton = document.querySelectorAll(".searchUserUpdateCredit");
+
+    //     searchButton.onclick = () => {
+    //         location.href = "http://localhost:8000/api//admin/creditModify"+search.value.userId;
+
+    //     }
+
+    // }
 
     addClickEventSearchButton(){
         const searchInput = document.querySelector(".search-input");
