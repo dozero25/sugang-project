@@ -4,7 +4,6 @@ window.onload = () => {
 
     CreditInfoService.getInstance().loadAllCreditList();
 
-    // ComponentEvent.getInstance().addClickEventCreditUsername();
     ComponentEvent.getInstance().addClickEventSearchButton();
     ComponentEvent.getInstance().addClickEventDeleteButton();
     ComponentEvent.getInstance().addClickEventDeleteCheckAll();
@@ -20,13 +19,13 @@ let searchObj = {
 }
 
 let creditObj = {
-    userId : 0,
+    userId : "",
     username: "",
-    pastCredit : 0,
-    pastAvg : 0,
-    maxCredit :  0,
-    presentCredit : 0,
-    subCredit : 0
+    pastCredit : "",
+    pastAvg : "",
+    maxCredit :  "",
+    presentCredit : "",
+    subCredit : ""
 }
 
 class InfoCreditApi{
@@ -38,26 +37,6 @@ class InfoCreditApi{
         return this.#instance;
     }
 
-    // getOneCreditUser(){
-    //     let returnData = null;
-
-    //     $.ajax({
-    //         async: false,
-    //         type: "post",
-    //         url: `http://localhost:8000/api/admin/creditUser/${creditObj.userId}`,
-    //         data: creditObj,
-    //         dataType: "json",
-    //         success: response => {
-    //             console.log(response);
-    //             returnData = response.data;
-    //         },
-    //         error: error => {
-    //             console.log(error);
-    //         }
-    //     });
-    //     return returnData;
-    // }
-    
     getAllCreditList(searchObj){
         let returnData = null;
 
@@ -199,18 +178,18 @@ class CreditInfoService{
 
         responeseData.forEach((data, index) => {
             creditList.innerHTML += `
-                <tr>
-                    <td><input type="checkbox" class="delete-checkbox"></td>
-                    <td class="userId" style=display:none></td>
-                    <td><a href="/admin/credit">${data.username}</a></td>
-                    <td>${data.pastCredit}</td>
-                    <td>${data.pastAvg}</td>
-                    <td>${data.maxCredit}</td>
-                    <td>${data.presentCredit}</td>
-                    <td>${data.subCredit - data.maxCredit}</td>
-                </tr>        
+            <tr>
+                <td><input type="checkbox" class="delete-checkbox"></td>
+                <td class="userId" style=display:none>${data.userId}</td>
+                <td><a href="/admin/credit?userId=${data.userId}" value=${data.userId}>${data.username}</a></td>
+                <td>${data.pastCredit}</td>
+                <td>${data.pastAvg}</td>
+                <td>${data.maxCredit}</td>
+                <td>${data.presentCredit}</td>
+                <td>${data.subCredit - data.maxCredit}</td>
+            </tr>    
             `;
-            // <td><button class="searchUserUpdateCredit">${data.username}</button></td>
+            
         });
         this.loadSearchNumberList();
         ComponentEvent.getInstance().addClickEventDeleteCheckbox();
@@ -235,17 +214,6 @@ class ComponentEvent{
         return this.#instance;
     }
 
-    // addClickEventCreditUsername(){
-    //     const search = InfoCreditApi.getInstance().getOneCreditUser();
-    //     const searchButton = document.querySelectorAll(".searchUserUpdateCredit");
-
-    //     searchButton.onclick = () => {
-    //         location.href = "http://localhost:8000/api//admin/creditModify"+search.value.userId;
-
-    //     }
-
-    // }
-
     addClickEventSearchButton(){
         const searchInput = document.querySelector(".search-input");
         const searchButton = document.querySelector(".search-button");
@@ -265,6 +233,8 @@ class ComponentEvent{
 
     addClickEventDeleteButton() {
         const deleteButton = document.querySelector(".delete-button");
+        const checkAll = document.querySelector(".delete-checkall");
+
         deleteButton.onclick = () => {
             if(confirm("정말로 삭제하시겠습니까?")) {
                 const deleteArray = new Array();

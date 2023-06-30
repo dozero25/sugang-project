@@ -205,11 +205,8 @@ public class AdminSearchService {
         }
     }
 
-    public Map<String, Object> loadCredit(int userId){
-        Map<String, Object> result = new HashMap<>();
-        result.put("creditMst", adminRepository.loadCredit(userId));
-
-        return result;
+    public CreditMst loadCredit(int userId){
+        return adminRepository.loadCredit(userId);
     }
 
     public int getUserCreditTotalCount(CreditUserCountDto creditUserCount){

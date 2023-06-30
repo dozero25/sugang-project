@@ -9,9 +9,11 @@ import com.koreait.koreaitsugang.web.dto.CMRespDto;
 import com.koreait.koreaitsugang.web.dto.admin.*;
 import com.koreait.koreaitsugang.entity.SubjectMst;
 import com.koreait.koreaitsugang.web.dto.*;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -196,15 +198,15 @@ public class AdminSearchApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
     }
 
-    @GetMapping("/creditModify/{userId}")
-    public ResponseEntity<CMRespDto<Map<String, Object>>> loadCredit(@PathVariable("userId") int userId) {
+    @GetMapping(path = "/credit/{userId}")
+    public ResponseEntity<CMRespDto<?>> loadCredit(@PathVariable("userId") int userId) {
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", adminSearchService.loadCredit(userId)));
     }
 
     @PostMapping("/creditUser/{userId}")
-    public ResponseEntity<CMRespDto<Map<String, Object>>> loadCreditUser(@PathVariable("userId") int userId) {
+    public ResponseEntity<CMRespDto<?>> loadCreditUser(@PathVariable("userId") int userId) {
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", adminSearchService.loadCredit(userId)));
@@ -263,7 +265,7 @@ public class AdminSearchApi {
 
     @ParamsAspect
     @ValidAspect
-    @PutMapping("/credit/{userId}")
+    @PatchMapping("/credit/{userId}")
     public ResponseEntity<CMRespDto<?>> modifyCredit(@PathVariable("userId") int subjectCode, @Valid @RequestBody CreditReqDto creditReqDto, BindingResult bindingResult){
         adminSearchService.modifyCreditByUserId(creditReqDto);
         return ResponseEntity

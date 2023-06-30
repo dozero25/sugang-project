@@ -54,7 +54,7 @@ public class AdminSearchController {
     public String creditreg(){ return "admin/credit/creditreg";}
 
     @GetMapping("/credit")
-    public String creditModify(@PathVariable int userId) {
+    public String creditModify() {
         return "admin/credit/creditmodify";
     }
 
