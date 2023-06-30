@@ -78,7 +78,7 @@ input, select, textarea {
     height: 50px;
 }
 
-.register-input {
+.register-input, .modification-input {
     border: none;
     width: 100px
 }
@@ -116,70 +116,6 @@ input, select, textarea {
     border: 1px solid #990101;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.page-controller {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.page-numbers {
-    display: flex;
-}
-
-.page-controller a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    text-decoration: none;
-    margin: 0px 5px;
-    border: 1px solid #202020;
-    border-radius: 4px;
-    width: 30px;
-    height: 30px;
-    color: #000000;
-
-    font-weight: 600;
-    font-size: 12px;
-}
-
-.page-controller li {
-    list-style-type: none;
-}
-
-.page-controller a:hover {
-    background-color: #202020;
+.can-button a {
     color: #ffffff;
-}
-
-.page-controller .disabled {
-    background-color: #202020;
-    color: #ffffff;
-    cursor: default;
 }

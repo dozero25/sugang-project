@@ -48,8 +48,10 @@
         where
         1 = 1
         <if test="searchValue != null and searchValue != ''">
-            and(um.username like concat('%' #{searchValue}, '%')
-            or um.name like concat('%', #{searchValue}, '%'))
+            and(
+            um.username like concat('%' #{searchValue}, '%')
+            or um.name like concat('%', #{searchValue}, '%')
+            )
         </if>
         <if test="category != '전체조회' and category != null">
             and category = #{category}
@@ -312,19 +314,6 @@
 
     <select id="loadCredit" parameterType="integer" resultType="com.koreait.koreaitsugang.entity.CreditMst">
         select
-        user_id as userId,
-        past_credit as pastCredit,
-        past_avg as pastAvg,
-        max_credit as maxCredit,
-        present_credit as presentCredit
-        from
-        credit_mst
-        where
-        user_id = #{userId};
-    </select>
-
-    <select id="loadAllCredit" parameterType="List" resultType="com.koreait.koreaitsugang.entity.CreditMst">
-        select
         cm.user_id as userId,
         um.username as username,
         cm.past_credit as pastCredit,
@@ -334,19 +323,98 @@
         cm.sub_credit as subCredit
         from
         credit_mst cm
-        left outer join user_mst um on(um.user_id = cm.user_id)
+        inner join user_mst um on(um.user_id = cm.user_id)
+        where
+        cm.user_id = #{userId};
     </select>
 
-    <insert id="insertCredit" parameterType="com.koreait.koreaitsugang.web.dto.admin.CreditInsertDto" keyProperty="userId">
+    <select id="loadAllCredit" parameterType="com.koreait.koreaitsugang.web.dto.admin.CreditReqDto" resultType="com.koreait.koreaitsugang.entity.CreditMst">
+        select
+            cm.user_id as userId,
+            um.username as username,
+            cm.past_credit as pastCredit,
+            cm.past_avg as pastAvg,
+            cm.max_credit as maxCredit,
+            cm.present_credit as presentCredit,
+            cm.sub_credit as subCredit
+        from
+            credit_mst cm
+        inner join user_mst um on(um.user_id = cm.user_id)
+        <if test="searchValue != null and searchValue != ''">
+            and (
+            um.username like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
+        <if test='limit == "Y"'>
+            limit #{index}, #{count}
+        </if>
+    </select>
+
+    <insert id="insertCredit" parameterType="com.koreait.koreaitsugang.web.dto.admin.CreditReqDto" keyProperty="userId">
         insert into
         credit_mst
-        values (#{userId}, #{pastCredit}, #{pastAvg}, #{maxCredit}, #{presentCredit}, #{subCredit})
+        values
+        (#{userId}, #{pastCredit}, #{pastAvg}, #{maxCredit}, #{presentCredit}, #{subCredit})
     </insert>
 
     <select id="selOnlyUserId" parameterType="List" resultType="Integer">
         select
-            user_id as userId
+        um.user_id as userId
         from
-        user_mst;
+        credit_mst cm
+        right outer join user_mst um on (cm.user_id = um.user_id)
+        where cm.user_id is null
+        order by um.user_id ASC
     </select>
+
+    <select id="getUserCreditTotalCount" parameterType="com.koreait.koreaitsugang.web.dto.admin.CreditUserCountDto" resultType="integer">
+        select
+        count(cm.user_id) as userId,
+        um.username as username
+        from
+        credit_mst cm
+        left outer join user_mst um on(um.user_id = cm.user_id)
+        where
+        1 = 1
+        <if test="searchValue != null and searchValue != ''">
+            and (
+            um.username like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
+        <if test='limit == "Y"'>
+            limit #{index}, #{count}
+        </if>
+    </select>
+
+    <delete id="deleteCreditUser">
+        delete
+        from
+        credit_mst
+        where
+        user_id = #{userId}
+    </delete>
+
+    <delete id="deleteCreditByUserId" parameterType="list">
+        delete
+        from
+            credit_mst
+        where
+            user_id in
+        <foreach collection="list" item="userId" open="(" close=")" separator=",">
+            #{userId}
+        </foreach>
+    </delete>
+
+    <update id="updateCreditByUserId" parameterType="com.koreait.koreaitsugang.web.dto.admin.CreditReqDto">
+        update
+        credit_mst
+        set
+        past_credit = #{pastCredit},
+        past_avg = #{pastAvg},
+        max_credit = #{maxCredit},
+        present_credit = #{presentCredit},
+        sub_credit = #{subCredit}
+        where
+        user_id = #{userId}
+    </update>
 </mapper>

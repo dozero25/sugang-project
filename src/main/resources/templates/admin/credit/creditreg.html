@@ -21,22 +21,23 @@
             </div>
             <div class="content-main">
                 <div class="content-items">
-                    
                 </div>
             </div>
             <div class="table-container">
                 <table class="content-table">
                     <thead>
                         <tr>
+                            <th><input type="checkbox" class="delete-checkall"></th>
                             <th>번호</th>
                             <th>직전학기<br>신청학점</th>
                             <th>직전학기<br>평균학점</th>
                             <th>총 취득학점</th>
                             <th>신청가능학점</th>
-                            <th>취득학점</th>         
+                            <th>졸업 학점</th>         
                         </tr>
                     </thead>
                     <tbody>
+                        <td><input type="checkbox" class="delete-checkbox"></td>
                         <td>
                             <select type="text" class="register-input user-select">
 
@@ -52,7 +53,7 @@
             </div>
             <div class="btn-box">
                 <button type="submit" class="reg-button">등록</button>
-                <button type="reset" class="can-button">취소</button>
+                <a href="/admin/creditsearch"><button type="reset" class="can-button">취소</button></a>
             </div>
         </div>
     </main>

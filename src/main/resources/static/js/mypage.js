@@ -71,6 +71,7 @@ class MypageLoadApi {
             dataType: "json",
             success: response => {
                 successFlag = true;
+                console.log(response);
             },
             error: error => {
                 console.log(error);

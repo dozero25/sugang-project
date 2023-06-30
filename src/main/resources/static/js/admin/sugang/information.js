@@ -84,7 +84,6 @@ class SugangInformationApi{
             },
             dataType: "json",
             success: responese => {
-                console.log(responese);
                 returnData = responese.data;
             }, 
             error: error => {

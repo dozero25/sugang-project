@@ -50,8 +50,7 @@ public class AdminSearchService {
     }
 
     public int UserTotalCounts(AdminSearchReqDto adminSearchReqDto) {
-        int usercount = adminRepository.getSearchUserTotalCount(adminSearchReqDto);
-        System.out.println(usercount);
+        adminRepository.getSearchUserTotalCount(adminSearchReqDto);
         return adminRepository.getSearchUserTotalCount(adminSearchReqDto);
     }
 
@@ -123,9 +122,9 @@ public class AdminSearchService {
         addStudentReqDto.setPassword(new BCryptPasswordEncoder().encode(addStudentReqDto.getPassword()));
         adminRepository.saveStudent(addStudentReqDto);
         adminRepository.saveStudentMst(addStudentReqDto);
-        adminRepository.insertSubCredit(addStudentReqDto.getUserId());
-
         accountRepository.saveRoleStudent(addStudentReqDto);
+
+        adminRepository.insertSubCredit(addStudentReqDto.getUserId());
 
         return addStudentReqDto;
     }
@@ -210,16 +209,21 @@ public class AdminSearchService {
         return adminRepository.loadCredit(userId);
     }
 
-    public List<CreditMst> loadAllCredit(){
-        return adminRepository.loadAllCredit();
+    public int getUserCreditTotalCount(CreditUserCountDto creditUserCount){
+        return adminRepository.getUserCreditTotalCount(creditUserCount);
     }
 
-    public void insertCredit(CreditInsertDto creditInsertDto){
-        insertCreidtErrorIndo(creditInsertDto);
-        adminRepository.insertCredit(creditInsertDto);
+    public List<CreditMst> loadAllCredit(CreditUserCountDto creditUserCountDto){
+        creditUserCountDto.setIndex();
+        return adminRepository.loadAllCredit(creditUserCountDto);
     }
-    private void insertCreidtErrorIndo(CreditInsertDto creditInsertDto){
-        if(creditInsertDto.getMaxCredit() > creditInsertDto.getSubCredit()) {
+
+    public void insertCredit(CreditReqDto creditReqDto){
+        insertCreidtErrorIndo(creditReqDto);
+        adminRepository.insertCredit(creditReqDto);
+    }
+    private void insertCreidtErrorIndo(CreditReqDto creditReqDto){
+        if(creditReqDto.getMaxCredit() > creditReqDto.getSubCredit()) {
             Map<String, String> errorMap = new HashMap<>();
             errorMap.put("creditInsertDto", "총 학점은 총 신청 학점보다 작을 수 없습니다.");
 
@@ -231,4 +235,15 @@ public class AdminSearchService {
         return adminRepository.selOnlyUserId();
     }
 
+    public void deleteCreditUser(int userId ) {
+        adminRepository.deleteCreditUser(userId);
+    }
+
+    public void deleteCreditByUserId(DeleteCreditUserReqDto deleteCreditUserReqDto) {
+        adminRepository.deleteCreditByUserId(deleteCreditUserReqDto.getUserIds());
+    }
+
+    public void modifyCreditByUserId(CreditReqDto creditReqDto){
+        adminRepository.updateCreditByUserId(creditReqDto);
+    }
 }
