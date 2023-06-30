@@ -363,7 +363,8 @@
         from
         credit_mst cm
         right outer join user_mst um on (cm.user_id = um.user_id)
-        where cm.user_id is null;
+        where cm.user_id is null
+        order by um.user_id ASC
     </select>
 
     <select id="getUserCreditTotalCount" parameterType="com.koreait.koreaitsugang.web.dto.admin.CreditUserCountDto" resultType="integer">

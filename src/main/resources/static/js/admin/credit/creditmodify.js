@@ -7,16 +7,20 @@ window.onload = () => {
 
     ComponentEvent.getInstance().addClickEventModificationButton();
 }
-let creditObj = {
-    userId : 0,
+const creditObj = {
+    userId : "",
     username: "",
-    pastCredit : 0,
-    pastAvg : 0,
-    maxCredit :  0,
-    presentCredit : 0,
-    subCredit : 0
+    pastCredit : "",
+    pastAvg : "",
+    maxCredit :  "",
+    presentCredit : "",
+    subCredit : ""
 }
 
+const fileObj = {
+    files: new Array(),
+    formData: new FormData()
+} 
 
 class ModifyCreditApi{
     static #instance = null;
@@ -33,11 +37,10 @@ class ModifyCreditApi{
         $.ajax({
             async: false,
             type: "get",
-            url: `http://localhost:8000/api/admin/credit/${Principal.getInstance().getPrincial().user.userId}`,
+            url: `http://localhost:8000/api/admin/credit/${creditObj.userId}`,
             dataType: "json",
             success: response => {
                 responeseData = response.data;
-                console.log(responeseData);
             },
             error: error => {
                 console.log(error);
@@ -51,7 +54,7 @@ class ModifyCreditApi{
 
         $.ajax({
             async: false,
-            type: "put",
+            type: "patch",
             url: `http://localhost:8000/api/admin/credit/${creditObj.userId}`,
             contentType: "application/json",
             data: JSON.stringify(creditObj),
@@ -82,29 +85,33 @@ class ModifyCreditService{
     }
 
     loadCredit(){
-        const responeseData = ModifyCreditApi.getInstance().getCreditUserId(creditObj);
+        const responeseData = ModifyCreditApi.getInstance().getCreditUserId();
+        
+        const modifiyLoad = document.querySelector(".content-table tbody");
 
-        console.log(responeseData);
-
-        // const modificationInput = document.querySelectorAll(".modification-input")
-        // modificationInput[1].value = responeseData.creditMst.username;
-        // modificationInput[2].value = responeseData.creditMst.pastCredit;
-        // modificationInput[3].value = responeseData.creditMst.pastAvg;
-        // modificationInput[4].value = responeseData.creditMst.maxCredit 
-        // modificationInput[5].value = responeseData.creditMst.presentCredit 
-        // modificationInput[6].value = responeseData.creditMst.subCredit 
+        modifiyLoad.innerHTML = `
+            <tr>
+                <td><input type="text" class="modification-input" value="${responeseData.username}"></td>
+                <td><input type="text" class="modification-input" value="${responeseData.pastCredit}"></td>
+                <td><input type="text" class="modification-input" value="${responeseData.pastAvg}"></td>
+                <td><input type="text" class="modification-input" value="${responeseData.maxCredit}"></td>
+                <td><input type="text" class="modification-input" value="${responeseData.presentCredit}"></td>
+                <td><input type="text" class="modification-input" value="${responeseData.subCredit}"></td>
+            <tr>
+        `;
     }
 
     setCreditObjValues() {
         const modificationInputs = document.querySelectorAll(".modification-input");
 
-        creditObj.userId = modificationInputs[0].value;
-        creditObj.username = modificationInputs[1].value;
-        creditObj.pastCredit = modificationInputs[2].value;
-        creditObj.pastAvg = modificationInputs[3].value;
-        creditObj.maxCredit = modificationInputs[4].value;
-        creditObj.presentCredit = modificationInputs[5].value;
-        creditObj.subCredit = modificationInputs[6].value;
+        console.log(modificationInputs);
+
+        creditObj.username = modificationInputs[0].value;
+        creditObj.pastCredit = modificationInputs[1].value;
+        creditObj.pastAvg = modificationInputs[2].value;
+        creditObj.maxCredit = modificationInputs[3].value;
+        creditObj.presentCredit = modificationInputs[4].value;
+        creditObj.subCredit = modificationInputs[5].value;
     }
 }
 
@@ -123,9 +130,12 @@ class ComponentEvent {
 
         modificationButton.onclick = () => {
             
-            ModifyCreditService.getInstance().setSubjectObjValues();
-
+            ModifyCreditService.getInstance().setCreditObjValues();
+            fileObj.formData.append("files", fileObj.files[0]);
             const successFlag = ModifyCreditApi.getInstance().modifyCredit();
+            
+            console.log(successFlag);
+
             if(successFlag) {
                 alert("수정 완료되었습니다.");
                 location.href="http://localhost:8000/admin/creditsearch";
