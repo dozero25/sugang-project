@@ -219,10 +219,10 @@ public class AdminSearchService {
     }
 
     public void insertCredit(CreditReqDto creditReqDto){
-        insertCreidtErrorIndo(creditReqDto);
+        insertCreditErrorIndo(creditReqDto);
         adminRepository.insertCredit(creditReqDto);
     }
-    private void insertCreidtErrorIndo(CreditReqDto creditReqDto){
+    private void insertCreditErrorIndo(CreditReqDto creditReqDto){
         if(creditReqDto.getMaxCredit() > creditReqDto.getSubCredit()) {
             Map<String, String> errorMap = new HashMap<>();
             errorMap.put("creditInsertDto", "총 학점은 총 신청 학점보다 작을 수 없습니다.");
