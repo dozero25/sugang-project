@@ -19,7 +19,7 @@ public interface SugangRepository {
 
     public int searchTotalCourse(SearchNumberListReqDto searchNumberListReqDto);
 
-    public List<OpenCourse> searchCourse(SearchSugangReqDto searchSugangReqDto);
+    public List<OpenCourse> getloadAllCourse(SearchSugangReqDto searchSugangReqDto);
 
     public int loadUserId(int userId);
 

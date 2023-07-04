@@ -172,8 +172,8 @@ class CreditInfoService{
 
     loadAllCreditList(){
         const responeseData = InfoCreditApi.getInstance().getAllCreditList(searchObj);
-
         const creditList = document.querySelector(".content-table tbody");
+        
         creditList.innerHTML = ``;
 
         responeseData.forEach((data, index) => {
