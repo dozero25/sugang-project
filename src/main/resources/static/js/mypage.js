@@ -279,22 +279,4 @@ class ComponentEvent {
             }
         }
     }
-
-    // addClickEventImgModificationButton() {
-    //     const imgModificationButton = document.querySelector(".modification-button");
-
-    //     imgModificationButton.onclick = () => {
-    //         fileObj.formData.append("files", fileObj.files[0]);
-
-    //         let successFlag = true;
-
-    //         if(imgObj.imageId != null) {
-    //             successFlag = MypageLoadApi.getInstance().removeImg();
-    //         }
-
-    //         if(successFlag = true) {
-    //             MypageLoadApi.getInstance().registerImg();        
-    //         }
-    //     }
-    // }
 }

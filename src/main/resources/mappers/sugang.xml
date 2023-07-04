@@ -29,8 +29,8 @@
             </if>
     </select>
 
-    <select id="searchCourse"
-            parameterType="com.koreait.koreaitsugang.web.dto.SearchSugangReqDto"
+    <select id="getloadAllCourse"
+            parameterType="com.koreait.koreaitsugang.entity.OpenCourse"
             resultType="com.koreait.koreaitsugang.entity.OpenCourse">
         select
             classification,
@@ -130,14 +130,17 @@
 
     <select id="loadCredit" parameterType="integer" resultType="com.koreait.koreaitsugang.entity.CreditMst">
         select
-            user_id as userId,
-            past_credit as pastCredit,
-            past_avg as pastAvg,
-            max_credit as maxCredit,
-            present_credit as presentCredit
+        cm.user_id as userId,
+        um.username as username,
+        cm.past_credit as pastCredit,
+        cm.past_avg as pastAvg,
+        cm.max_credit as maxCredit,
+        cm.present_credit as presentCredit,
+        cm.sub_credit as subCredit
         from
-            credit_mst
+        credit_mst cm
+        inner join user_mst um on(um.user_id = cm.user_id)
         where
-            user_id = #{userId};
+        cm.user_id = #{userId}
     </select>
 </mapper>

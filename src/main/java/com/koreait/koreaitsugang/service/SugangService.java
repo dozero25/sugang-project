@@ -29,9 +29,9 @@ public class SugangService {
         return sugangRepository.searchTotalCourse(searchNumberListReqDto);
     }
 
-    public List<OpenCourse> getOpenCourse(SearchSugangReqDto searchSugangReqDto) {
+    public List<OpenCourse> getloadAllCourse(SearchSugangReqDto searchSugangReqDto) {
         searchSugangReqDto.setIndex();
-        return sugangRepository.searchCourse(searchSugangReqDto);
+        return sugangRepository.getloadAllCourse(searchSugangReqDto);
     }
 
     public int applyCourse(int subjectCode, int userId){
