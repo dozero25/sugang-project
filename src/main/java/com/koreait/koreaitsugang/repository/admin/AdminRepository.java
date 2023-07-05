@@ -41,9 +41,10 @@ public interface AdminRepository {
 
     public UserImage findUserImageByUsername(String username);
 
-    public int updateStudentByUsername(UpdateStudentReqDto updateStudentReqDto);
+    public int updateUserByUsername(UserMst userMst);
 
-    public int updateStudentmstByUseranme(UpdateStudentReqDto updateStudentReqDto);
+    // 이거 필요 없을 듯
+    public String updateUsermstByUseranme(UpdateUserReqDto updateUserReqDto);
 
     public List<SubjectMst> searchSugang(SearchReqDto searchReqDto);
 

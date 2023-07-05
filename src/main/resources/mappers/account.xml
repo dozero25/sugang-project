@@ -83,8 +83,8 @@
         update
             user_mst
         set
-            password = #{passw
-            user_id = #{userId}
+            password = #{password}
+        where username = #{username}
     </update>
 
     <insert id="saveRole" parameterType="com.koreait.koreaitsugang.entity.RoleDtl">

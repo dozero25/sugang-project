@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.Email;
 import java.util.List;
 
 @Builder
@@ -29,9 +31,7 @@ public class UserMst {
 
     private String address;
 
-    private String departmentNumber;
-
-    private int grade;
+    private int departmentNumber;
 
     private List<RoleDtl> roleDtl;
 }

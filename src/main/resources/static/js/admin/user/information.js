@@ -80,12 +80,10 @@ class UserInformatinApi{
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/admin/users",
+            url: "http://localhost:8000/api/admin/users",
             data: searchObj,
             dataType: "json",
             success: response => {
-                console.log(response);
-                console.log(response.username);
                 returnData = response.data;
             },
             error: error => {
@@ -102,7 +100,7 @@ class UserInformatinApi{
         $.ajax({
             async: false,
             type: "delete",
-            url: "http://127.0.0.1:8000/api/admin/users",
+            url: "http://localhost:8000/api/admin/users",
             contentType: "application/json",
             data: JSON.stringify(
                 {
@@ -216,14 +214,14 @@ class UserInformatinService {
                 <tr>
                     <td><input type="checkbox" class="delete-checkbox"></td>
                     <td class="category-select">${data.category}</td>
-                    <td class="username">${data.username}</td>
+                    <td class="username"><a href="/admin/user/modi?username=${data.username}" value="${data.username}">${data.username}</a></td>
                     <td>${data.name}</td>
                     <td>${data.password}</td>
-                    <td><a href="/admin/usersearch/${data.username}"><button class="modify-button">수정</button></a></td>
                 </tr>
+                    
             `;
         });
-
+            // <td> value="${data.username}"><button class="modify-button">수정</button></td>
         this.loadSearchNumberList();
 
     }

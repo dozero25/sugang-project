@@ -55,7 +55,7 @@ class StudentModifyApi{
         $.ajax({
             async: false,
             type: "get",
-            url: `http://127.0.0.1:8000/api/admin/user/${stuObj.username}`,
+            url: `http://localhost:8000/api/admin/user/${stuObj.username}`,
             dataType: "json",
             success: response => {
                 console.log(response);
@@ -75,7 +75,7 @@ class StudentModifyApi{
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/admin/usersearch",
+            url: "http://localhost:8000/api/admin/usersearch",
             dataType: "json",
             success: responese => {
                 console.log(responese);
@@ -94,8 +94,8 @@ class StudentModifyApi{
 
         $.ajax({
             async: false,
-            type: "put",
-            url:`http://127.0.0.1:8000/api/admin/user/${stuObj.username}`,
+            type: "patch",
+            url:`http://localhost:8000/api/admin/user/${stuObj.username}`,
             contentType: "application/json",
             data: JSON.stringify(stuObj),
             dataType: "json",
@@ -119,7 +119,7 @@ class StudentModifyApi{
         $.ajax({
             async: false,
             type: "delete",
-            url: `http://127.0.0.1:8000/api/admin/user/${stuObj.username}/image/${imgObj.imageId}`,
+            url: `http://localhost:8000/api/admin/user/${stuObj.username}/image/${imgObj.imageId}`,
             dataType: "json",
             success: response => {
                 console.log(response);
@@ -139,7 +139,7 @@ class StudentModifyApi{
         $.ajax({
             async:false,
             type:"post",
-            url: `http://127.0.0.1:8000/api/admin/user/${stuObj.username}/images`,
+            url: `http://localhost:8000/api/admin/user/${stuObj.username}/images`,
             encType: "mulipart/form-data",
             contentType: false,
             processData: false,
@@ -174,7 +174,7 @@ class StudentModifyService{
 
         responeseData.forEach((data, index) => {
             categorySelect.innerHTML += `
-                <option value = "${index+1}">${data}</option>
+                <option value = "${data}">${data}</option>
             `;
         });
     }
@@ -192,13 +192,13 @@ class StudentModifyService{
         stuObj.username = modificationInputs[0].value;
         stuObj.password = modificationInputs[1].value;
         stuObj.name = modificationInputs[2].value;
-        stuObj.phone = modificationInputs[3].value;
-        stuObj.birthDate = modificationInputs[4].value;
-        stuObj.email = modificationInputs[5].value;
-        stuObj.grade = modificationInputs[6].value;
-        stuObj.address = modificationInputs[7].value;
-        // stuObj.departmentNumber = modificationInputs[8].value;
-        stuObj.departmentNumber = categorySelect.options[categorySelect.selectedIndex].value;
+        stuObj.departmentNumber = modificationInputs[3].value;
+        stuObj.phone = modificationInputs[4].value;
+        stuObj.birthDate = modificationInputs[5].value;
+        stuObj.email = modificationInputs[6].value;
+        stuObj.grade = modificationInputs[7].value;
+        stuObj.address = modificationInputs[8].value;
+        // stuObj.departmentNumber = categorySelect.options[categorySelect.selectedIndex].value;
     }
 
     loadUserAndImageData(){
@@ -215,12 +215,12 @@ class StudentModifyService{
         modificationInputs[0].value = responeseData.username.username;
         modificationInputs[1].value = responeseData.username.password;
         modificationInputs[2].value = responeseData.username.name;
-        modificationInputs[3].value = responeseData.username.phone;
-        modificationInputs[4].value = responeseData.username.birthDate;
-        modificationInputs[5].value = responeseData.username.email;
-        modificationInputs[6].value = responeseData.username.grade;
-        modificationInputs[7].value = responeseData.username.address;
-        modificationInputs[8].value = responeseData.username.category;
+        modificationInputs[3].value = responeseData.username.category;
+        modificationInputs[4].value = responeseData.username.phone;
+        modificationInputs[5].value = responeseData.username.birthDate;
+        modificationInputs[6].value = responeseData.username.email;
+        modificationInputs[7].value = responeseData.username.grade;
+        modificationInputs[8].value = responeseData.username.address;
         
 
         if(responeseData.userImage != null){
@@ -230,7 +230,7 @@ class StudentModifyService{
             imgObj.originName = responeseData.userImage.originName;
 
             const userImg = document.querySelector(".user-img");
-            userImg.src = `http://127.0.0.1:8000/images/user/${responeseData.userImage.saveName}`;
+            userImg.src = `http://localhost:8000/images/user/${responeseData.userImage.saveName}`;
         }
 
     }
@@ -366,7 +366,7 @@ class ComponentEvent {
 
             if(successFlag){
                 StudentModifyApi.getInstance().registerImg();
-                location.href="http://127.0.0.1:5501/templates/admin/user_information.html";
+                location.href="/admin/user/search";
             }
         }
     }

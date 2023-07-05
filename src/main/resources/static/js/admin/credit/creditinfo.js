@@ -47,7 +47,6 @@ class InfoCreditApi{
             data: searchObj,
             dataType: "json",
             success: response => {
-                console.log(response);
                 returnData = response.data;
             },
             error: error => {
