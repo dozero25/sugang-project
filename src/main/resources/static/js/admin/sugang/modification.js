@@ -151,7 +151,7 @@ class ComponentEvent {
             const successFlag = SugangModificationApi.getInstance().modifySubject();
             if(successFlag) {
                 alert("수정 완료되었습니다.");
-                location.href="http://127.0.0.1:5501/templates/admin/sugang_information.html";
+                location.href="/admin/sugang/search";
             } else {
                 location.reload();
             }

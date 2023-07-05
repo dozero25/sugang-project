@@ -116,7 +116,11 @@ input, select, textarea {
 }
 
 .content-table tbody td:nth-child(2) {
-    width: 19%;
+    width: 22%;
+}
+
+.content-table tbody a:hover {
+    color: #0026ff;
 }
 
 .content-table tbody td:nth-child(3) {
@@ -128,7 +132,7 @@ input, select, textarea {
 }
 
 .content-table tbody td:nth-child(5) {
-    width: 22%;
+    width: 19%;
 }
 
 .content-table tbody td:nth-child(6) {

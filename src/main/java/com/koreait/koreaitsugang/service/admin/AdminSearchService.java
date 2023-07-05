@@ -172,9 +172,8 @@ public class AdminSearchService {
         return result;
     }
 
-    public void modifyStudent(UpdateStudentReqDto updateStudentReqDto) {
-        adminRepository.updateStudentByUsername(updateStudentReqDto);
-        adminRepository.updateStudentmstByUseranme(updateStudentReqDto);
+    public void modifyUser(UserMst userMst) {
+        adminRepository.updateUserByUsername(userMst);
     }
 
     public void removeUserImage(String username) {

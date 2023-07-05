@@ -176,23 +176,26 @@
             username = #{username}
     </delete>
 
-    <update id="updateStudentByUsername" parameterType="com.koreait.koreaitsugang.web.dto.admin.UpdateStudentReqDto">
-        update user_mst as um
-        left outer join department_mst as dm
-        on(dm.department_number = um.department_number)
+    <update id="updateUserByUsername" parameterType="com.koreait.koreaitsugang.entity.UserMst" >
+        update
+        user_mst
+<!--        as um-->
+<!--        left outer join department_mst as dm-->
+<!--        on(dm.department_number = um.department_number)-->
         set
-            um.password = #{password},
-            um.name = #{name},
-            um.phone = #{phone},
-            um.birth_date = #{birthDate},
-            um.email = #{email},
-            um.address = #{address},
-            um.department_number = #{departmentNumber}
+            password = #{password},
+            name = #{name},
+            username = #{username},
+            phone = #{phone},
+            birth_date = #{birthDate},
+            email = #{email},
+            address = #{address},
+            department_number = #{departmentNumber}
         where
-            um.username = #{username}
+            username = #{username}
     </update>
 
-    <update id="updateStudentmstByUseranme" parameterType="com.koreait.koreaitsugang.web.dto.admin.UpdateStudentReqDto">
+    <update id="updateUsermstByUseranme" parameterType="com.koreait.koreaitsugang.web.dto.admin.UpdateUserReqDto">
         update student_mst
         set
             grade = #{grade}

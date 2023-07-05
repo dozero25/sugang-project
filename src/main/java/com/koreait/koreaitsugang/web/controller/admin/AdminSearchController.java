@@ -12,18 +12,18 @@ public class AdminSearchController {
     @GetMapping("/main")
     public String adminMain(){return "admin/adminmain";}
 
-    @GetMapping("/usersearch")
+    @GetMapping("/user/search")
     public String userInformation(){
         return "admin/user/information";
     }
 
-    @GetMapping("/userregister")
+    @GetMapping("/user/reg")
     public String userRegister(){
         return "admin/user/register";
     }
 
-    @GetMapping("/usersearch/{username}")
-    public String userModifity(@PathVariable String username){
+    @GetMapping("/user/modi")
+    public String userModifity(){
         return "admin/user/modify";
     }
 
@@ -32,18 +32,18 @@ public class AdminSearchController {
         return "admin/professor/register";
     }
 
-    @GetMapping("/search")
+    @GetMapping("/sugang/search")
     public String sugangInformation(){
         return "admin/sugang/information";
     }
 
-    @GetMapping("/sugang")
+    @GetMapping("/sugang/reg")
     public String sugangRegister(){
         return "admin/sugang/register";
     }
 
-    @GetMapping("/sugang/{subjectCode}")
-    public String sugangModify(@PathVariable int subjectCode) {
+    @GetMapping("/sugang/modi")
+    public String sugangModify() {
         return "admin/sugang/modification";
   }
 

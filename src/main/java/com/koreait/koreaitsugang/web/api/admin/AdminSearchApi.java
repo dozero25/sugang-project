@@ -9,11 +9,9 @@ import com.koreait.koreaitsugang.web.dto.CMRespDto;
 import com.koreait.koreaitsugang.web.dto.admin.*;
 import com.koreait.koreaitsugang.entity.SubjectMst;
 import com.koreait.koreaitsugang.web.dto.*;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -56,7 +54,7 @@ public class AdminSearchApi {
         return ResponseEntity.ok().body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", adminSearchService.UserTotalCounts(adminSearchReqDto)));
     }
 
-    @GetMapping("/sugang/{subjectCode}")
+    @GetMapping(path = "/sugang/{subjectCode}")
     public ResponseEntity<CMRespDto<Map<String, Object>>> getSugang(@PathVariable("subjectCode") int subjectCode) {
         return ResponseEntity
                 .ok()
@@ -128,8 +126,8 @@ public class AdminSearchApi {
                 .body(new CMRespDto<>(HttpStatus.CREATED.value(), "Successfully", true));
     }
 
-    @GetMapping("/user/{username}")
-    public ResponseEntity<CMRespDto<Map<String, Object>>> getUser(@PathVariable String username){
+    @GetMapping(path = "/user/{username}")
+    public ResponseEntity<CMRespDto<Map<String, Object>>> getUser(@PathVariable("username") String username){
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(),"Successfully",adminSearchService.getUsernameAndImage(username)));
@@ -137,9 +135,9 @@ public class AdminSearchApi {
 
     @ParamsAspect
     @ValidAspect
-    @PutMapping("/user/{username}")
-    public ResponseEntity<CMRespDto<?>> updateStudent(@Valid @RequestBody UpdateStudentReqDto updateStudentReqDto, BindingResult bindingResult){
-        adminSearchService.modifyStudent(updateStudentReqDto);
+    @PatchMapping(path = "/user/{username}")
+    public ResponseEntity<CMRespDto<?>> updateUser(@PathVariable("username") String username, @Valid @RequestBody UserMst userMst, BindingResult bindingResult){
+        adminSearchService.modifyUser(userMst);
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully",true));
@@ -147,7 +145,7 @@ public class AdminSearchApi {
 
 
     @DeleteMapping("/user/{username}/image/{imageId}")
-    public ResponseEntity<CMRespDto<?>> removeUserImage(@PathVariable String username, @PathVariable int imageId){
+    public ResponseEntity<CMRespDto<?>> removeUserImage(@PathVariable("username") String username, @PathVariable int imageId){
         adminSearchService.removeUserImage(username);
 
         return ResponseEntity
