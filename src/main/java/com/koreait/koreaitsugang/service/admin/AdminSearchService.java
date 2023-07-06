@@ -45,8 +45,7 @@ public class AdminSearchService {
     }
 
     public List<String> Categories() {
-        List<String> category = adminRepository.majorCategory();
-        return category;
+        return adminRepository.majorCategory();
     }
 
     public int UserTotalCounts(AdminSearchReqDto adminSearchReqDto) {
@@ -172,8 +171,10 @@ public class AdminSearchService {
         return result;
     }
 
-    public void modifyUser(UserMst userMst) {
-        adminRepository.updateUserByUsername(userMst);
+    public void modifyUser(UpdateUserReqDto updateUserReqDto) {
+
+        adminRepository.updateUserByUsername(updateUserReqDto);
+        adminRepository.updateUserGradeByUseranme(updateUserReqDto);
     }
 
     public void removeUserImage(String username) {

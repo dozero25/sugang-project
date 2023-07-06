@@ -135,9 +135,9 @@ public class AdminSearchApi {
 
     @ParamsAspect
     @ValidAspect
-    @PatchMapping(path = "/user/{username}")
-    public ResponseEntity<CMRespDto<?>> updateUser(@PathVariable("username") String username, @Valid @RequestBody UserMst userMst, BindingResult bindingResult){
-        adminSearchService.modifyUser(userMst);
+    @PutMapping(path = "/user/{username}")
+    public ResponseEntity<CMRespDto<?>> updateUser(@PathVariable("username") String username, @Valid @RequestBody UpdateUserReqDto updateUserReqDto, BindingResult bindingResult){
+        adminSearchService.modifyUser(updateUserReqDto);
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully",true));
