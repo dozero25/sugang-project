@@ -6,6 +6,7 @@ import com.koreait.koreaitsugang.web.dto.SearchNumberListReqDto;
 import com.koreait.koreaitsugang.web.dto.SearchReqDto;
 import com.koreait.koreaitsugang.web.dto.SubjectReqDto;
 import com.koreait.koreaitsugang.web.dto.admin.*;
+import com.sun.jdi.IncompatibleThreadStateException;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -37,14 +38,13 @@ public interface AdminRepository {
 
     public int saveProfessorMst(AddProfessorReqDto addProfessorReqDto);
 
-    public UserMst findUsernameByUsername(String username);
+    public UpdateUserReqDto findUsernameByUsername(String username);
 
     public UserImage findUserImageByUsername(String username);
 
-    public int updateUserByUsername(UserMst userMst);
+    public int updateUserByUsername(UpdateUserReqDto updateUserReqDto);
 
-    // 이거 필요 없을 듯
-    public String updateUsermstByUseranme(UpdateUserReqDto updateUserReqDto);
+    public int updateUserGradeByUseranme(UpdateUserReqDto updateUserReqDto);
 
     public List<SubjectMst> searchSugang(SearchReqDto searchReqDto);
 

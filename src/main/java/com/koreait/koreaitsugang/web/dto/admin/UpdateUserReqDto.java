@@ -26,6 +26,8 @@ public class UpdateUserReqDto {
 
     private String birthDate;
 
+    private String category;
+
     private int departmentNumber;
 
 }

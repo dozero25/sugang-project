@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class DepartmentMst {
     private  int departmentNumber;
     private  int collegeNumber;
-    private String departmentName;
+    private String category;
     private  String departmentPhone;
     private String building;
 }

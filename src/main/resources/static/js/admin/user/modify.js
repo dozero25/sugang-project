@@ -3,7 +3,7 @@ window.onload = () => {
     AsideService.getInstance().asideMenuEvent();
     
     StudentModifyService.getInstance().setUsername();
-    StudentModifyService.getInstance().loadCategories();
+    // StudentModifyService.getInstance().loadCategories();
     StudentModifyService.getInstance().loadUserAndImageData();
 
     ComponentEvent.getInstance().addClickEventModificationButton();
@@ -58,7 +58,6 @@ class StudentModifyApi{
             url: `http://localhost:8000/api/admin/user/${stuObj.username}`,
             dataType: "json",
             success: response => {
-                console.log(response);
                 responeseData = response.data;
             },
             error: error => {
@@ -78,7 +77,6 @@ class StudentModifyApi{
             url: "http://localhost:8000/api/admin/usersearch",
             dataType: "json",
             success: responese => {
-                console.log(responese);
                 returnData = responese.data;
             }, 
             error: error => {
@@ -94,7 +92,7 @@ class StudentModifyApi{
 
         $.ajax({
             async: false,
-            type: "patch",
+            type: "put",
             url:`http://localhost:8000/api/admin/user/${stuObj.username}`,
             contentType: "application/json",
             data: JSON.stringify(stuObj),
@@ -122,7 +120,6 @@ class StudentModifyApi{
             url: `http://localhost:8000/api/admin/user/${stuObj.username}/image/${imgObj.imageId}`,
             dataType: "json",
             success: response => {
-                console.log(response);
                 successFlag = true;
             },
             error: error => {
@@ -174,7 +171,7 @@ class StudentModifyService{
 
         responeseData.forEach((data, index) => {
             categorySelect.innerHTML += `
-                <option value = "${data}">${data}</option>
+                <option value = "${index + 1}">${data}</option>
             `;
         });
     }
@@ -187,7 +184,6 @@ class StudentModifyService{
     setStuObjValues(){
         const modificationInputs = document.querySelectorAll(".modification-input");
         const categorySelect = document.querySelector(".category-select");
-        
 
         stuObj.username = modificationInputs[0].value;
         stuObj.password = modificationInputs[1].value;
@@ -198,7 +194,8 @@ class StudentModifyService{
         stuObj.email = modificationInputs[6].value;
         stuObj.grade = modificationInputs[7].value;
         stuObj.address = modificationInputs[8].value;
-        // stuObj.departmentNumber = categorySelect.options[categorySelect.selectedIndex].value;
+        // categorySelect.options[categorySelect.selectedIndex].value;
+        // stuObj.departmentNumber = 
     }
 
     loadUserAndImageData(){
@@ -308,9 +305,10 @@ class ComponentEvent {
 
                 imgAddButton.disabled = false;
                 imgCancelButton.disabled = false;
-            }else{
-                location.reload();
             }
+            // else{
+            //     location.reload();
+            // }
         }
     }
 
