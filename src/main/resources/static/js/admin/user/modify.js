@@ -171,7 +171,7 @@ class StudentModifyService{
 
         responeseData.forEach((data, index) => {
             categorySelect.innerHTML += `
-                <option value = "${index + 1}">${data}</option>
+                <option value = "${data}">${data}</option>
             `;
         });
     }
@@ -194,6 +194,8 @@ class StudentModifyService{
         stuObj.email = modificationInputs[6].value;
         stuObj.grade = modificationInputs[7].value;
         stuObj.address = modificationInputs[8].value;
+
+            console.log(stuObj.category);
         // categorySelect.options[categorySelect.selectedIndex].value;
         // stuObj.departmentNumber = 
     }
@@ -212,7 +214,7 @@ class StudentModifyService{
         modificationInputs[0].value = responeseData.username.username;
         modificationInputs[1].value = responeseData.username.password;
         modificationInputs[2].value = responeseData.username.name;
-        modificationInputs[3].value = responeseData.username.category;
+        modificationInputs[3].value = responeseData.username.departmentNumber;
         modificationInputs[4].value = responeseData.username.phone;
         modificationInputs[5].value = responeseData.username.birthDate;
         modificationInputs[6].value = responeseData.username.email;

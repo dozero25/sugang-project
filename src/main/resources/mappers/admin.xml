@@ -184,6 +184,7 @@
             username = #{username},
             password = #{password},
             name = #{name},
+<!--            category= #{category},-->
             department_number = #{departmentNumber},
             phone = #{phone},
             birth_date = #{birthDate},
