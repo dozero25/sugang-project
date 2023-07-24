@@ -8,6 +8,7 @@ import com.koreait.koreaitsugang.exception.CustomApplyCountException;
 import com.koreait.koreaitsugang.repository.SugangRepository;
 import com.koreait.koreaitsugang.web.dto.SearchNumberListReqDto;
 import com.koreait.koreaitsugang.web.dto.SearchSugangReqDto;
+import com.koreait.koreaitsugang.web.dto.UserPocketCreditInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -73,5 +74,9 @@ public class SugangService {
 
     public CreditMst loadCredit(int userId){
         return sugangRepository.loadCredit(userId);
+    }
+
+    public UserPocketCreditInfo getCountAndCreditSumByUser(int userId){
+        return sugangRepository.getCountAndCreditSumByUserId(userId);
     }
 }

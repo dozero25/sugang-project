@@ -3,7 +3,7 @@ window.onload = () => {
     AsideService.getInstance().asideMenuEvent();
     
     StudentModifyService.getInstance().setUsername();
-    // StudentModifyService.getInstance().loadCategories();
+    StudentModifyService.getInstance().loadCategories();
     StudentModifyService.getInstance().loadUserAndImageData();
 
     ComponentEvent.getInstance().addClickEventModificationButton();
@@ -16,7 +16,6 @@ window.onload = () => {
 
 const stuObj = {
     username : "",
-    category : "",
     name : "",
     password : "",
     name : "",
@@ -78,6 +77,7 @@ class StudentModifyApi{
             dataType: "json",
             success: responese => {
                 returnData = responese.data;
+                console.log(responese);
             }, 
             error: error => {
                 console.log(error);
@@ -171,7 +171,7 @@ class StudentModifyService{
 
         responeseData.forEach((data, index) => {
             categorySelect.innerHTML += `
-                <option value = "${data}">${data}</option>
+                <option value = "${data.departmentNumber}">${data.category}</option>
             `;
         });
     }
@@ -194,21 +194,10 @@ class StudentModifyService{
         stuObj.email = modificationInputs[6].value;
         stuObj.grade = modificationInputs[7].value;
         stuObj.address = modificationInputs[8].value;
-
-            console.log(stuObj.category);
-        // categorySelect.options[categorySelect.selectedIndex].value;
-        // stuObj.departmentNumber = 
     }
 
     loadUserAndImageData(){
         const responeseData = StudentModifyApi.getInstance().getUserAndImage();
-
-        console.log(responeseData);
-        // if(responeseData.username == null){
-        //     alert("해당 유저는 등록되지 않은 유저입니다.");
-        //     history.back();
-        //     return;
-        // }
 
         const modificationInputs = document.querySelectorAll(".modification-input");
         modificationInputs[0].value = responeseData.username.username;
@@ -301,16 +290,18 @@ class ComponentEvent {
 
             StudentModifyService.getInstance().clearErrors();
 
-            if(confirm("학생 이미지를 수정하시겠습니까?")){
-                const imgAddButton = document.querySelector(".img-add-button");
-                const imgCancelButton = document.querySelector(".img-cancel-button");
+            const imgAddButton = document.querySelector(".img-add-button");
+            const imgCancelButton = document.querySelector(".img-cancel-button");
 
+            if(confirm("학생 이미지를 수정하시겠습니까?")){
                 imgAddButton.disabled = false;
                 imgCancelButton.disabled = false;
+                modifyButton.disabled = true;
             }
-            // else{
-            //     location.reload();
-            // }
+            else {
+                location.href="http://localhost:8000/admin/user/search";
+            }
+            
         }
     }
 
@@ -376,7 +367,7 @@ class ComponentEvent {
         
         imgCancelButton.onclick = () => {
             if(confirm("이미지 수정을 취소하시겠습니까?")){
-                location.reload();
+                location.href="http://localhost:8000/admin/user/search";
             }
         }
     }

@@ -67,7 +67,6 @@ public class SugangApi {
     public ResponseEntity<CMRespDto<?>> deleteCourse(@RequestBody PocketMst pocketMst, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 
         sugangService.deleteCourse(pocketMst.getSubjectCode(), principalDetails.getUser().getUserId());
-
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", pocketMst));
@@ -88,5 +87,14 @@ public class SugangApi {
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", sugangService.loadCredit(principalDetails.getUser().getUserId())));
     }
+
+    @ParamsAspect
+    @GetMapping("/credit/info")
+    public ResponseEntity<CMRespDto<?>> getLoadUserCreditInfo(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", sugangService.getCountAndCreditSumByUser(principalDetails.getUser().getUserId())));
+    }
+
 
 }

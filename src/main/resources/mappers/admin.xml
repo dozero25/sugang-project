@@ -4,8 +4,9 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.koreaitsugang.repository.admin.AdminRepository">
 
-    <select id="majorCategory" resultType="String">
+    <select id="getCategory" resultType="com.koreait.koreaitsugang.entity.DepartmentMst">
         select
+            department_number as departmentNumber,
             category
         from
             department_mst;
@@ -177,19 +178,18 @@
     <update id="updateUserByUsername" parameterType="com.koreait.koreaitsugang.web.dto.admin.UpdateUserReqDto" >
         update
         user_mst
-<!--        as um-->
-<!--        left outer join department_mst as dm-->
-<!--        on(dm.department_number = um.department_number)-->
+        as um
+        left outer join department_mst as dm
+        on(dm.department_number = um.department_number)
         set
-            username = #{username},
-            password = #{password},
-            name = #{name},
-<!--            category= #{category},-->
-            department_number = #{departmentNumber},
-            phone = #{phone},
-            birth_date = #{birthDate},
-            email = #{email},
-            address = #{address}
+        um.username = #{username},
+        um.password = #{password},
+        um.name = #{name},
+        um.department_number = #{departmentNumber},
+        um.phone = #{phone},
+        um.birth_date = #{birthDate},
+        um.email = #{email},
+        um.address = #{address}
         where
             username = #{username}
     </update>

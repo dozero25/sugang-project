@@ -3,6 +3,7 @@ window.onload = () => {
     AsideService.getInstance().asideMenuEvent();
     
     SugangModificationService.getInstance().setSubjectCode();
+    SugangModificationService.getInstance().loadCategories();
     SugangModificationService.getInstance().loadSubject();
 
     ComponentEvent.getInstance().addClickEventModificationButton();
@@ -54,6 +55,26 @@ class SugangModificationApi{
         return responeseData;
     }
 
+    getLoadCategories(){
+        let returnData = null;
+
+        $.ajax({
+            async: false,
+            type: "get",
+            url: "http://localhost:8000/api/admin/usersearch",
+            dataType: "json",
+            success: responese => {
+                returnData = responese.data;
+                console.log(responese);
+            }, 
+            error: error => {
+                console.log(error);
+            }
+        });
+
+        return returnData;
+    }
+
     modifySubject() {
         let successFlag =false;
 
@@ -88,6 +109,19 @@ class SugangModificationService {
     setSubjectCode() {
         const URLSearch = new URLSearchParams(location.search);
         subjectObj.subjectCode = URLSearch.get("subjectCode");
+    }
+
+    loadCategories(){
+        const responeseData = SugangModificationApi.getInstance().getLoadCategories();
+        const categorySelect = document.querySelector(".category-select");
+
+        categorySelect.innerHTML = ``;
+
+        responeseData.forEach((data, index) => {
+            categorySelect.innerHTML += `
+                <option value = "${data.category}">${data.category}</option>
+            `;
+        });
     }
 
     loadSubject() {
