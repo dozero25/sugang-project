@@ -7,6 +7,7 @@ import com.koreait.koreaitsugang.entity.PocketMst;
 import com.koreait.koreaitsugang.web.dto.SearchNumberListReqDto;
 
 import com.koreait.koreaitsugang.web.dto.SearchSugangReqDto;
+import com.koreait.koreaitsugang.web.dto.UserPocketCreditInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -34,4 +35,6 @@ public interface SugangRepository {
     public OpenCourse findCourse(int subjectCode);
 
     public CreditMst loadCredit(int userId);
+
+    public UserPocketCreditInfo getCountAndCreditSumByUserId(int userId);
 }

@@ -143,4 +143,15 @@
         where
         cm.user_id = #{userId}
     </select>
+
+    <select id="getCountAndCreditSumByUserId" parameterType="integer" resultType="com.koreait.koreaitsugang.web.dto.UserPocketCreditInfo">
+        select
+        count(*) as totalCreditCount,
+        sum(sm.credit) as totalCreditSum
+        from
+        pocket_mst pm
+        inner join subject_mst sm on (pm.subject_code = sm.subject_code)
+        where
+        pm.user_id= #{userId}
+    </select>
 </mapper>

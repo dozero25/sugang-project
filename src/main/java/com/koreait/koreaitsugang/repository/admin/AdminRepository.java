@@ -14,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface AdminRepository {
 
-    public List<String> majorCategory();
+    public List<DepartmentMst> getCategory();
 
     public int getSearchUserTotalCount(AdminSearchReqDto adminSearchReqDto);
 

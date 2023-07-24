@@ -109,7 +109,7 @@ class SugangRegisterService {
 
         responeseData.forEach(data => {
             categorySelect.innerHTML += `
-                <option value="${data}">${data}</option>
+                <option value="${data.departmentNumber}">${data.category}</option>
             `;
         }); 
     }

@@ -198,7 +198,7 @@ class UserInformatinService {
 
         responeseData.forEach(data => {
             categorySelect.innerHTML += `
-                <option value="${data}">${data}</option>
+                <option value="${data.category}">${data.category}</option>
             `;
         });
     }
