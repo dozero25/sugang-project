@@ -83,6 +83,16 @@
         values (0, #{subjectCode}, #{userId})
     </insert>
 
+    <select id="getPocketSubjectCode" resultType="com.koreait.koreaitsugang.entity.PocketMst">
+        select
+            subject_code as subjectCode,
+            user_id as userId
+        from
+            pocket_mst
+        where
+            user_id = #{userId} and subject_code = #{subjectCode}
+    </select>
+
     <delete id="deleteCourse"
             parameterType="com.koreait.koreaitsugang.entity.PocketMst">
         delete from pocket_mst

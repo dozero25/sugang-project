@@ -2,7 +2,7 @@ window.onload = () => {
     HeaderService.getInstance().loadHeader();
 
     SearchService.getInstance().loadCategories();
-    // SearchService.getInstance().clearCourseList();
+    SearchService.getInstance().clearCourseList();
     SearchService.getInstance().loadOpenCourse();
     SearchService.getInstance().loadCourseList();
     SearchService.getInstance().loadCredit();
@@ -10,8 +10,6 @@ window.onload = () => {
 
     ComponentEvent.getInstance().addClickEventCategoryRadios();
     ComponentEvent.getInstance().addClickEventSearchButton();
-    ComponentEvent.getInstance().deleteCourseButton();
-
     
 }
 
@@ -297,37 +295,16 @@ class SearchService {
         });
     }
 
-    // clearCourseList(){
-    //     const responseData = SearchApi.getInstance().getOpenCourse(searchObj);
-    //     const openTable = document.querySelector(".opened-table tbody");
-
-    //     openTable.innerHTML=``;
-        
-    //     responseData.forEach((data, index) => {
-    //         subjectCode.push(data);
-    //         openTable.innerHTML +=`
-    //         <tr>
-    //             <td><button type="submit" class="submit-button1" value=${data.subjectCode}>신청</button></td>
-    //             <td>${data.classification}</td>
-    //             <td>${data.subjectCode}</td>
-    //             <td>${data.subjectName}</td>
-    //             <td>${data.credit}</td>
-    //             <td>${data.professorName}</td>
-    //             <td>${data.building} / ${data.lectureTime}</td>
-    //             <td></th>
-    //             <td>Y</th>
-    //             <td></th>
-    //         </tr>
-    //         `;
-    //     });
-    //     this.loadPageController();
-    //     ComponentEvent.getInstance().addClickApplyCourseButton();
-    // }
-
-    clearloadCourseList(){
-        const pageController = document.querySelector(".confirmed-table tbody");
+    clearCourseList(){
+        const pageController = document.querySelector(".opened-table tbody");
         pageController.innerHTML = "";
     }
+
+    clearloadCourseList(){
+            const pageController = document.querySelector(".confirmed-table tbody");
+            pageController.innerHTML = "";
+       }
+
 
     loadOpenCourse() {
         const responseData = SearchApi.getInstance().getOpenCourse(searchObj);
@@ -489,20 +466,20 @@ class ComponentEvent {
             button.onclick = () => {
                 subjectCode[index].userId = principal;
                 const applyData = SearchApi.getInstance().applyCourse(subjectCode[index]);
-
+                console.log(subjectCode[index]);
                 inputCourseTable.innerHTML = `
                 <tr>
                     <td><button type="button" class="delete-button">삭제</button></td>
-                    <td>${index.classification}</td>
-                    <td>${index.subjectCode}</td>
-                    <td>${index.subjectName}</td>
-                    <td>${index.credit}</td>
-                    <td>${index.professorName}</td>
-                    <td>${index.building} / ${index.lectureTime}</td>
+                    <td>${applyData.classification}</td>
+                    <td>${applyData.subjectCode}</td>
+                    <td>${applyData.subjectName}</td>
+                    <td>${applyData.credit}</td>
+                    <td>${applyData.professorName}</td>
+                    <td>${applyData.building} / ${applyData.lectureTime}</td>
                     <td>N</th>
                 </tr>
                 `;
-                
+                console.log(applyData.subjectCode);
                 SearchService.getInstance().loadOpenCourse();
                 SearchService.getInstance().loadCourseList();
                 SearchService.getInstance().getLoadPocketInfo();
@@ -515,8 +492,8 @@ class ComponentEvent {
         const deletebutton = document.querySelectorAll(".delete-button");
         const outCourseTable = document.querySelector(".confirmed-table tbody");
 
-        deletebutton.forEach((buttons, index) => {
-            buttons.onclick= () => {
+        deletebutton.forEach((button, index) => {
+            button.onclick= () => {
                 subjectCode[index].userId = PrincipalApi.getInstance().getPrincipal().user.userId;
                 const deleteData = SearchApi.getInstance().deleteCourse(subjectCode[index]);
 
@@ -532,11 +509,12 @@ class ComponentEvent {
                     <td>N</th>
                 </tr>
                 `;
+
                 SearchService.getInstance().loadCourseList();
-                location.reload();
+                location.reload(true);
             };
-            
         });
+
 
     }
     

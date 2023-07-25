@@ -47,6 +47,10 @@ public class SugangService {
         return sugangRepository.saveCourse(pocketMst);
     }
 
+    public PocketMst getPocketSubjectCode(int userId, int subjectCode){
+        return sugangRepository.getPocketSubjectCode(userId, subjectCode);
+    }
+
     public int deleteCourse(int subjectCode, int userId) {
         PocketMst pocketMst = PocketMst.builder()
                 .subjectCode(subjectCode)
@@ -54,6 +58,7 @@ public class SugangService {
                 .build();
 
         return sugangRepository.deleteCourse(pocketMst);
+
     }
 
     public List<OpenCourse> loadCourses(int userId) {
