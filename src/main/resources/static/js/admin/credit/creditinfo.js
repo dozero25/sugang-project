@@ -196,7 +196,6 @@ class CreditInfoService{
 
     removeCreditUsers(deleteArray){
         let successFlag = InfoCreditApi.getInstance().deleteCreditUsers(deleteArray);
-        console.log(successFlag);
         if(successFlag) {
             searchObj.page = 1;
             this.loadAllCreditList();

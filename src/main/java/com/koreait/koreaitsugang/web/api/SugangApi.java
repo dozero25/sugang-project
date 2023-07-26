@@ -55,27 +55,17 @@ public class SugangApi {
     @PostMapping("/apply")
     public ResponseEntity<CMRespDto<?>> applyCourse(@RequestBody PocketMst pocketMst, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
-        sugangService.applyCourse(pocketMst.getSubjectCode(), principalDetails.getUser().getUserId());
-
+        pocketMst.setUserId(principalDetails.getUser().getUserId());
+        System.out.println(pocketMst.getSubjectCode());
         return ResponseEntity
                 .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", pocketMst));
-    }
-
-    @GetMapping("/123")
-    public ResponseEntity<CMRespDto<?>> getPocketSubjectCode(@AuthenticationPrincipal PrincipalDetails principalDetails, PocketMst pocketMst){
-//        sugangService.getPocketSubjectCode(pocketMst.getSubjectCode(principalDetails.getUser().getUserId()));
-//        System.out.println(sugangService.getPocketSubjectCode(principalDetails.getUser().getUserId()));
-        return ResponseEntity
-                .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", null));
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", sugangService.applyCourse(pocketMst)));
     }
 
     @ParamsAspect
     @DeleteMapping("/delete")
     public ResponseEntity<CMRespDto<?>> deleteCourse(@RequestBody PocketMst pocketMst, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         sugangService.deleteCourse(pocketMst.getSubjectCode(), principalDetails.getUser().getUserId());
-        System.out.println(pocketMst.getSubjectCode());
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", pocketMst));

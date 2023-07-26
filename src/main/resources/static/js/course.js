@@ -3,14 +3,13 @@ window.onload = () => {
 
     SearchService.getInstance().loadCategories();
     SearchService.getInstance().clearCourseList();
-    SearchService.getInstance().loadOpenCourse();
     SearchService.getInstance().loadCourseList();
     SearchService.getInstance().loadCredit();
     SearchService.getInstance().getLoadPocketInfo();
 
     ComponentEvent.getInstance().addClickEventCategoryRadios();
     ComponentEvent.getInstance().addClickEventSearchButton();
-    
+    ComponentEvent.getInstance().deleteCourseButton();
 }
 
 const searchObj = {
@@ -21,7 +20,7 @@ const searchObj = {
     count: 5
 }
 
-const subjectCode = new Array();
+const pocketObj = new Array();
 
 class SearchApi {
     static #instance = null;
@@ -109,31 +108,33 @@ class SearchApi {
             error: error => {
                 console.log(error);
                 alert("중복된 과목 입니다.");
-                location.reload()
+                // location.reload()
             }
         });
         return responseData;
     }
 
     deleteCourse(pocketObj) {
-        let returnData = pocketObj;
+        let responeseData = pocketObj;
 
         $.ajax({
             async: false,
             type: "delete",
-            url: 'http://localhost:8000/api/sugang/delete',
+            url: `http://localhost:8000/api/sugang/delete`,
             contentType: "application/json",
-            data: JSON.stringify(pocketObj),
+            data: JSON.stringify(
+                pocketObj
+                ),
             dataType:"json",
             success : response => {
-                returnData = response.data;
+                responeseData = response.data;
             },
             error: error => {
                 console.log(error);
             }
         });
 
-        return returnData;
+        return responeseData;
     }
 
     subloadCourse(pocketObj){
@@ -146,8 +147,8 @@ class SearchApi {
             data: pocketObj,
             dataType: "json",
             success: response => {
-                console.log(response);
                 responseData = response.data;
+                console.log(response);
             },
             error: error => {
                 console.log(error);
@@ -184,7 +185,6 @@ class SearchApi {
             data:"json",
             success : response =>{
                 responseData = response.data;
-                console.log(response);
             },
             error: error => {
                 console.log(error);
@@ -245,7 +245,7 @@ class SearchService {
 
             preButton.onclick = () => {
                 searchObj.page--;
-                subjectCode.splice(0, subjectCode.length);
+                pocketObj.splice(0, pocketObj.length);
                 this.loadOpenCourse();
                 
 
@@ -260,7 +260,7 @@ class SearchService {
             nextButton.onclick = () => {
                 searchObj.page++;
                 
-                subjectCode.splice(0, subjectCode.length);
+                pocketObj.splice(0, pocketObj.length);
                 this.loadOpenCourse();
                 
             }
@@ -286,7 +286,7 @@ class SearchService {
             if(pageNumber != searchObj.page) {
                 button.onclick = () => {
                     searchObj.page = pageNumber;
-                    subjectCode.splice(0, subjectCode.length);
+                    pocketObj.splice(0, pocketObj.length);
                     this.loadOpenCourse();
                     
                     
@@ -312,8 +312,10 @@ class SearchService {
 
         openTable.innerHTML = ``;
 
+        SearchService.getInstance().clearCourseList();
+
         responseData.forEach((data, index) => {
-            subjectCode.push(data);
+            pocketObj.push(data);
             openTable.innerHTML +=`
             <tr>
                 <td><button type="submit" class="submit-button1" value=${data.subjectCode}>신청</button></td>
@@ -342,8 +344,7 @@ class SearchService {
         openTable.innerHTML = ``;
 
         responseData.forEach((data, index) => {
-            subjectCode.push(data);
-            
+            pocketObj.push(data);
             openTable.innerHTML +=`
             <tr>
                 <td><button type="button" class="delete-button">삭제</button></td>
@@ -360,11 +361,9 @@ class SearchService {
         });
         
     }
-
     
     loadCredit(){
         const responseData = SearchApi.getInstance().getLoadCreditInfo();
-
         const openCreditTable = document.querySelector(".grade-container");
 
         openCreditTable.innerHTML = ``;
@@ -413,7 +412,6 @@ class SearchService {
         const responeseData = SearchApi.getInstance().getInfoPocketCredit();
 
         pocketInfo.innerHTML = `
-            <span class="course-title">장바구니 내역</span>
             <span class="course-count">
                 <span class="proposal-text">신청학점 : </span>
                 <span class="proposal-text">${responeseData.totalCreditSum} 학점</span>
@@ -441,8 +439,8 @@ class ComponentEvent {
                 searchObj.classification.splice(0);
                 if(radio.checked) {
                     searchObj.classification.push(radio.value);
-                    while(subjectCode.length != 0) {
-                        subjectCode.pop(0);
+                    while(pocketObj.length != 0) {
+                        pocketObj.pop(0);
                     }
 
                     SearchService.getInstance().loadOpenCourse();
@@ -464,9 +462,9 @@ class ComponentEvent {
 
         inputApplyCourse.forEach((button, index) => {
             button.onclick = () => {
-                subjectCode[index].userId = principal;
-                const applyData = SearchApi.getInstance().applyCourse(subjectCode[index]);
-                console.log(subjectCode[index]);
+                pocketObj[index].userId = principal;
+                const applyData = SearchApi.getInstance().applyCourse(pocketObj[index]);
+                
                 inputCourseTable.innerHTML = `
                 <tr>
                     <td><button type="button" class="delete-button">삭제</button></td>
@@ -479,11 +477,12 @@ class ComponentEvent {
                     <td>N</th>
                 </tr>
                 `;
-                console.log(applyData.subjectCode);
+                
                 SearchService.getInstance().loadOpenCourse();
                 SearchService.getInstance().loadCourseList();
                 SearchService.getInstance().getLoadPocketInfo();
-                ComponentEvent.getInstance().deleteCourseButton();
+                
+                
             }
         });
     }
@@ -491,11 +490,12 @@ class ComponentEvent {
     deleteCourseButton(){
         const deletebutton = document.querySelectorAll(".delete-button");
         const outCourseTable = document.querySelector(".confirmed-table tbody");
-
+        const principal = PrincipalApi.getInstance().getPrincipal().user.userId;
+        
         deletebutton.forEach((button, index) => {
-            button.onclick= () => {
-                subjectCode[index].userId = PrincipalApi.getInstance().getPrincipal().user.userId;
-                const deleteData = SearchApi.getInstance().deleteCourse(subjectCode[index]);
+            button.onclick = () => {
+                pocketObj[index].userId = PrincipalApi.getInstance().getPrincipal().user.userId;
+                const deleteData = SearchApi.getInstance().deleteCourse(pocketObj[index]);
 
                 outCourseTable.outerHTML = `
                 <tr>
@@ -512,12 +512,13 @@ class ComponentEvent {
 
                 SearchService.getInstance().loadCourseList();
                 location.reload(true);
+
             };
         });
 
 
     }
-    
+
     addClickEventSearchButton() {
         const classificationList = document.querySelector(".info");
         const searchInput = document.querySelector(".subject-code-select");

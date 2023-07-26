@@ -35,20 +35,9 @@ public class SugangService {
         return sugangRepository.getloadAllCourse(searchSugangReqDto);
     }
 
-    public int applyCourse(int subjectCode, int userId){
-
-        abilityApply(subjectCode);
-
-        PocketMst pocketMst = PocketMst.builder()
-                .subjectCode(subjectCode)
-                .userId(userId)
-                .build();
-
+    public int applyCourse(PocketMst pocketMst){
+        abilityApply(pocketMst.getSubjectCode());
         return sugangRepository.saveCourse(pocketMst);
-    }
-
-    public PocketMst getPocketSubjectCode(int userId, int subjectCode){
-        return sugangRepository.getPocketSubjectCode(userId, subjectCode);
     }
 
     public int deleteCourse(int subjectCode, int userId) {
@@ -58,7 +47,6 @@ public class SugangService {
                 .build();
 
         return sugangRepository.deleteCourse(pocketMst);
-
     }
 
     public List<OpenCourse> loadCourses(int userId) {
@@ -84,4 +72,5 @@ public class SugangService {
     public UserPocketCreditInfo getCountAndCreditSumByUser(int userId){
         return sugangRepository.getCountAndCreditSumByUserId(userId);
     }
+
 }
