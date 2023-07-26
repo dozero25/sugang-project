@@ -28,9 +28,8 @@ public interface SugangRepository {
 
     public int saveCourse(PocketMst pocketMst);
 
-    public PocketMst getPocketSubjectCode(int userId, int subjectCode);
-
     public int deleteCourse(PocketMst pocketMst);
+
     public List<OpenCourse> loadCourse(int userId);
 
     public OpenCourse findCourse(int subjectCode);

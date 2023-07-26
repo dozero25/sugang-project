@@ -83,15 +83,6 @@
         values (0, #{subjectCode}, #{userId})
     </insert>
 
-    <select id="getPocketSubjectCode" resultType="com.koreait.koreaitsugang.entity.PocketMst">
-        select
-            subject_code as subjectCode,
-            user_id as userId
-        from
-            pocket_mst
-        where
-            user_id = #{userId} and subject_code = #{subjectCode}
-    </select>
 
     <delete id="deleteCourse"
             parameterType="com.koreait.koreaitsugang.entity.PocketMst">
@@ -117,6 +108,15 @@
         inner join pocket_mst pm on (pm.subject_code = sm.subject_code)
         where
         pm.user_id = #{userId}
+    </select>
+
+    <select id="getSubjectCode" resultType="integer">
+        select
+            subject_code as subjectCode
+        from
+            subject_mst
+        where
+            subject_code = #{subjectCode}
     </select>
 
     <select id="findCourse"
