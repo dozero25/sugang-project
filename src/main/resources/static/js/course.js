@@ -4,6 +4,7 @@ window.onload = () => {
     SearchService.getInstance().loadCategories();
     SearchService.getInstance().clearCourseList();
     SearchService.getInstance().loadCourseList();
+    SearchService.getInstance().loadOpenCourse();
     SearchService.getInstance().loadCredit();
     SearchService.getInstance().getLoadPocketInfo();
 
@@ -21,6 +22,8 @@ const searchObj = {
 }
 
 const pocketObj = new Array();
+
+const deleteArray = new Array();
 
 class SearchApi {
     static #instance = null;
@@ -49,7 +52,7 @@ class SearchApi {
         return returnData;
     }
 
-    getTotalCount(searchObj) {
+    getTotalCount() {
         let returnData = null;
 
         $.ajax({
@@ -62,8 +65,7 @@ class SearchApi {
             },
             dataType: "json",
             success: response => {
-                 returnData = response.data;
-                 
+                 returnData = response.data;             
             },
             error: error => {
                 console.log(error);
@@ -114,8 +116,8 @@ class SearchApi {
         return responseData;
     }
 
-    deleteCourse(pocketObj) {
-        let responeseData = pocketObj;
+    deleteCourse(deleteArray) {
+        let responeseData = deleteArray;
 
         $.ajax({
             async: false,
@@ -123,7 +125,7 @@ class SearchApi {
             url: `http://localhost:8000/api/sugang/delete`,
             contentType: "application/json",
             data: JSON.stringify(
-                pocketObj
+                deleteArray
                 ),
             dataType:"json",
             success : response => {
@@ -148,7 +150,6 @@ class SearchApi {
             dataType: "json",
             success: response => {
                 responseData = response.data;
-                console.log(response);
             },
             error: error => {
                 console.log(error);
@@ -247,9 +248,6 @@ class SearchService {
                 searchObj.page--;
                 pocketObj.splice(0, pocketObj.length);
                 this.loadOpenCourse();
-                
-
-            
             }
         }
 
@@ -288,8 +286,6 @@ class SearchService {
                     searchObj.page = pageNumber;
                     pocketObj.splice(0, pocketObj.length);
                     this.loadOpenCourse();
-                    
-                    
                 }
             }
         });
@@ -333,8 +329,8 @@ class SearchService {
         });
         this.loadPageController();
         ComponentEvent.getInstance().addClickApplyCourseButton();
-        
     }
+    
 
     loadCourseList(){
         const responseData = SearchApi.getInstance().subloadCourse();
@@ -344,7 +340,7 @@ class SearchService {
         openTable.innerHTML = ``;
 
         responseData.forEach((data, index) => {
-            pocketObj.push(data);
+            deleteArray.push(data);
             openTable.innerHTML +=`
             <tr>
                 <td><button type="button" class="delete-button">삭제</button></td>
@@ -357,8 +353,8 @@ class SearchService {
                 <td>N</th>
             </tr>
             `;
-            ComponentEvent.getInstance().deleteCourseButton();
         });
+        ComponentEvent.getInstance().deleteCourseButton();
         
     }
     
@@ -434,6 +430,7 @@ class ComponentEvent {
 
     addClickEventCategoryRadios() {
         const radios = document.querySelectorAll(".info-radio");
+
         radios.forEach(radio => {
             radio.onclick = () => {
                 searchObj.classification.splice(0);
@@ -442,7 +439,6 @@ class ComponentEvent {
                     while(pocketObj.length != 0) {
                         pocketObj.pop(0);
                     }
-
                     SearchService.getInstance().loadOpenCourse();
                     
                 }
@@ -482,7 +478,7 @@ class ComponentEvent {
                 SearchService.getInstance().loadCourseList();
                 SearchService.getInstance().getLoadPocketInfo();
                 
-                
+                location.reload();
             }
         });
     }
@@ -494,8 +490,8 @@ class ComponentEvent {
         
         deletebutton.forEach((button, index) => {
             button.onclick = () => {
-                pocketObj[index].userId = PrincipalApi.getInstance().getPrincipal().user.userId;
-                const deleteData = SearchApi.getInstance().deleteCourse(pocketObj[index]);
+                deleteArray[index].userId = principal;
+                const deleteData = SearchApi.getInstance().deleteCourse(deleteArray[index]);
 
                 outCourseTable.outerHTML = `
                 <tr>
@@ -511,12 +507,10 @@ class ComponentEvent {
                 `;
 
                 SearchService.getInstance().loadCourseList();
-                location.reload(true);
+                location.reload();
 
             };
         });
-
-
     }
 
     addClickEventSearchButton() {
@@ -529,6 +523,17 @@ class ComponentEvent {
             searchObj.searchValue = searchInput.value;
             searchObj.page = 1;
 
+            pocketObj.splice(0);
+            const index = searchObj.searchValue.indexOf(searchObj.searchValue);
+            // if(index.valueOf(null)) {
+            //     alert("1");
+            //     return false;
+            // }
+
+            pocketObj.splice(index, 1);
+
+
+            SearchService.getInstance().clearCourseList();
             SearchService.getInstance().loadOpenCourse();
         }
 
