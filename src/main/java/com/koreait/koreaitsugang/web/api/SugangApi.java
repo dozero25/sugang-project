@@ -71,7 +71,6 @@ public class SugangApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", pocketMst));
     }
 
-
     @ParamsAspect
     @GetMapping("/load")
     public ResponseEntity<CMRespDto<?>> loadCourses(@AuthenticationPrincipal PrincipalDetails principalDetails) {
