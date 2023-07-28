@@ -86,6 +86,10 @@ class SearchApi {
             dataType: "json",
             success : response => {
                 responseData = response.data;
+                if(responseData.length == 0) {
+                    alert("존재하지 않는 과목입니다.\n과목 정보를 다시 확인해주시기 바랍니다.");
+                    location.reload();
+                }
             },
             error : error => {
                 console.log(error);
@@ -110,7 +114,6 @@ class SearchApi {
             error: error => {
                 console.log(error);
                 alert("중복된 과목 입니다.");
-                // location.reload()
             }
         });
         return responseData;
@@ -312,6 +315,7 @@ class SearchService {
 
         responseData.forEach((data, index) => {
             pocketObj.push(data);
+
             openTable.innerHTML +=`
             <tr>
                 <td><button type="submit" class="submit-button1" value=${data.subjectCode}>신청</button></td>
@@ -438,6 +442,7 @@ class ComponentEvent {
                     searchObj.classification.push(radio.value);
                     while(pocketObj.length != 0) {
                         pocketObj.pop(0);
+                        searchObj.page=1;
                     }
                     SearchService.getInstance().loadOpenCourse();
                     
@@ -445,6 +450,7 @@ class ComponentEvent {
                 else {
                     const index = searchObj.classification.indexOf(radio.value);
                     searchObj.classification.splice(index, 1);
+                    searchObj.page=1;
                     SearchService.getInstance().clearCourseList();
                 }
             }
@@ -525,13 +531,7 @@ class ComponentEvent {
 
             pocketObj.splice(0);
             const index = searchObj.searchValue.indexOf(searchObj.searchValue);
-            // if(index.valueOf(null)) {
-            //     alert("1");
-            //     return false;
-            // }
-
             pocketObj.splice(index, 1);
-
 
             SearchService.getInstance().clearCourseList();
             SearchService.getInstance().loadOpenCourse();
