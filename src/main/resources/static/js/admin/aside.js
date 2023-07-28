@@ -24,14 +24,14 @@ class AsideService{
             <div class="aaaa">
                 <h3 class="title-text-sugang">수강정보관리</h3>
                 <ul class="sub-menu1">
-                    <a href="/admin/search"><li>강의정보 조회</li></a>
-                    <a href="/admin/sugang"><li>강의정보 등록</li></a>
+                    <a href="/admin/sugang/search"><li>강의정보 조회</li></a>
+                    <a href="/admin/sugang/reg"><li>강의정보 등록</li></a>
                 </ul>
             </div>
             <h3 class="title-text-sp">학생/교수 정보관리</h3>
             <ul class="sub-menu2">
-                <a href="/admin/usersearch"><li>학생/교수 정보 조회</li></a>
-                <a href="/admin/userregister"><li>학생정보 등록</li></a>
+                <a href="/admin/user/search"><li>학생/교수 정보 조회</li></a>
+                <a href="/admin/user/reg"><li>학생정보 등록</li></a>
                 <a href="/admin/professorregister"><li>교수정보 등록</li></a>
             </ul>
             <h3 class="title-text-credit">학생학점관리</h3>

@@ -1,14 +1,11 @@
 package com.koreait.koreaitsugang.service.admin;
 
-import com.koreait.koreaitsugang.entity.CreditMst;
-import com.koreait.koreaitsugang.entity.UserImage;
-import com.koreait.koreaitsugang.entity.UserMst;
+import com.koreait.koreaitsugang.entity.*;
 import com.koreait.koreaitsugang.exception.CustomMaxCreditException;
 import com.koreait.koreaitsugang.exception.CustomValidationException;
 import com.koreait.koreaitsugang.repository.AccountRepository;
 import com.koreait.koreaitsugang.web.dto.DeleteSubjectsReqDto;
 import com.koreait.koreaitsugang.web.dto.admin.*;
-import com.koreait.koreaitsugang.entity.SubjectMst;
 import com.koreait.koreaitsugang.repository.admin.AdminRepository;
 import com.koreait.koreaitsugang.web.dto.SearchNumberListReqDto;
 import com.koreait.koreaitsugang.web.dto.SearchReqDto;
@@ -44,9 +41,8 @@ public class AdminSearchService {
         return adminRepository.searchSugang(searchReqDto);
     }
 
-    public List<String> Categories() {
-        List<String> category = adminRepository.majorCategory();
-        return category;
+    public List<DepartmentMst> Categories() {
+        return adminRepository.getCategory();
     }
 
     public int UserTotalCounts(AdminSearchReqDto adminSearchReqDto) {
@@ -172,9 +168,10 @@ public class AdminSearchService {
         return result;
     }
 
-    public void modifyStudent(UpdateStudentReqDto updateStudentReqDto) {
-        adminRepository.updateStudentByUsername(updateStudentReqDto);
-        adminRepository.updateStudentmstByUseranme(updateStudentReqDto);
+    public void modifyUser(UpdateUserReqDto updateUserReqDto) {
+
+        adminRepository.updateUserByUsername(updateUserReqDto);
+        adminRepository.updateUserGradeByUseranme(updateUserReqDto);
     }
 
     public void removeUserImage(String username) {

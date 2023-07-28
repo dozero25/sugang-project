@@ -6,6 +6,7 @@ import com.koreait.koreaitsugang.web.dto.SearchNumberListReqDto;
 import com.koreait.koreaitsugang.web.dto.SearchReqDto;
 import com.koreait.koreaitsugang.web.dto.SubjectReqDto;
 import com.koreait.koreaitsugang.web.dto.admin.*;
+import com.sun.jdi.IncompatibleThreadStateException;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface AdminRepository {
 
-    public List<String> majorCategory();
+    public List<DepartmentMst> getCategory();
 
     public int getSearchUserTotalCount(AdminSearchReqDto adminSearchReqDto);
 
@@ -37,13 +38,13 @@ public interface AdminRepository {
 
     public int saveProfessorMst(AddProfessorReqDto addProfessorReqDto);
 
-    public UserMst findUsernameByUsername(String username);
+    public UpdateUserReqDto findUsernameByUsername(String username);
 
     public UserImage findUserImageByUsername(String username);
 
-    public int updateStudentByUsername(UpdateStudentReqDto updateStudentReqDto);
+    public int updateUserByUsername(UpdateUserReqDto updateUserReqDto);
 
-    public int updateStudentmstByUseranme(UpdateStudentReqDto updateStudentReqDto);
+    public int updateUserGradeByUseranme(UpdateUserReqDto updateUserReqDto);
 
     public List<SubjectMst> searchSugang(SearchReqDto searchReqDto);
 

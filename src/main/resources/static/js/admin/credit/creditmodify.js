@@ -104,8 +104,6 @@ class ModifyCreditService{
     setCreditObjValues() {
         const modificationInputs = document.querySelectorAll(".modification-input");
 
-        console.log(modificationInputs);
-
         creditObj.username = modificationInputs[0].value;
         creditObj.pastCredit = modificationInputs[1].value;
         creditObj.pastAvg = modificationInputs[2].value;

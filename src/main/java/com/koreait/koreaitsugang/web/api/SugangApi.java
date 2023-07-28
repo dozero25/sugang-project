@@ -1,6 +1,7 @@
 package com.koreait.koreaitsugang.web.api;
 
 import com.koreait.koreaitsugang.aop.annotation.ParamsAspect;
+import com.koreait.koreaitsugang.aop.annotation.ValidAspect;
 import com.koreait.koreaitsugang.entity.ClassificationView;
 import com.koreait.koreaitsugang.entity.OpenCourse;
 import com.koreait.koreaitsugang.entity.PocketMst;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,50 +25,47 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SugangApi {
 
-    private final SugangService searchService;
+    private final SugangService sugangService;
 
     @GetMapping("/classification")
     public ResponseEntity<CMRespDto<List<ClassificationView>>> search(){
 
         return ResponseEntity.ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(),"Successfully",searchService.categories()));
+                .body(new CMRespDto<>(HttpStatus.OK.value(),"Successfully",sugangService.categories()));
     }
 
     @GetMapping("/search/total")
     public ResponseEntity<CMRespDto<Integer>> totalCount(SearchNumberListReqDto searchNumberListReqDto) {
         return ResponseEntity
                 .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", searchService.getSearchTotalCourses(searchNumberListReqDto)));
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", sugangService.getSearchTotalCourses(searchNumberListReqDto)));
     }
 
-    @GetMapping("/open")
-    public ResponseEntity<CMRespDto<List<OpenCourse>>> openCourses(@Valid SearchSugangReqDto searchSugangReqDto, @AuthenticationPrincipal PrincipalDetails principalDetails){
-
-        if (principalDetails == null) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new CMRespDto<>(HttpStatus.BAD_REQUEST.value(), "Failed", null));
-        }
+    @ParamsAspect
+    @ValidAspect
+    @PostMapping("/all/course")
+    public ResponseEntity<CMRespDto<List<OpenCourse>>> openCourses(@Valid SearchSugangReqDto searchSugangReqDto, BindingResult bindingResult){
 
         return ResponseEntity
                 .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", searchService.getOpenCourse(searchSugangReqDto)));
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", sugangService.getloadAllCourse(searchSugangReqDto)));
     }
 
     @ParamsAspect
     @PostMapping("/apply")
     public ResponseEntity<CMRespDto<?>> applyCourse(@RequestBody PocketMst pocketMst, @AuthenticationPrincipal PrincipalDetails principalDetails){
-        searchService.applyCourse(pocketMst.getSubjectCode(), principalDetails.getUser().getUserId());
+
+        pocketMst.setUserId(principalDetails.getUser().getUserId());
+        System.out.println(pocketMst.getSubjectCode());
         return ResponseEntity
                 .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", pocketMst));
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", sugangService.applyCourse(pocketMst)));
     }
 
     @ParamsAspect
     @DeleteMapping("/delete")
     public ResponseEntity<CMRespDto<?>> deleteCourse(@RequestBody PocketMst pocketMst, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        searchService.deleteCourse(pocketMst.getSubjectCode(), principalDetails.getUser().getUserId());
-
+        sugangService.deleteCourse(pocketMst.getSubjectCode(), principalDetails.getUser().getUserId());
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", pocketMst));
@@ -77,7 +76,7 @@ public class SugangApi {
     public ResponseEntity<CMRespDto<?>> loadCourses(@AuthenticationPrincipal PrincipalDetails principalDetails) {
         return ResponseEntity
                 .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", searchService.loadCourses(principalDetails.getUser().getUserId())));
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", sugangService.loadCourses(principalDetails.getUser().getUserId())));
     }
 
     @ParamsAspect
@@ -85,7 +84,16 @@ public class SugangApi {
     public ResponseEntity<CMRespDto<?>> loadCredit(@AuthenticationPrincipal PrincipalDetails principalDetails) {
         return ResponseEntity
                 .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", searchService.loadCredit(principalDetails.getUser().getUserId())));
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", sugangService.loadCredit(principalDetails.getUser().getUserId())));
     }
+
+    @ParamsAspect
+    @GetMapping("/credit/info")
+    public ResponseEntity<CMRespDto<?>> getLoadUserCreditInfo(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", sugangService.getCountAndCreditSumByUser(principalDetails.getUser().getUserId())));
+    }
+
 
 }

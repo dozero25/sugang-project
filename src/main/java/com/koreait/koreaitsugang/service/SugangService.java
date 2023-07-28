@@ -8,6 +8,7 @@ import com.koreait.koreaitsugang.exception.CustomApplyCountException;
 import com.koreait.koreaitsugang.repository.SugangRepository;
 import com.koreait.koreaitsugang.web.dto.SearchNumberListReqDto;
 import com.koreait.koreaitsugang.web.dto.SearchSugangReqDto;
+import com.koreait.koreaitsugang.web.dto.UserPocketCreditInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,20 +30,13 @@ public class SugangService {
         return sugangRepository.searchTotalCourse(searchNumberListReqDto);
     }
 
-    public List<OpenCourse> getOpenCourse(SearchSugangReqDto searchSugangReqDto) {
+    public List<OpenCourse> getloadAllCourse(SearchSugangReqDto searchSugangReqDto) {
         searchSugangReqDto.setIndex();
-        return sugangRepository.searchCourse(searchSugangReqDto);
+        return sugangRepository.getloadAllCourse(searchSugangReqDto);
     }
 
-    public int applyCourse(int subjectCode, int userId){
-
-        abilityApply(subjectCode);
-
-        PocketMst pocketMst = PocketMst.builder()
-                .subjectCode(subjectCode)
-                .userId(userId)
-                .build();
-
+    public int applyCourse(PocketMst pocketMst){
+        abilityApply(pocketMst.getSubjectCode());
         return sugangRepository.saveCourse(pocketMst);
     }
 
@@ -74,4 +68,9 @@ public class SugangService {
     public CreditMst loadCredit(int userId){
         return sugangRepository.loadCredit(userId);
     }
+
+    public UserPocketCreditInfo getCountAndCreditSumByUser(int userId){
+        return sugangRepository.getCountAndCreditSumByUserId(userId);
+    }
+
 }

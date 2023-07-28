@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DepartmentMst {
-    private  int departmentNumber;
-    private  int collegeNumber;
-    private String departmentName;
-    private  String departmentPhone;
+    private int departmentNumber;
+    private int collegeNumber;
+    private String category;
+    private String departmentPhone;
     private String building;
 }

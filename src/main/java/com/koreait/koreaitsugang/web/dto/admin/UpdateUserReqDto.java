@@ -1,13 +1,11 @@
 package com.koreait.koreaitsugang.web.dto.admin;
 
-import com.koreait.koreaitsugang.entity.StudentDtl;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
-import java.util.List;
 
 @Data
-public class UpdateStudentReqDto {
+public class UpdateUserReqDto {
 
     private int userId;
 
@@ -28,8 +26,8 @@ public class UpdateStudentReqDto {
 
     private String birthDate;
 
-    private int departmentNumber;
+    private String category;
 
-    private List<StudentDtl> studentDtl;
+    private int departmentNumber;
 
 }

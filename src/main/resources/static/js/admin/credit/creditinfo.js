@@ -47,7 +47,6 @@ class InfoCreditApi{
             data: searchObj,
             dataType: "json",
             success: response => {
-                console.log(response);
                 returnData = response.data;
             },
             error: error => {
@@ -172,8 +171,8 @@ class CreditInfoService{
 
     loadAllCreditList(){
         const responeseData = InfoCreditApi.getInstance().getAllCreditList(searchObj);
-
         const creditList = document.querySelector(".content-table tbody");
+        
         creditList.innerHTML = ``;
 
         responeseData.forEach((data, index) => {
@@ -197,7 +196,6 @@ class CreditInfoService{
 
     removeCreditUsers(deleteArray){
         let successFlag = InfoCreditApi.getInstance().deleteCreditUsers(deleteArray);
-        console.log(successFlag);
         if(successFlag) {
             searchObj.page = 1;
             this.loadAllCreditList();

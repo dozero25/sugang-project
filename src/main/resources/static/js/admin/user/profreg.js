@@ -116,7 +116,7 @@ class UserRegisterService{
 
         responeseData.forEach((data,index) => {
             categorySelect.innerHTML += `
-                <option value="${index+1}">${data}</option>
+                <option value="${data.departmentNumber}">${data.category}</option>
             `;
         });
     }

@@ -16,7 +16,6 @@ window.onload = () => {
 
 const stuObj = {
     username : "",
-    category : "",
     name : "",
     password : "",
     name : "",
@@ -55,10 +54,9 @@ class StudentModifyApi{
         $.ajax({
             async: false,
             type: "get",
-            url: `http://127.0.0.1:8000/api/admin/user/${stuObj.username}`,
+            url: `http://localhost:8000/api/admin/user/${stuObj.username}`,
             dataType: "json",
             success: response => {
-                console.log(response);
                 responeseData = response.data;
             },
             error: error => {
@@ -75,11 +73,11 @@ class StudentModifyApi{
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/admin/usersearch",
+            url: "http://localhost:8000/api/admin/usersearch",
             dataType: "json",
             success: responese => {
-                console.log(responese);
                 returnData = responese.data;
+                console.log(responese);
             }, 
             error: error => {
                 console.log(error);
@@ -95,7 +93,7 @@ class StudentModifyApi{
         $.ajax({
             async: false,
             type: "put",
-            url:`http://127.0.0.1:8000/api/admin/user/${stuObj.username}`,
+            url:`http://localhost:8000/api/admin/user/${stuObj.username}`,
             contentType: "application/json",
             data: JSON.stringify(stuObj),
             dataType: "json",
@@ -119,10 +117,9 @@ class StudentModifyApi{
         $.ajax({
             async: false,
             type: "delete",
-            url: `http://127.0.0.1:8000/api/admin/user/${stuObj.username}/image/${imgObj.imageId}`,
+            url: `http://localhost:8000/api/admin/user/${stuObj.username}/image/${imgObj.imageId}`,
             dataType: "json",
             success: response => {
-                console.log(response);
                 successFlag = true;
             },
             error: error => {
@@ -139,7 +136,7 @@ class StudentModifyApi{
         $.ajax({
             async:false,
             type:"post",
-            url: `http://127.0.0.1:8000/api/admin/user/${stuObj.username}/images`,
+            url: `http://localhost:8000/api/admin/user/${stuObj.username}/images`,
             encType: "mulipart/form-data",
             contentType: false,
             processData: false,
@@ -174,7 +171,7 @@ class StudentModifyService{
 
         responeseData.forEach((data, index) => {
             categorySelect.innerHTML += `
-                <option value = "${index+1}">${data}</option>
+                <option value = "${data.departmentNumber}">${data.category}</option>
             `;
         });
     }
@@ -187,40 +184,31 @@ class StudentModifyService{
     setStuObjValues(){
         const modificationInputs = document.querySelectorAll(".modification-input");
         const categorySelect = document.querySelector(".category-select");
-        
 
         stuObj.username = modificationInputs[0].value;
         stuObj.password = modificationInputs[1].value;
         stuObj.name = modificationInputs[2].value;
-        stuObj.phone = modificationInputs[3].value;
-        stuObj.birthDate = modificationInputs[4].value;
-        stuObj.email = modificationInputs[5].value;
-        stuObj.grade = modificationInputs[6].value;
-        stuObj.address = modificationInputs[7].value;
-        // stuObj.departmentNumber = modificationInputs[8].value;
-        stuObj.departmentNumber = categorySelect.options[categorySelect.selectedIndex].value;
+        stuObj.departmentNumber = modificationInputs[3].value;
+        stuObj.phone = modificationInputs[4].value;
+        stuObj.birthDate = modificationInputs[5].value;
+        stuObj.email = modificationInputs[6].value;
+        stuObj.grade = modificationInputs[7].value;
+        stuObj.address = modificationInputs[8].value;
     }
 
     loadUserAndImageData(){
         const responeseData = StudentModifyApi.getInstance().getUserAndImage();
 
-        console.log(responeseData);
-        // if(responeseData.username == null){
-        //     alert("해당 유저는 등록되지 않은 유저입니다.");
-        //     history.back();
-        //     return;
-        // }
-
         const modificationInputs = document.querySelectorAll(".modification-input");
         modificationInputs[0].value = responeseData.username.username;
         modificationInputs[1].value = responeseData.username.password;
         modificationInputs[2].value = responeseData.username.name;
-        modificationInputs[3].value = responeseData.username.phone;
-        modificationInputs[4].value = responeseData.username.birthDate;
-        modificationInputs[5].value = responeseData.username.email;
-        modificationInputs[6].value = responeseData.username.grade;
-        modificationInputs[7].value = responeseData.username.address;
-        modificationInputs[8].value = responeseData.username.category;
+        modificationInputs[3].value = responeseData.username.departmentNumber;
+        modificationInputs[4].value = responeseData.username.phone;
+        modificationInputs[5].value = responeseData.username.birthDate;
+        modificationInputs[6].value = responeseData.username.email;
+        modificationInputs[7].value = responeseData.username.grade;
+        modificationInputs[8].value = responeseData.username.address;
         
 
         if(responeseData.userImage != null){
@@ -230,7 +218,7 @@ class StudentModifyService{
             imgObj.originName = responeseData.userImage.originName;
 
             const userImg = document.querySelector(".user-img");
-            userImg.src = `http://127.0.0.1:8000/images/user/${responeseData.userImage.saveName}`;
+            userImg.src = `http://localhost:8000/images/user/${responeseData.userImage.saveName}`;
         }
 
     }
@@ -302,15 +290,18 @@ class ComponentEvent {
 
             StudentModifyService.getInstance().clearErrors();
 
-            if(confirm("학생 이미지를 수정하시겠습니까?")){
-                const imgAddButton = document.querySelector(".img-add-button");
-                const imgCancelButton = document.querySelector(".img-cancel-button");
+            const imgAddButton = document.querySelector(".img-add-button");
+            const imgCancelButton = document.querySelector(".img-cancel-button");
 
+            if(confirm("학생 이미지를 수정하시겠습니까?")){
                 imgAddButton.disabled = false;
                 imgCancelButton.disabled = false;
-            }else{
-                location.reload();
+                modifyButton.disabled = true;
             }
+            else {
+                location.href="http://localhost:8000/admin/user/search";
+            }
+            
         }
     }
 
@@ -366,7 +357,7 @@ class ComponentEvent {
 
             if(successFlag){
                 StudentModifyApi.getInstance().registerImg();
-                location.href="http://127.0.0.1:5501/templates/admin/user_information.html";
+                location.href="/admin/user/search";
             }
         }
     }
@@ -376,7 +367,7 @@ class ComponentEvent {
         
         imgCancelButton.onclick = () => {
             if(confirm("이미지 수정을 취소하시겠습니까?")){
-                location.reload();
+                location.href="http://localhost:8000/admin/user/search";
             }
         }
     }

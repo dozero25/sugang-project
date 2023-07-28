@@ -4,8 +4,9 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.koreaitsugang.repository.admin.AdminRepository">
 
-    <select id="majorCategory" resultType="String">
+    <select id="getCategory" resultType="com.koreait.koreaitsugang.entity.DepartmentMst">
         select
+            department_number as departmentNumber,
             category
         from
             department_mst;
@@ -121,7 +122,7 @@
             (0, #{userId})
     </insert>
 
-    <select id="findUsernameByUsername" resultType="com.koreait.koreaitsugang.entity.UserMst">
+    <select id="findUsernameByUsername" resultType="com.koreait.koreaitsugang.web.dto.admin.UpdateUserReqDto">
         select
             um.user_id as userId,
             um.username,
@@ -135,13 +136,11 @@
             dm.category,
             um.department_number as departmentNumber
         from
-            user_mst as um
-            left outer join department_mst as dm
-            on (um.department_number = dm.department_number)
-            left outer join student_mst as sm
-            on (um.user_id = sm.user_id)
+            user_mst um
+            left outer join department_mst dm on (um.department_number = dm.department_number)
+            left outer join student_mst sm on (um.user_id = sm.user_id)
         where
-            um.username = #{username};
+            um.username = #{username}
     </select>
 
     <select id="findUserImageByUsername" resultType="com.koreait.koreaitsugang.entity.UserImage">
@@ -176,23 +175,26 @@
             username = #{username}
     </delete>
 
-    <update id="updateStudentByUsername" parameterType="com.koreait.koreaitsugang.web.dto.admin.UpdateStudentReqDto">
-        update user_mst as um
+    <update id="updateUserByUsername" parameterType="com.koreait.koreaitsugang.web.dto.admin.UpdateUserReqDto" >
+        update
+        user_mst
+        as um
         left outer join department_mst as dm
         on(dm.department_number = um.department_number)
         set
-            um.password = #{password},
-            um.name = #{name},
-            um.phone = #{phone},
-            um.birth_date = #{birthDate},
-            um.email = #{email},
-            um.address = #{address},
-            um.department_number = #{departmentNumber}
+        um.username = #{username},
+        um.password = #{password},
+        um.name = #{name},
+        um.department_number = #{departmentNumber},
+        um.phone = #{phone},
+        um.birth_date = #{birthDate},
+        um.email = #{email},
+        um.address = #{address}
         where
-            um.username = #{username}
+            username = #{username}
     </update>
 
-    <update id="updateStudentmstByUseranme" parameterType="com.koreait.koreaitsugang.web.dto.admin.UpdateStudentReqDto">
+    <update id="updateUserGradeByUseranme" parameterType="com.koreait.koreaitsugang.web.dto.admin.UpdateUserReqDto">
         update student_mst
         set
             grade = #{grade}
