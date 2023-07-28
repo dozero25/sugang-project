@@ -1,0 +1,46 @@
+.write-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+    width: 100%;
+    font-size: 15px;
+}
+
+form {
+    margin: 50px 0px 0px 0px;
+}
+
+label{
+    font-size: 20px;
+}
+
+input {
+    margin: 10px 0px 5px 0px;
+}
+
+.boardSubject {
+    width: 50%;
+    height: 30px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+textarea {
+    margin: 10px 0px 5px 0px;
+    width: 100%;
+    resize: none;
+    border: 1px solid #dbdbdb;
+}
+
+.btn-box {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.write-btn {
+    padding: 15px 10px;
+}

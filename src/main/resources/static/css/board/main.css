@@ -1,0 +1,96 @@
+.board-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+    width: 100%;
+    font-size: 15px;
+}
+
+.board-list {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 0px;
+}
+
+.board-list li {
+    padding: 0px 20px;
+}
+
+.board-list li button{
+    padding: 15px 20px;
+    font-size: 16px;
+    background-color: #4063ff;
+    border: 1px solid #2f55ff;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.board-list li button:hover {
+    background-color: #0f397a;
+}
+
+.borad-table thead tr th{
+    border-top: 1px solid #2f55ff;
+    border-left: none;
+    border-right: none;
+    padding: 20px 15px;
+}
+
+.borad-table thead tr th:nth-child(1){width: 150px;}
+.borad-table thead tr th:nth-child(2){width: 300px;}
+.borad-table thead tr th:nth-child(3){width: 150px;}
+.borad-table thead tr th:nth-child(4){width: 150px;}
+.borad-table thead tr th:nth-child(5){width: 150px;}
+
+.borad-table tbody tr td{
+    padding: 15px;
+    border-left: none;
+    border-right: none;
+
+    text-align: center;
+    font-size: 14px;
+}
+.page-controller {
+    display: flex;
+    justify-content: center;
+    
+    margin: 10px 0px;
+}
+
+.page-numbers {
+    display: flex;
+}
+
+.page-controller a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-decoration: none;
+    margin: 0px 5px;
+    border: 1px solid #dbdbdb;
+    background-color: #f0f0f0;
+    width: 40px;
+    height: 28px;
+
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.page-controller li {
+    list-style-type: none;
+}
+
+.page-controller a:hover {
+    background-color: #345ae0;
+    color: white;
+}
+
+.page-controller .disabled {
+    background-color: #202020;
+    color: white;
+    cursor: default;
+}

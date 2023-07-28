@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("")
-public class GongziController {
+public class BoardController {
 
-    @GetMapping("/announcement")
-    public String announcement(){return "announcement";}
+    @GetMapping("/board")
+    public String announcement(){return "board/main";}
 }

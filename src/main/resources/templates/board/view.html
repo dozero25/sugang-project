@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 보기</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/board/write.css">
+    <link rel="stylesheet" href="/static/css/board/view.css">
+</head>
+<body>
+    <header class="header-container">
+        <div class="lnb wrap">
+            <div class="lnb-inner">
+                <h1>
+                    <img src="/static/image/logo.png" alt="코리아IT 대학교 수강신청">
+                </h1>
+                <span class="school-name">코리아IT 대학교 <li>KOREA-IT UNIVERSITY</li></span>
+                <span class="sugang-date">2023학년도 1학기 수강 바구니</span>
+            </div>
+            <div class="user-info">
+                <ul>
+                    <li class="user"><a href=""><span></span></a></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+        <div class="menulist wrap">
+            
+    </div>
+    </header>
+    <main>
+        <div class="write-container">
+            <form method="post" action="">
+                <label>제목</label>
+                <div>
+                    <input type="text" name="boardSubject" class="boardSubject" autocomplete="off" required>
+                </div>
+                <label>내용</label>
+                <div>
+                    <textarea name="boardContent" class="boardContent" id="boardContent" cols="100" rows="30"></textarea>
+                </div>
+                <input type="file" name="boardUploadName" class="boardUploadName">
+                <input type="hidden">
+            </form>
+            <div class="btn-box">
+                <a href="">
+                    <button type="button" class="btn">답글달기</button>
+                </a>
+                <a href="">
+                    <button type="button" class="btn">수정할 내용 보기</button>
+                </a>
+                <a href="">
+                    <button type="button" class="btn">삭제</button>
+                </a>
+                <a href="">
+                    <button type="button" class="btn">목록으로</button>
+                </a>
+            </div>
+        </div>
+    </main>
+    <script src="/static/js/header.js"></script>
+    <script src="/static/js/account/principal.js"></script>
+    <script src="/static/js/board/write.js"></script>
+</body>
+</html>
