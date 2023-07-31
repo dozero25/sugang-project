@@ -4,4 +4,45 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.koreaitsugang.repository.BoardRepository">
 
+    <select id="getAllBoardList" parameterType="list" resultType="com.koreait.koreaitsugang.web.dto.BoardDto">
+        select
+        bm.board_id as boardId,
+        bm.board_subject as boardSubject,
+        um.name as name,
+        bm.board_content as boardContent,
+        bm.board_visit as boardVisit,
+        bm.board_upload_name as boardUploadName,
+        bm.board_upload_size as boardUploadSize,
+        bm.board_upload_trans as boardUploadTrans,
+        bm.board_regdate as boardRegDate,
+        bm.board_grp as boardGrp
+        from
+        board_mst bm
+        inner join user_mst um on (bm.user_id = um.user_id)
+        order by
+        board_id desc
+    </select>
+
+    <select id="getBoardViewByUserIdAndBoardId" resultType="com.koreait.koreaitsugang.web.dto.BoardDto">
+        select
+        bm.board_id as boardId,
+        bm.board_subject as boardSubject,
+        um.name as name,
+        bm.board_content as boardContent,
+        bm.board_visit as boardVisit,
+        bm.board_upload_name as boardUploadName,
+        bm.board_upload_size as boardUploadSize,
+        bm.board_upload_trans as boardUploadTrans,
+        bm.board_regdate as boardRegDate,
+        bm.board_grp as boardGrp
+        from
+        board_mst bm
+        inner join user_mst um on (bm.user_id = um.user_id)
+        where
+        bm.board_id = #{boardId}
+    </select>
+
+    <insert id="saveBoard">
+
+    </insert>
 </mapper>
