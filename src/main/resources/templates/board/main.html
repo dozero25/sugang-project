@@ -15,7 +15,7 @@
     <header class="header-container">
 
     </header>
-    <main>
+    <main class="container">
         <div class="board-container">
             <div class="board-list">
                 <li>
@@ -28,7 +28,17 @@
                     <button>자유 게시판</button>
                 </li>
             </div>
+            <div class="write-box">
+                <div class="left-items">
+                    <a href="/board/write"><button type="button" class="write-btn">글쓰기</button></a>
+                </div>
+                <div class="right-items">
+                    <input type="search" class="search-input">
+                    <button type="button" class="search-button">검색</button>
+                </div>
+            </div>
             <table class="board-table">
+                
                 <thead>
                     <tr>
                         <th>번호</th>
@@ -39,15 +49,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>게시판1</td>
-                        <td>관리자</td>
-                        <td>2023-07-28</td>
-                        <td>3</td>
-                    </tr>
+                    
                 </tbody>
             </table>
+            
             <div class="page-controller">
                 <a href="" class="disabled">이전</a>
                 <ul class="page-numbers">
