@@ -13,4 +13,7 @@ public class BoardController {
 
     @GetMapping("/view")
     public String boardView(){return "board/view";}
+
+    @GetMapping("/write")
+    public String boardWrite(){return "board/write";}
 }
