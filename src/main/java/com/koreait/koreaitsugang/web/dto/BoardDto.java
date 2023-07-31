@@ -1,20 +1,15 @@
-package com.koreait.koreaitsugang.entity;
+package com.koreait.koreaitsugang.web.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
-public class BoardMst {
+public class BoardDto {
     private int boardId;
     private String boardSubject;
     private int userId;
+    private String name;
     private String boardContent;
     private int boardVisit;
     private String boardUploadName;

@@ -4,6 +4,7 @@ import com.koreait.koreaitsugang.aop.annotation.ParamsAspect;
 import com.koreait.koreaitsugang.aop.annotation.ValidAspect;
 import com.koreait.koreaitsugang.entity.CreditMst;
 import com.koreait.koreaitsugang.entity.UserMst;
+import com.koreait.koreaitsugang.service.BoardService;
 import com.koreait.koreaitsugang.service.admin.AdminSearchService;
 import com.koreait.koreaitsugang.web.dto.CMRespDto;
 import com.koreait.koreaitsugang.web.dto.admin.*;
@@ -28,6 +29,9 @@ public class AdminSearchApi {
 
     @Autowired
     private AdminSearchService adminSearchService;
+
+    @Autowired
+    private BoardService boardService;
 
     @GetMapping("/usersearch")
     public ResponseEntity<CMRespDto<?>> search(){
