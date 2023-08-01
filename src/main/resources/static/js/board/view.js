@@ -16,7 +16,6 @@ const boardObj = {
     boardGrp: ""
 }
 
-
 class BoardViewApi {
     static #instance = null;
     static getInstance(){
@@ -43,7 +42,7 @@ class BoardViewApi {
         });
         return responseData;
     }
-    
+
 }
 
 class BoardViewService {
@@ -63,6 +62,7 @@ class BoardViewService {
 
     loadBoardView(){
         const responseData = BoardViewApi.getInstance().getBoardView();
+        BoardViewApi.getInstance().setBoardVisit();
         const viewDetail = document.querySelector(".view-detail");
 
         viewDetail.innerHTML = `
