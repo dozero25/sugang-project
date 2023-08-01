@@ -4,13 +4,13 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.koreaitsugang.repository.BoardRepository">
 
-    <select id="getAllBoardList" parameterType="list" resultType="com.koreait.koreaitsugang.web.dto.BoardDto">
+    <select id="getAllBoardList" parameterType="com.koreait.koreaitsugang.web.dto.SearchBoardReqDto" resultType="com.koreait.koreaitsugang.web.dto.BoardDto">
         select
         bm.board_id as boardId,
         bm.board_subject as boardSubject,
         um.name as name,
-        bm.board_content as boardContent,
         bm.board_visit as boardVisit,
+        bm.board_content as boardContent,
         bm.board_upload_name as boardUploadName,
         bm.board_upload_size as boardUploadSize,
         bm.board_upload_trans as boardUploadTrans,
@@ -19,8 +19,19 @@
         from
         board_mst bm
         inner join user_mst um on (bm.user_id = um.user_id)
+        where 1=1
+        <if test='searchValue != null and searchValue !=""'>
+            and (
+            board_id like CONCAT('%', #{searchValue}, '%')
+            or board_subject like CONCAT('%', #{searchValue}, '%')
+            or name like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
         order by
         board_id desc
+        <if test='limit == "Y"'>
+            limit #{index}, #{count}
+        </if>
     </select>
 
     <select id="getBoardViewByUserIdAndBoardId" resultType="com.koreait.koreaitsugang.web.dto.BoardDto">
@@ -29,7 +40,6 @@
         bm.board_subject as boardSubject,
         um.name as name,
         bm.board_content as boardContent,
-        bm.board_visit as boardVisit,
         bm.board_upload_name as boardUploadName,
         bm.board_upload_size as boardUploadSize,
         bm.board_upload_trans as boardUploadTrans,
@@ -40,36 +50,6 @@
         inner join user_mst um on (bm.user_id = um.user_id)
         where
         bm.board_id = #{boardId}
-    </select>
-
-    <select id="searchBoard" parameterType="com.koreait.koreaitsugang.web.dto.SearchBoardReqDto" resultType="com.koreait.koreaitsugang.web.dto.BoardDto">
-        select
-        bm.board_id as boardId,
-        bm.board_subject as boardSubject,
-        um.name as name,
-        um.user_id as userId,
-        bm.board_content as boardContent,
-        bm.board_visit as boardVisit,
-        bm.board_upload_name as boardUploadName,
-        bm.board_upload_size as boardUploadSize,
-        bm.board_upload_trans as boardUploadTrans,
-        bm.board_regdate as boardRegDate,
-        bm.board_grp as boardGrp
-        from
-        board_mst bm
-        inner join user_mst um on (bm.user_id = um.user_id)
-        where
-        1=1
-        <if test='searchValue != null and searchValue !=""'>
-            and (
-            board_id like CONCAT('%', #{searchValue}, '%')
-            or board_subject like CONCAT('%', #{searchValue}, '%')
-            or name like CONCAT('%', #{searchValue}, '%')
-            )
-        </if>
-        <if test='limit == "Y"'>
-            limit #{index}, #{count}
-        </if>
     </select>
 
     <select id="getSearchBoardTotalCount" parameterType="com.koreait.koreaitsugang.web.dto.SearchBoardReqDto" resultType="integer">
@@ -95,7 +75,27 @@
         </if>
     </select>
 
-    <insert id="saveBoard">
-
+    <insert id="saveBoard" parameterType="com.koreait.koreaitsugang.entity.BoardMst">
+        insert into
+        board_mst
+        values (0, #{boardSubject}, #{userId}, #{boardContent}, 0, #{boardUploadName}, #{boardUploadSize},#{boardUploadTrans},now(),#{boardGrp})
     </insert>
+
+    <insert id="setCountVisit" parameterType="com.koreait.koreaitsugang.entity.BoardVisitMst">
+        insert into board_visit
+        values (0, #{boardId}, 1)
+    </insert>
+
+
+    <select id="getBoardVisit" parameterType="integer" resultType="com.koreait.koreaitsugang.web.dto.BoardVisitDto">
+        select
+        bm.board_id as boardId,
+        count(bv.board_visit) as boardVisit
+        from
+        board_mst bm
+        inner join board_visit bv on (bm.board_id = bv.board_id)
+        group by
+        bm.board_id
+    </select>
+
 </mapper>
