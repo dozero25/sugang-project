@@ -78,7 +78,7 @@
     <update id="setCountVisit" parameterType="com.koreait.koreaitsugang.web.dto.BoardVisitCountDto">
         update board_mst
         set
-        board_visit = #{boardVisit} + 1
+        board_visit = board_visit + 1
         where
         board_id = #{boardId}
     </update>
