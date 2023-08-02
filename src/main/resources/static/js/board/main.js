@@ -1,6 +1,7 @@
 window.onload = () => {
     HeaderService.getInstance().loadHeader();
 
+    // BoardMainService.getInstance().setBoardId();
     BoardMainService.getInstance().getLoadAllBoardList();
     BoardMainService.getInstance().getWriteButtonRequirement();
 
@@ -15,8 +16,8 @@ let searchObj = {
     count : 10
 }
 
-
-let visitCount= {
+const viewCount = {
+    boardId: "",
     boardVisit: ""
 }
 
@@ -65,26 +66,26 @@ class BoardMainApi {
         });
         return returnData;
     }
-
-    getBoardVisit(){
-        let responeseData = null;
+    
+    getVisitBoardCount(){
+        let successFlag = false;
 
         $.ajax({
             async: false,
-            type: "get",
-            url: "http://localhost:8000/api/board/visit",
+            type: "patch",
+            url:`http://localhost:8000/api/board/count`,
+            contentType: "application/json",
+            data: JSON.stringify(viewCount),
             dataType: "json",
             success: response => {
-                responeseData = response.data;
-                console.log(response);
+                successFlag = true;
             },
             error: error => {
                 console.log(error);
             }
         });
-        return responeseData;
+        return successFlag;
     }
-    
 }
 
 class BoardMainService {
@@ -95,6 +96,12 @@ class BoardMainService {
         }
         return this.#instance;
     }
+
+    // setBoardId() {
+    //     const URLSearch = new URLSearchParams(location.search);
+    //     viewCount.boardId = URLSearch.get("boardId");
+    // }
+
     loadSearchNumberList() {
         const pageController = document.querySelector(".page-controller");
 
@@ -158,33 +165,25 @@ class BoardMainService {
     getLoadAllBoardList(){
         const responeseData = BoardMainApi.getInstance().getAllBoardList(searchObj);
         const boardTable = document.querySelector(".board-table tbody");
-        const visitData = BoardMainApi.getInstance().getBoardVisit();
-        
+
         boardTable.innerHTML = ``;
         
-        let num = 0;
-        
         responeseData.forEach((data, index) => {
-            boardTable.innerHTML = `
+            boardTable.innerHTML += `
             <tr>
                 <td>${data.boardId}</td>
-                <td><a href="/board/view?boardId=${data.boardId}" value=${data.boardId}>${data.boardSubject}</a></td>
+                <td>
+                <a href="/board/view?boardId=${data.boardId}&boardVisit=${data.boardVisit}" value=${data.boardId} id="go-writepage">${data.boardSubject}</a>
+                </td>
                 <td>${data.name}</td>
                 <td>${data.boardRegDate}</td>
-                <td>
-                ${visitData[num].boardId == data.boardId
-                    ?
-                    `${visitData[num].boardVisit}`
-                    :
-                    `${data.boardVisit}`
-                }
-                </td>
-                
+                <td>${data.boardVisit}</td>
             </tr>
             `;
-            num++;
+            console.log(data.boardVisit);
         });
         this.loadSearchNumberList();
+        ComponentEvent.getInstance().addClickEventVisitCountUp();
     }
 
     getWriteButtonRequirement(){
@@ -232,5 +231,18 @@ class ComponentEvent{
                 searchButton.click();
             }
         }
+    }
+    
+    addClickEventVisitCountUp(){
+        const goWrite = document.querySelectorAll("#go-writepage");
+
+        goWrite.forEach((button, index) => {
+            button.onclick = () => {
+                BoardMainApi.getInstance().getVisitBoardCount();
+                const a = goWrite.getA
+                console.log(goWrite.value);
+
+            }
+        });
     }
 }
