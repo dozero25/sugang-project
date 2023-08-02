@@ -57,16 +57,4 @@ public class BoardApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
     }
 
-    @ParamsAspect
-    @ValidAspect
-    @PatchMapping("/count")
-    public ResponseEntity<CMRespDto<?>> countVisitBoard(BoardVisitCountDto boardVisitCountDto, BindingResult bindingResult){
-//        boardService.setCountVisit(boardVisitCountDto);;
-        return ResponseEntity
-                .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
-    }
-
-
-
 }

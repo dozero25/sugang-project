@@ -18,7 +18,6 @@ public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
 
-
     public List<BoardDto> getAllBoardList(SearchBoardReqDto searchBoardReqDto){
         searchBoardReqDto.setIndex();
         return boardRepository.getAllBoardList(searchBoardReqDto);
@@ -37,7 +36,6 @@ public class BoardService {
     }
 
     public int setCountVisit(BoardVisitCountDto boardVisitCountDto){
-//        boardVisitCountDto.countVisit();
         return boardRepository.setCountVisit(boardVisitCountDto);
     }
 
