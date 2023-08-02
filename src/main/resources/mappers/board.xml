@@ -75,27 +75,18 @@
         </if>
     </select>
 
+    <update id="setCountVisit" parameterType="com.koreait.koreaitsugang.web.dto.BoardVisitCountDto">
+        update board_mst
+        set
+        board_visit = #{boardVisit} + 1
+        where
+        board_id = #{boardId}
+    </update>
+
     <insert id="saveBoard" parameterType="com.koreait.koreaitsugang.entity.BoardMst">
         insert into
         board_mst
         values (0, #{boardSubject}, #{userId}, #{boardContent}, 0, #{boardUploadName}, #{boardUploadSize},#{boardUploadTrans},now(),#{boardGrp})
     </insert>
-
-    <insert id="setCountVisit" parameterType="com.koreait.koreaitsugang.entity.BoardVisitMst">
-        insert into board_visit
-        values (0, #{boardId}, 1)
-    </insert>
-
-
-    <select id="getBoardVisit" parameterType="integer" resultType="com.koreait.koreaitsugang.web.dto.BoardVisitDto">
-        select
-        bm.board_id as boardId,
-        count(bv.board_visit) as boardVisit
-        from
-        board_mst bm
-        inner join board_visit bv on (bm.board_id = bv.board_id)
-        group by
-        bm.board_id
-    </select>
 
 </mapper>

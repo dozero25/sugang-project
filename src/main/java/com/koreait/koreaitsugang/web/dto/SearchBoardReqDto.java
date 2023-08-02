@@ -11,7 +11,6 @@ public class SearchBoardReqDto {
 
     private String searchValue;
 
-
     private String limit;
 
     private int count;

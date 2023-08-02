@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,23 +35,25 @@
     </div>
     </header>
     <main>
-        <div class="write-container">
-            <form method="post" action="">
+        <div class="write-container">   
+            <div class="form-box">
                 <label>제목</label>
                 <div>
-                    <input type="text" name="boardSubject" class="boardSubject" autocomplete="off" required>
+                    <input type="text" class="register-input first" autocomplete="off" required>
                 </div>
                 <label>내용</label>
                 <div>
-                    <textarea name="boardContent" class="boardContent" id="boardContent" cols="100" rows="30"></textarea>
+                    <textarea class="register-input" cols="100" rows="30"></textarea>
                 </div>
-                <input type="file" name="boardUploadName" class="boardUploadName">
-                <input type="hidden">
+                <input type="file" class="register-input">
+                <input type="hidden" class="register-input">
+                <input type="hidden" class="register-input">
+                <input type="hidden" class="register-input">
 
                 <div class="btn-box">
                     <button type="submit" class="reg-btn">게시물 등록</button>
                 </div>
-            </form>
+            </div>
         </div>
     </main>
     <script src="/static/js/header.js"></script>

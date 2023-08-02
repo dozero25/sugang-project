@@ -39,7 +39,7 @@ class SugangRegisterApi {
         $.ajax({
             async: false,
             type: "post",
-            url: "http://127.0.0.1:8000/api/admin/sugang",
+            url: "http://localhost:8000/api/admin/sugang",
             contentType: "application/json",
             data: JSON.stringify(subjectObj),
             dataType: "json",
@@ -61,7 +61,7 @@ class SugangRegisterApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/admin",
+            url: "http://localhost:8000/api/admin",
             dataType: "json",
             success: response => {
                 responseData = response.data;

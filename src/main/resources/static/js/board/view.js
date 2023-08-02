@@ -62,7 +62,6 @@ class BoardViewService {
 
     loadBoardView(){
         const responseData = BoardViewApi.getInstance().getBoardView();
-        BoardViewApi.getInstance().setBoardVisit();
         const viewDetail = document.querySelector(".view-detail");
 
         viewDetail.innerHTML = `
