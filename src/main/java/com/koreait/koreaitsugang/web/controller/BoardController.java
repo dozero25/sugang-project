@@ -16,4 +16,7 @@ public class BoardController {
 
     @GetMapping("/write")
     public String boardWrite(){return "board/write";}
+
+    @GetMapping("/update")
+    public String boardupdate(){return "board/modify";}
 }

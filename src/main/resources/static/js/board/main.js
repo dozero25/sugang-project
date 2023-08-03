@@ -1,7 +1,6 @@
 window.onload = () => {
     HeaderService.getInstance().loadHeader();
 
-    // BoardMainService.getInstance().setBoardId();
     BoardMainService.getInstance().getLoadAllBoardList();
     BoardMainService.getInstance().getWriteButtonRequirement();
 
@@ -10,15 +9,9 @@ window.onload = () => {
 
 let searchObj = {
     page : 1,
-    major : "",
     searchValue : "",
     limit : "Y",
     count : 10
-}
-
-const viewCount = {
-    boardId: "",
-    boardVisit: ""
 }
 
 class BoardMainApi {
@@ -35,7 +28,7 @@ class BoardMainApi {
 
         $.ajax({
             async : false,
-            type: "post",
+            type: "get",
             url: "http://localhost:8000/api/board/all/list",
             data: searchObj,
             dataType: "json",
@@ -49,13 +42,16 @@ class BoardMainApi {
         return returnData;
     }
 
-    getSearchBoardTotalCount(searchObj){
+    getSearchBoardTotalCount(){
         let returnData = null;
 
         $.ajax({
             async: false,
             type: "get",
             url: "http://localhost:8000/api/board/totalCount",
+            data: {
+                "searchValue" : searchObj.searchValue
+            },
             dataType: "json",
             success: response => {
                 returnData = response.data;
@@ -65,26 +61,6 @@ class BoardMainApi {
             }
         });
         return returnData;
-    }
-    
-    getVisitBoardCount(){
-        let successFlag = false;
-
-        $.ajax({
-            async: false,
-            type: "patch",
-            url:`http://localhost:8000/api/board/count`,
-            contentType: "application/json",
-            data: JSON.stringify(viewCount),
-            dataType: "json",
-            success: response => {
-                successFlag = true;
-            },
-            error: error => {
-                console.log(error);
-            }
-        });
-        return successFlag;
     }
 }
 
@@ -97,12 +73,7 @@ class BoardMainService {
         return this.#instance;
     }
 
-    // setBoardId() {
-    //     const URLSearch = new URLSearchParams(location.search);
-    //     viewCount.boardId = URLSearch.get("boardId");
-    // }
-
-    loadSearchNumberList() {
+    loadPageController() {
         const pageController = document.querySelector(".page-controller");
 
         const totalcount = BoardMainApi.getInstance().getSearchBoardTotalCount(searchObj);
@@ -166,24 +137,22 @@ class BoardMainService {
         const responeseData = BoardMainApi.getInstance().getAllBoardList(searchObj);
         const boardTable = document.querySelector(".board-table tbody");
 
-        boardTable.innerHTML = ``;
-        
+        boardTable.innerHTML = "";
+
         responeseData.forEach((data, index) => {
             boardTable.innerHTML += `
             <tr>
                 <td>${data.boardId}</td>
                 <td>
-                <a href="/board/view?boardId=${data.boardId}&boardVisit=${data.boardVisit}" value=${data.boardId} id="go-writepage">${data.boardSubject}</a>
+                <a href="/board/view?boardId=${data.boardId}" value=${data.boardId} id="go-writepage">${data.boardSubject}</a>
                 </td>
                 <td>${data.name}</td>
                 <td>${data.boardRegDate}</td>
                 <td>${data.boardVisit}</td>
             </tr>
             `;
-            console.log(data.boardVisit);
         });
-        this.loadSearchNumberList();
-        ComponentEvent.getInstance().addClickEventVisitCountUp();
+        this.loadPageController();
     }
 
     getWriteButtonRequirement(){
@@ -231,18 +200,5 @@ class ComponentEvent{
                 searchButton.click();
             }
         }
-    }
-    
-    addClickEventVisitCountUp(){
-        const goWrite = document.querySelectorAll("#go-writepage");
-
-        goWrite.forEach((button, index) => {
-            button.onclick = () => {
-                BoardMainApi.getInstance().getVisitBoardCount();
-                const a = goWrite.getA
-                console.log(goWrite.value);
-
-            }
-        });
     }
 }

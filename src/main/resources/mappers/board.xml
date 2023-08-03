@@ -89,4 +89,44 @@
         values (0, #{boardSubject}, #{userId}, #{boardContent}, 0, #{boardUploadName}, #{boardUploadSize},#{boardUploadTrans},now(),#{boardGrp})
     </insert>
 
+    <update id="updateBoardByBoardId" parameterType="com.koreait.koreaitsugang.entity.BoardMst">
+        update board_mst
+        set
+        board_subject = #{boardSubject},
+        board_content = #{boardContent},
+        board_upload_name = #{boardUploadName},
+        board_upload_size = #{boardUploadSize},
+        board_upload_trans = #{boardUploadTrans},
+        board_regdate = now(),
+        board_grp = #{boardGrp}
+        where
+        board_id = ${boardId}
+    </update>
+
+    <select id="getBoardUpdateViewByUserIdAndBoardId" resultType="com.koreait.koreaitsugang.web.dto.BoardDto">
+        select
+        bm.board_id as boardId,
+        bm.board_subject as boardSubject,
+        bm.user_id as userId,
+        um.name as name,
+        bm.board_content as boardContent,
+        bm.board_upload_name as boardUploadName,
+        bm.board_upload_size as boardUploadSize,
+        bm.board_upload_trans as boardUploadTrans,
+        bm.board_regdate as boardRegDate,
+        bm.board_grp as boardGrp
+        from
+        board_mst bm
+        inner join user_mst um on (bm.user_id = um.user_id)
+        where
+        bm.board_id = #{boardId}
+    </select>
+
+    <delete id="deleteBoard">
+        delete
+        from
+        board_mst
+        where
+        board_id = #{boardId}
+    </delete>
 </mapper>

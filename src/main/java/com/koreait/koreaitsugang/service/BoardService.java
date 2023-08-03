@@ -39,4 +39,15 @@ public class BoardService {
         return boardRepository.setCountVisit(boardVisitCountDto);
     }
 
+    public int modifyBoard(BoardMst boardMst) {
+        return boardRepository.updateBoardByBoardId(boardMst);
+    }
+
+    public BoardDto getBoardUpdateViewByUserIdAndBoardId(int boardId) {
+        return boardRepository.getBoardUpdateViewByUserIdAndBoardId(boardId);
+    }
+
+    public void deleteBoardByBoardId(int boardId) {
+        boardRepository.deleteBoard(boardId);
+    }
 }

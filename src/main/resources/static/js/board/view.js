@@ -3,6 +3,8 @@ window.onload = () => {
     
     BoardViewService.getInstance().setBoardViewBoardId();
     BoardViewService.getInstance().loadBoardView();
+
+    ComponentEvent.getInstance().addClickEventDeleteBoardButton();
 }
 
 const boardObj = {
@@ -41,6 +43,25 @@ class BoardViewApi {
             }
         });
         return responseData;
+    }
+
+    
+    deleteBoard(){
+        let returnFlag = false;
+
+        $.ajax({
+            async: false,
+            type: "delete",
+            url: `http://localhost:8000/api/board/delete/${boardObj.boardId}`,
+            dataType:"json",
+            success: response => {
+                returnFlag = true;
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+        return returnFlag;
     }
 
 }
@@ -83,9 +104,52 @@ class BoardViewService {
                 <textarea class="boardContent" id="boardContent" cols="100" rows="30" readonly>${responseData.boardContent}</textarea>
             </div>
             <input type="file" class="boardUploadName" value="${responseData.boardUploadName}">
-            <input type="hidden">       
+            <input type="hidden" value="${responseData.boardId}">       
         `;
+
+        const btnBox = document.querySelector(".btn-box");
+        const principal = PrincipalApi.getInstance().getPrincipal();
+
+        btnBox.innerHTML += `
+            <a href="">
+                <button type="button" class="btn">답글달기</button>
+            </a>
+            ${principal.user.name == responseData.name
+                ?`<a href="/board/update?boardId=${responseData.boardId}">
+                <button type="button" class="btn">수정</button>
+                </a>
+                <a>
+                    <button type="button" class="delete-btn" value="${responseData.boardId}">삭제</button>
+                </a>
+                `:`
+                `
+            }
+            <a href="/board">
+                <button type="button" class="btn">목록으로</button>
+            </a>
+        `; 
+    }
+}
+class ComponentEvent{
+    static #instance = null;
+    static getInstance() {
+        if(this.#instance == null) {
+            this.#instance = new ComponentEvent();
+        }
+        return this.#instance;
     }
 
-    
+    addClickEventDeleteBoardButton(){
+        const deleteBtn = document.querySelector(".delete-btn");
+
+        deleteBtn.onclick = () => {
+            if(confirm("정말 삭제하시겠습니까?")) {
+                boardObj.boardId = deleteBtn.value;
+                BoardViewApi.getInstance().deleteBoard(boardObj);
+
+                location.href="/board";
+            }
+            
+        } 
+    }
 }
