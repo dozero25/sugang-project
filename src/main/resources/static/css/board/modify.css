@@ -1,4 +1,4 @@
-.view-container {
+.modify-container {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -9,7 +9,7 @@
     font-size: 15px;
 }
 
-.view-detail {
+.modify-detail {
     margin: 50px 0px 0px 0px;
 }
 
@@ -19,7 +19,6 @@ label{
 
 input {
     margin: 10px 0px 5px 0px;
-    pointer-events: none;
 }
 
 .boardSubject {
@@ -34,7 +33,6 @@ textarea {
     width: 100%;
     resize: none;
     border: 1px solid #dbdbdb;
-    pointer-events: none;
 }
 
 .btn-box {
@@ -43,21 +41,8 @@ textarea {
     justify-content: center;
 }
 
-.write-btn {
-    padding: 15px 10px;
-}
-
-.btn-box {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-}
-
-.btn{
+.btn1, .btn2, .btn3 {
     padding: 8px 5px;
     margin: 0px 5px;
-}
-.delete-btn {
-    padding: 8px 5px;
-    margin: 0px 5px;
+
 }

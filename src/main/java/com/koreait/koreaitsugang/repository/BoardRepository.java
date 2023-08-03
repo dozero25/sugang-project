@@ -22,5 +22,11 @@ public interface BoardRepository {
 
     public int setCountVisit(BoardVisitCountDto boardVisitCountDto);
 
+    public int updateBoardByBoardId(BoardMst boardMst);
+
+    public BoardDto getBoardUpdateViewByUserIdAndBoardId(int boardId);
+
+    public int deleteBoard(int boardId);
+
 }
 

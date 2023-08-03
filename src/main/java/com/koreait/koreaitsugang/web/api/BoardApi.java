@@ -25,7 +25,7 @@ public class BoardApi {
     @Autowired
     private BoardService boardService;
 
-    @PostMapping("/all/list")
+    @GetMapping("/all/list")
     public ResponseEntity<CMRespDto<?>> getAllBoardList(SearchBoardReqDto searchBoardReqDto) {
         return ResponseEntity
                 .ok()
@@ -57,4 +57,27 @@ public class BoardApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
     }
 
+    @ParamsAspect
+    @ValidAspect
+    @PatchMapping("/update/{boardId}")
+    public ResponseEntity<CMRespDto<?>> modifyBoard(@PathVariable("boardId") int boardId, @Valid @RequestBody BoardMst boardMst, BindingResult bindingResult){
+        boardService.modifyBoard(boardMst);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));    }
+
+    @GetMapping("/update/view/{boardId}")
+    public ResponseEntity<CMRespDto<?>> getUpdateViewBoard(@PathVariable("boardId") int boardId) {
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", boardService.getBoardUpdateViewByUserIdAndBoardId(boardId)));
+    }
+
+    @DeleteMapping("/delete/{boardId}")
+    public ResponseEntity<CMRespDto<?>> deleteBoard(@PathVariable int boardId) {
+        boardService.deleteBoardByBoardId(boardId);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
+    }
 }

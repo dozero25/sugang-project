@@ -18,7 +18,7 @@ public class SearchBoardReqDto {
     private int index;
 
     public void setIndex() {
-        index = (page-1)*count;
+        index = (page-1) * count;
     }
 
 }
