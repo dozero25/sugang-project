@@ -53,12 +53,12 @@ public class BoardService {
         return boardRepository.boardCategory();
     }
 
-    public List<BoardDto> getBoardListByBoardGrp(int boardGrp){
-        return boardRepository.getBoardListByBoardGrp(boardGrp);
+    public List<BoardDto> getBoardListByBoardGrp(SearchBoardGrpReqDto searchBoardGrpReqDto){
+        searchBoardGrpReqDto.setIndex();
+        return boardRepository.getBoardListByBoardGrp(searchBoardGrpReqDto);
     }
 
     public int getSearchBoardCountByBoardGrp(SearchBoardGrpReqDto searchBoardGrpReqDto){
-        searchBoardGrpReqDto.setIndex();
         return boardRepository.getSearchBoardCountByBoardGrp(searchBoardGrpReqDto);
     }
 }

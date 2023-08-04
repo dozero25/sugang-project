@@ -90,14 +90,13 @@ public class BoardApi {
     }
 
     @GetMapping("/list/{boardGrp}")
-    public ResponseEntity<CMRespDto<?>> getBoardListByBoardGrp(@PathVariable int boardGrp) {
-
+    public ResponseEntity<CMRespDto<?>> getBoardListByBoardGrp(@PathVariable("boardGrp") int boardGrp, SearchBoardGrpReqDto searchBoardGrpReqDto) {
         return ResponseEntity
                 .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", boardService.getBoardListByBoardGrp(boardGrp)));
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", boardService.getBoardListByBoardGrp(searchBoardGrpReqDto)));
     }
 
-    @GetMapping("/board/count/{boardGrp}")
+    @GetMapping("/count/{boardGrp}")
     public ResponseEntity<CMRespDto<?>> getSearchBoardCountByBoardGrp(@PathVariable("boardGrp") int boardGrp, SearchBoardGrpReqDto searchBoardGrpReqDto, BindingResult bindingResult) {
         return ResponseEntity
                 .ok()
