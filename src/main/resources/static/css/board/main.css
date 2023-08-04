@@ -17,11 +17,11 @@
     margin: 50px 0px;
 }
 
-.board-list li {
+.board-list div {
     padding: 0px 20px;
 }
 
-.board-list li button{
+.board-list div button{
     padding: 15px 20px;
     font-size: 16px;
     background-color: #4063ff;
@@ -30,7 +30,7 @@
     cursor: pointer;
 }
 
-.board-list li button:hover {
+.board-list div button:hover {
     background-color: #0f397a;
 }
 

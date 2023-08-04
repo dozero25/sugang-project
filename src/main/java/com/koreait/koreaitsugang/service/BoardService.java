@@ -2,9 +2,7 @@ package com.koreait.koreaitsugang.service;
 
 import com.koreait.koreaitsugang.entity.BoardMst;
 import com.koreait.koreaitsugang.repository.BoardRepository;
-import com.koreait.koreaitsugang.web.dto.BoardDto;
-import com.koreait.koreaitsugang.web.dto.BoardVisitCountDto;
-import com.koreait.koreaitsugang.web.dto.SearchBoardReqDto;
+import com.koreait.koreaitsugang.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,5 +47,18 @@ public class BoardService {
 
     public void deleteBoardByBoardId(int boardId) {
         boardRepository.deleteBoard(boardId);
+    }
+
+    public List<BoardCategoryDto> boardCategory(){
+        return boardRepository.boardCategory();
+    }
+
+    public List<BoardDto> getBoardListByBoardGrp(int boardGrp){
+        return boardRepository.getBoardListByBoardGrp(boardGrp);
+    }
+
+    public int getSearchBoardCountByBoardGrp(SearchBoardGrpReqDto searchBoardGrpReqDto){
+        searchBoardGrpReqDto.setIndex();
+        return boardRepository.getSearchBoardCountByBoardGrp(searchBoardGrpReqDto);
     }
 }

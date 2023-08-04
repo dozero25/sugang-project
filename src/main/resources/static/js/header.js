@@ -78,7 +78,7 @@ class HeaderService {
             </div>
         </div>
         <div class="menulist wrap">
-            <li class="on"><a href="http://localhost:8000/board">공지사항</a></li>
+            <li class="on"><a href="http://localhost:8000/board">게시판</a></li>
             <li><a href="http://localhost:8000/course">장바구니</a></li>
             <li><a href="">수강신청</a></li>
             ${principal.user.roleDtl[0].roleId == 3

@@ -6,6 +6,7 @@ import com.koreait.koreaitsugang.entity.BoardMst;
 import com.koreait.koreaitsugang.service.BoardService;
 import com.koreait.koreaitsugang.web.dto.BoardVisitCountDto;
 import com.koreait.koreaitsugang.web.dto.CMRespDto;
+import com.koreait.koreaitsugang.web.dto.SearchBoardGrpReqDto;
 import com.koreait.koreaitsugang.web.dto.SearchBoardReqDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,5 +80,27 @@ public class BoardApi {
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
+    }
+
+    @GetMapping("/get/category")
+    public ResponseEntity<CMRespDto<?>> getBoardCategory() {
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", boardService.boardCategory()));
+    }
+
+    @GetMapping("/list/{boardGrp}")
+    public ResponseEntity<CMRespDto<?>> getBoardListByBoardGrp(@PathVariable int boardGrp) {
+
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", boardService.getBoardListByBoardGrp(boardGrp)));
+    }
+
+    @GetMapping("/board/count/{boardGrp}")
+    public ResponseEntity<CMRespDto<?>> getSearchBoardCountByBoardGrp(@PathVariable("boardGrp") int boardGrp, SearchBoardGrpReqDto searchBoardGrpReqDto, BindingResult bindingResult) {
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", boardService.getSearchBoardCountByBoardGrp(searchBoardGrpReqDto)));
     }
 }

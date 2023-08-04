@@ -1,10 +1,7 @@
 package com.koreait.koreaitsugang.repository;
 
 import com.koreait.koreaitsugang.entity.BoardMst;
-import com.koreait.koreaitsugang.web.dto.BoardDto;
-import com.koreait.koreaitsugang.web.dto.BoardVisitCountDto;
-import com.koreait.koreaitsugang.web.dto.BoardVisitDto;
-import com.koreait.koreaitsugang.web.dto.SearchBoardReqDto;
+import com.koreait.koreaitsugang.web.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -27,6 +24,12 @@ public interface BoardRepository {
     public BoardDto getBoardUpdateViewByUserIdAndBoardId(int boardId);
 
     public int deleteBoard(int boardId);
+
+    public List<BoardCategoryDto> boardCategory();
+
+    public List<BoardDto> getBoardListByBoardGrp(int boardGrp);
+
+    public int getSearchBoardCountByBoardGrp(SearchBoardGrpReqDto searchBoardGrpReqDto);
 
 }
 
