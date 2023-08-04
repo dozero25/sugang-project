@@ -139,7 +139,6 @@ class ComponentEvent {
             BoardModifyService.getInstance().setBoardObjValues();
             const successFlag = BoardModifyApi.getInstance().modifyBoard();
         
-
             if(successFlag) {
                 alert("등록이 완료되었습니다.");
                 location.href="/board"
