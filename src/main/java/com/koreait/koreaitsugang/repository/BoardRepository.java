@@ -27,7 +27,7 @@ public interface BoardRepository {
 
     public List<BoardCategoryDto> boardCategory();
 
-    public List<BoardDto> getBoardListByBoardGrp(int boardGrp);
+    public List<BoardDto> getBoardListByBoardGrp(SearchBoardGrpReqDto searchBoardGrpReqDto);
 
     public int getSearchBoardCountByBoardGrp(SearchBoardGrpReqDto searchBoardGrpReqDto);
 
