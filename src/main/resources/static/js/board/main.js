@@ -11,14 +11,9 @@ window.onload = () => {
 
 let searchObj = {
     page : 1,
-    searchValue : "",
-    limit : "Y",
-    count : 10
-}
-
-let searchbyBoradGrpObj = {
-    page : 1,
-    boardGrp: "",
+    boardId: "",
+    boardSubject : "",
+    userId: "",
     searchValue : "",
     limit : "Y",
     count : 10
@@ -33,7 +28,6 @@ const boardObj = {
     boardVisit: "",
     boardRegDate: "",
     boardGrp: "",
-
     page : 1,
     searchValue : "",
     limit : "Y",
@@ -107,13 +101,14 @@ class BoardMainApi {
         return responeseData;
     }
 
-    getLoadBoardListByBoardGrp(){
+    getLoadBoardListByBoardGrp(boardObj){
         let responeseData = null;
 
         $.ajax({
             async: false,
             type: "get",
             url: `http://localhost:8000/api/board/list/${boardObj.boardGrp}`,
+            data: boardObj,
             dataType: "json",
             success: response => {
                 responeseData = response.data;
@@ -125,7 +120,7 @@ class BoardMainApi {
         return responeseData;
     }
 
-    getSearchBoardCountByBoardGrp(boardObj){
+    getSearchBoardCountByBoardGrp(){
         let returnData = null;
 
         $.ajax({
@@ -134,7 +129,8 @@ class BoardMainApi {
             url: `http://localhost:8000/api/board/count/${boardObj.boardGrp}`,
             data: {
                 "searchValue" : boardObj.searchValue,
-                "boardGrp" : boardObj.boardGrp
+                "boardGrp" : boardObj.boardGrp,
+
             },
             dataType: "json",
             success: response => {
@@ -221,6 +217,7 @@ class BoardMainService {
         const pageController = document.querySelector(".page-controller");
 
         const totalcount = BoardMainApi.getInstance().getSearchBoardCountByBoardGrp(boardObj);
+
         const maxPageNumber = totalcount % boardObj.count == 0 
                             ? Math.floor(totalcount / boardObj.count) 
                             : Math.floor(totalcount / boardObj.count) + 1;
@@ -237,8 +234,8 @@ class BoardMainService {
             preButton.classList.remove("disabled");
 
             preButton.onclick = () => {
-                searchbyBoradGrpObj.page--;
-                BoardMainApi.getInstance().getLoadBoardListByBoardGrp();
+                boardObj.page--;
+                this.getLoadButtonClickBoardList();
             }
         }
 
@@ -248,7 +245,7 @@ class BoardMainService {
 
             preButton.onclick = () => {
                 boardObj.page++;
-                BoardMainApi.getInstance().getLoadBoardListByBoardGrp();
+                this.getLoadButtonClickBoardList();
             }
         }
         const startIndex = boardObj.page % 5 == 0 
@@ -271,7 +268,7 @@ class BoardMainService {
             if(pageNumber != boardObj.page) {
                 button.onclick = () => {
                     boardObj.page = pageNumber;
-                    BoardMainApi.getInstance().getLoadBoardListByBoardGrp();
+                    this.getLoadButtonClickBoardList();
                 }
             }
         });
@@ -300,29 +297,23 @@ class BoardMainService {
     }
 
     getWriteButtonRequirement(){
-        const principal = PrincipalApi.getInstance().getPrincipal();
         const writeBox = document.querySelector(".left-items");
-
+        
         writeBox.innerHTML = `
-        ${principal.user.roleDtl[0].roleId == 3 
-            ?`
-            <a href="/board/write"><button type="button" class="write-btn">글쓰기</button></a>
-            `:`
-            <a href="/board/write"><button type="button" class="write-btn" style="display: none">글쓰기</button></a>
-        `}
-        ${principal.user.roleDtl[0].roleId == 2 
-            ?`
-            <a href="/board/write"><button type="button" class="write-btn">글쓰기</button></a>
-            `:`
-            <a href="/board/write"><button type="button" class="write-btn" style="display: none">글쓰기</button></a>
-        `}
-        `;
+        <a href="/board/write"><button type="button" class="write-btn">글쓰기</button></a>
+    `;
     }
 
     getLoadBoardCategoryButton(){
         const boardList = document.querySelector(".board-list");
         const boardCategory = BoardMainApi.getInstance().getLoadBoardCategory();
         
+        boardList.innerHTML += `
+            <div>
+                <a href="/board"><button>전체 게시판</button></a>
+            </div>
+            `;
+
         boardCategory.forEach((data) => {
             boardList.innerHTML += `
             <div>
@@ -330,6 +321,28 @@ class BoardMainService {
             </div>
             `;
         });
+    }
+
+    getLoadButtonClickBoardList(){
+        const boardTable = document.querySelector(".board-table tbody");
+        const responeseData = BoardMainApi.getInstance().getLoadBoardListByBoardGrp(boardObj);
+                
+        boardTable.innerHTML = ``
+
+        responeseData.forEach((data, index)=> {
+            boardTable.innerHTML += `
+            <tr>
+                <td>${data.boardId}</td>
+                <td>
+                <a href="/board/view?boardId=${data.boardId}" value=${data.boardId} id="go-writepage">${data.boardSubject}</a>
+                </td>
+                <td>${data.name}</td>
+                <td>${data.boardRegDate}</td>
+                <td>${data.boardVisit}</td>
+            </tr> 
+            `;
+        });
+        this.loadPageControllerByBoardGrp();
     }
 }
 
@@ -361,46 +374,13 @@ class ComponentEvent{
 
     addClickEventBoardListByBoardGrp(){
         const categoryBtn = document.querySelectorAll(".category-btn");
-        const boardTable = document.querySelector(".board-table tbody");
         const boardCategory = BoardMainApi.getInstance().getLoadBoardCategory();
-        
+
         categoryBtn.forEach((button, index) => {
-            button.onclick= () => {
+           button.onclick= () => {
                 boardObj.boardGrp = boardCategory[index].boardGrp;
-                const boardList = BoardMainApi.getInstance().getLoadBoardListByBoardGrp(searchbyBoradGrpObj);
-                
-                boardTable.innerHTML = ``;
-
-                boardList.forEach((data, index)=> {
-                    boardTable.innerHTML += `
-                    <tr>
-                        <td>${data.boardId}</td>
-                        <td>
-                        <a href="/board/view?boardId=${data.boardId}" value=${data.boardId} id="go-writepage">${data.boardSubject}</a>
-                        </td>
-                        <td>${data.name}</td>
-                        <td>${data.boardRegDate}</td>
-                        <td>${data.boardVisit}</td>
-                    </tr> 
-                    `;
-                });
-                BoardMainService.getInstance().loadPageControllerByBoardGrp();
-
-                // for(let i = 0; i < boardList.length; i++) {
-                    
-                    // boardTable.innerHTML += `
-                    //     <tr>
-                    //         <td>${boardList[i].boardId}</td>
-                    //         <td>
-                    //         <a href="/board/view?boardId=${boardList[i].boardId}" value=${boardList[i].boardId} id="go-writepage">${boardList[i].boardSubject}</a>
-                    //         </td>
-                    //         <td>${boardList[i].name}</td>
-                    //         <td>${boardList[i].boardRegDate}</td>
-                    //         <td>${boardList[i].boardVisit}</td>
-                    //     </tr> 
-                    //     `;
-                    // }
-                // BoardMainService.getInstance().loadPageControllerByBoardGrp();
+                boardObj.page=1;
+                BoardMainService.getInstance().getLoadButtonClickBoardList();
             }
         });
     }

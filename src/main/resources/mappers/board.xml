@@ -19,8 +19,9 @@
         from
         board_mst bm
         inner join user_mst um on (bm.user_id = um.user_id)
+        inner join board_category bc on (bm.board_grp = bc.board_grp)
         where
-        bm.board_grp not in (3)
+        bc.board_category_name not in ("자유게시판")
         <if test='searchValue != null and searchValue !=""'>
             and (
             board_id like CONCAT('%', #{searchValue}, '%')
@@ -158,8 +159,18 @@
         inner join board_category bc on (bm.board_grp = bc.board_grp)
         where
         bm.board_grp = #{boardGrp}
+        <if test='searchValue != null and searchValue !=""'>
+            and (
+            bm.board_id like CONCAT('%', #{searchValue}, '%')
+            or bm.board_subject like CONCAT('%', #{searchValue}, '%')
+            or um.name like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
         order by
         bm.board_id desc
+        <if test='limit == "Y"'>
+            limit #{index}, #{count}
+        </if>
     </select>
 
     <select id="getSearchBoardCountByBoardGrp" parameterType="com.koreait.koreaitsugang.web.dto.SearchBoardGrpReqDto" resultType="integer">
@@ -184,5 +195,4 @@
             limit #{index}, #{count}
         </if>
     </select>
-
 </mapper>
