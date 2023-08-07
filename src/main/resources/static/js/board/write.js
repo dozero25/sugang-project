@@ -1,6 +1,8 @@
 window.onload = () => {
     HeaderService.getInstance().loadHeader();
 
+    BoardWriteService.getInstance().loadBoardCategoryList();
+    
     ComponentEvent.getInstance().addClickEventRegisterButton();
 }
 
@@ -45,6 +47,24 @@ class BoardWriteApi {
         });
         return successFlag;
     }
+
+    getLoadBoardCategory(){
+        let responeseData = null;
+
+        $.ajax({
+            async: false,
+            type: "get",
+            url: "http://localhost:8000/api/board/get/category",
+            dataType: "json",
+            success: response => {
+                responeseData = response.data;
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+        return responeseData;
+    }
 }
 
 class BoardWriteService {
@@ -61,9 +81,40 @@ class BoardWriteService {
         const principal = PrincipalApi.getInstance().getPrincipal();
 
         boardObj.boardSubject = registerInput[0].value;
-        boardObj.boardContent = registerInput[1].value;
-        boardObj.boardUploadName = registerInput[2].value;
+        boardObj.boardGrp = registerInput[1].value;
+        boardObj.boardContent = registerInput[2].value;
+        boardObj.boardUploadName = registerInput[3].value;
         boardObj.userId = principal.user.userId;
+    }
+
+    loadBoardCategoryList(){
+        const responeseData = BoardWriteApi.getInstance().getLoadBoardCategory();
+        const principal = PrincipalApi.getInstance().getPrincipal();
+
+        const boardCategory = document.querySelector(".reg-option");
+        boardCategory.innerHTML = `<option value="">목록을 선택하세요</option>`;
+        
+        if(principal.user.roleDtl[0].roleId == 3){
+            responeseData.forEach((data) => {
+                boardCategory.innerHTML += `
+                <option value="${data.boardGrp}">${data.boardCategoryName}</option>
+                `;
+            });
+        }
+
+        if(principal.user.roleDtl[0].roleId == 2){
+            responeseData.forEach((data) => {
+                boardCategory.innerHTML += `
+                <option value="${data.boardGrp}">${data.boardCategoryName}</option>
+                `;
+            });
+        }
+
+        if(principal.user.roleDtl[0].roleId == 1){
+            boardCategory.innerHTML = `
+            <option value="4">자유게시판</option>
+            `;
+        }
     }
 }
 
