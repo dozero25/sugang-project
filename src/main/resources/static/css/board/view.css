@@ -1,10 +1,63 @@
+.view-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+    width: 100%;
+    font-size: 15px;
+}
+
+.view-detail {
+    margin: 50px 0px 0px 0px;
+}
+
+label{
+    font-size: 20px;
+}
+
+input {
+    margin: 10px 0px 5px 0px;
+    pointer-events: none;
+}
+
+.boardSubject {
+    width: 50%;
+    height: 30px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+textarea {
+    margin: 10px 0px 5px 0px;
+    width: 100%;
+    resize: none;
+    border: 1px solid #dbdbdb;
+    pointer-events: none;
+}
+
 .btn-box {
     margin-top: 10px;
     display: flex;
     justify-content: center;
 }
 
-.btn {
+.write-btn {
+    padding: 15px 10px;
+}
+
+.btn-box {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn{
+    padding: 8px 5px;
+    margin: 0px 5px;
+}
+.delete-btn {
     padding: 8px 5px;
     margin: 0px 5px;
 }

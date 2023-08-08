@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/static/css/common.css">
     <link rel="stylesheet" href="/static/css/reset.css">
     <link rel="stylesheet" href="/static/css/header.css">
-    <link rel="stylesheet" href="/static/css/board/write.css">
+    <link rel="stylesheet" href="/static/css/board/modify.css">
 </head>
 <body>
     <header class="header-container">
@@ -35,8 +35,8 @@
     </div>
     </header>
     <main>
-        <div class="write-container">
-            <form method="post" action="">
+        <div class="modify-container">
+            <div class="modify-detail">
                 <label>제목</label>
                 <div>
                     <input type="text" name="boardSubject" class="boardSubject" autocomplete="off" required>
@@ -48,10 +48,18 @@
                 <input type="file" name="boardUploadName" class="boardUploadName">
                 <input type="hidden">
 
-                <div class="btn-box">
-                    <button type="submit" class="write-btn">게시물 수정</button>
-                </div>
-            </form>
+            </div>
+            <div class="btn-box">
+                <a href="/board">
+                    <button type="button" class="btn1">목록</button>
+                </a>
+                <a>
+                    <button type="button" class="btn2">게시물 수정</button>
+                </a>
+                <a onclick="history.back()">
+                    <button type="button" class="btn3">이전</button>
+                </a>   
+            </div>
         </div>
     </main>
     <script src="/static/js/header.js"></script>

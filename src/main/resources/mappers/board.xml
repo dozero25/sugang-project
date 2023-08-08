@@ -4,4 +4,199 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.koreaitsugang.repository.BoardRepository">
 
+    <select id="getAllBoardList" parameterType="com.koreait.koreaitsugang.web.dto.SearchBoardReqDto" resultType="com.koreait.koreaitsugang.web.dto.BoardDto">
+        select
+        bm.board_id as boardId,
+        bm.board_subject as boardSubject,
+        um.name as name,
+        bm.board_visit as boardVisit,
+        bm.board_content as boardContent,
+        bm.board_upload_name as boardUploadName,
+        bm.board_upload_size as boardUploadSize,
+        bm.board_upload_trans as boardUploadTrans,
+        bm.board_regdate as boardRegDate,
+        bm.board_grp as boardGrp
+        from
+        board_mst bm
+        inner join user_mst um on (bm.user_id = um.user_id)
+        inner join board_category bc on (bm.board_grp = bc.board_grp)
+        where
+        bc.board_category_name not in ("자유게시판")
+        <if test='searchValue != null and searchValue !=""'>
+            and (
+            board_id like CONCAT('%', #{searchValue}, '%')
+            or board_subject like CONCAT('%', #{searchValue}, '%')
+            or name like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
+        order by
+        board_id desc
+        <if test='limit == "Y"'>
+            limit #{index}, #{count}
+        </if>
+    </select>
+
+    <select id="getBoardViewByUserIdAndBoardId" resultType="com.koreait.koreaitsugang.web.dto.BoardDto">
+        select
+        bm.board_id as boardId,
+        bm.board_subject as boardSubject,
+        um.name as name,
+        bm.board_content as boardContent,
+        bm.board_upload_name as boardUploadName,
+        bm.board_upload_size as boardUploadSize,
+        bm.board_upload_trans as boardUploadTrans,
+        bm.board_regdate as boardRegDate,
+        bm.board_grp as boardGrp
+        from
+        board_mst bm
+        inner join user_mst um on (bm.user_id = um.user_id)
+        where
+        bm.board_id = #{boardId}
+    </select>
+
+    <select id="getSearchBoardTotalCount" parameterType="com.koreait.koreaitsugang.web.dto.SearchBoardReqDto" resultType="integer">
+        select
+        count(bm.board_id) as boardId,
+        bm.board_subject as boardSubject,
+        um.name as name,
+        um.user_id as userId
+        from
+        board_mst bm
+        inner join user_mst um on (bm.user_id = um.user_id)
+        where
+        1=1
+        <if test='searchValue != null and searchValue !=""'>
+            and (
+            bm.board_id like CONCAT('%', #{searchValue}, '%')
+            or bm.board_subject like CONCAT('%', #{searchValue}, '%')
+            or um.name like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
+        <if test='limit == "Y"'>
+            limit #{index}, #{count}
+        </if>
+    </select>
+
+    <update id="setCountVisit" parameterType="com.koreait.koreaitsugang.web.dto.BoardVisitCountDto">
+        update board_mst
+        set
+        board_visit = board_visit + 1
+        where
+        board_id = #{boardId}
+    </update>
+
+    <insert id="saveBoard" parameterType="com.koreait.koreaitsugang.entity.BoardMst">
+        insert into
+        board_mst
+        values (0, #{boardSubject}, #{userId}, #{boardContent}, 0, #{boardUploadName}, #{boardUploadSize},#{boardUploadTrans},now(),#{boardGrp})
+    </insert>
+
+    <update id="updateBoardByBoardId" parameterType="com.koreait.koreaitsugang.entity.BoardMst">
+        update board_mst
+        set
+        board_subject = #{boardSubject},
+        board_content = #{boardContent},
+        board_upload_name = #{boardUploadName},
+        board_upload_size = #{boardUploadSize},
+        board_upload_trans = #{boardUploadTrans},
+        board_regdate = now(),
+        board_grp = #{boardGrp}
+        where
+        board_id = ${boardId}
+    </update>
+
+    <select id="getBoardUpdateViewByUserIdAndBoardId" resultType="com.koreait.koreaitsugang.web.dto.BoardDto">
+        select
+        bm.board_id as boardId,
+        bm.board_subject as boardSubject,
+        bm.user_id as userId,
+        um.name as name,
+        bm.board_content as boardContent,
+        bm.board_upload_name as boardUploadName,
+        bm.board_upload_size as boardUploadSize,
+        bm.board_upload_trans as boardUploadTrans,
+        bm.board_regdate as boardRegDate,
+        bm.board_grp as boardGrp
+        from
+        board_mst bm
+        inner join user_mst um on (bm.user_id = um.user_id)
+        where
+        bm.board_id = #{boardId}
+    </select>
+
+    <delete id="deleteBoard">
+        delete
+        from
+        board_mst
+        where
+        board_id = #{boardId}
+    </delete>
+
+    <select id="boardCategory" parameterType="list" resultType="com.koreait.koreaitsugang.web.dto.BoardCategoryDto">
+        select
+        board_category_id as boardCategoryId,
+        board_grp as boardGrp,
+        board_category_name as boardCategoryName
+        from
+        board_category
+    </select>
+
+    <select id="getBoardListByBoardGrp" parameterType="List" resultType="com.koreait.koreaitsugang.web.dto.BoardDto">
+        select
+        bm.board_id as boardId,
+        bm.board_subject as boardSubject,
+        um.name as name,
+        bm.board_visit as boardVisit,
+        bm.board_content as boardContent,
+        bm.board_upload_name as boardUploadName,
+        bm.board_upload_size as boardUploadSize,
+        bm.board_upload_trans as boardUploadTrans,
+        bm.board_regdate as boardRegDate,
+        bm.board_grp as boardGrp
+        from
+        board_mst bm
+        inner join user_mst um on (bm.user_id = um.user_id)
+        inner join board_category bc on (bm.board_grp = bc.board_grp)
+        where
+        bm.board_grp = #{boardGrp}
+        <if test='searchValue != null and searchValue !=""'>
+            and (
+            bm.board_id like CONCAT('%', #{searchValue}, '%')
+            or bm.board_subject like CONCAT('%', #{searchValue}, '%')
+            or um.name like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
+        order by
+        bm.board_id desc
+        <if test='limit == "Y"'>
+            limit #{index}, #{count}
+        </if>
+    </select>
+
+    <select id="getSearchBoardCountByBoardGrp" parameterType="com.koreait.koreaitsugang.web.dto.SearchBoardGrpReqDto" resultType="integer">
+        select
+        count(bm.board_id) as boardId,
+        bm.board_subject as boardSubject,
+        um.name as name,
+        um.user_id as userId
+        from
+        board_mst bm
+        inner join user_mst um on (bm.user_id = um.user_id)
+        where
+        bm.board_grp = #{boardGrp}
+        <if test='searchValue != null and searchValue !=""'>
+            and (
+            bm.board_id like CONCAT('%', #{searchValue}, '%')
+            or bm.board_subject like CONCAT('%', #{searchValue}, '%')
+            or um.name like CONCAT('%', #{searchValue}, '%')
+            )
+        </if>
+        <if test='limit == "Y"'>
+            limit #{index}, #{count}
+        </if>
+    </select>
+
+    <select id="">
+
+    </select>
 </mapper>
