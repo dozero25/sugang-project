@@ -25,6 +25,6 @@ mybatis:
 #    - /mappers/*.xml
 
 file:
-  path: C:/koreaIT project/KoreaIT_Sugang/upload/
+  path: C:/Users/ITPS/Documents/sugang-project/upload
 
 
