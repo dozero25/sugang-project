@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,10 +14,12 @@ import lombok.NoArgsConstructor;
 public class BoardMst {
     private int boardId;
     private String boardSubject;
-    private String username;
+    private int userId;
     private String boardContent;
     private int boardVisit;
     private String boardUploadName;
     private int boardUploadSize;
     private String boardUploadTrans;
+    private LocalDate boardRegDate;
+    private int boardGrp;
 }

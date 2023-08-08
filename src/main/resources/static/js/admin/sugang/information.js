@@ -226,7 +226,7 @@ class SugangInformationService{
 
     removeSubjects(deleteArray) {
         let successFlag = SugangInformationApi.getInstance().deleteSubjects(deleteArray);
-        console.log(successFlag)
+        
         if(successFlag) {
             searchObj.page = 1;
             this.loadSugangList();

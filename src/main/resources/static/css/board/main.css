@@ -1,25 +1,27 @@
-.board-container {
+.container {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-   
+
+    flex-direction: row;
+
     width: 100%;
     font-size: 15px;
+}
+.board-container {
+    width: 1050px;
 }
 
 .board-list {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin: 50px 0px;
 }
 
-.board-list li {
+.board-list div {
     padding: 0px 20px;
 }
 
-.board-list li button{
+.board-list div button{
     padding: 15px 20px;
     font-size: 16px;
     background-color: #4063ff;
@@ -28,24 +30,60 @@
     cursor: pointer;
 }
 
-.board-list li button:hover {
+.board-list div button:hover {
     background-color: #0f397a;
 }
 
-.borad-table thead tr th{
+.board-table thead tr th{
     border-top: 1px solid #2f55ff;
     border-left: none;
     border-right: none;
     padding: 20px 15px;
 }
 
-.borad-table thead tr th:nth-child(1){width: 150px;}
-.borad-table thead tr th:nth-child(2){width: 300px;}
-.borad-table thead tr th:nth-child(3){width: 150px;}
-.borad-table thead tr th:nth-child(4){width: 150px;}
-.borad-table thead tr th:nth-child(5){width: 150px;}
+.write-box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 100%;
+}
 
-.borad-table tbody tr td{
+.write-btn {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border: 1px solid #dbdbdb;
+}
+
+.write-btn:hover {
+    background-color: #345ae0; 
+    color: #ffffff;
+}
+
+.search-input {
+    height: 40px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    border: 1px solid #dbdbdb;
+    font-size: 14px;
+    color: black;
+}
+
+.search-button:hover {
+    border: 1px solid #345ae0;
+    background-color: #345ae0;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.board-table thead tr th:nth-child(1){width: 150px;}
+.board-table thead tr th:nth-child(2){width: 250px;}
+.board-table thead tr th:nth-child(3){width: 250px;}
+.board-table thead tr th:nth-child(4){width: 200px;}
+.board-table thead tr th:nth-child(5){width: 200px;}
+
+.board-table tbody tr td{
     padding: 15px;
     border-left: none;
     border-right: none;

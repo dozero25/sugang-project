@@ -36,37 +36,35 @@
     </div>
     </header>
     <main>
-        <div class="write-container">
-            <form method="post" action="">
+        <div class="view-container">
+            <div class="view-detail">
                 <label>제목</label>
                 <div>
                     <input type="text" name="boardSubject" class="boardSubject" autocomplete="off" required>
                 </div>
+                <label>작성자</label>
+                <span>
+                    <input type="text" name="name" class="name" autocomplete="off">
+                </span>
+                <label>작성일</label>
+                <span>
+                    <input type="datetime" name="regdate" class="regdate" autocomplete="off">
+                </span>
+                <br>
                 <label>내용</label>
                 <div>
                     <textarea name="boardContent" class="boardContent" id="boardContent" cols="100" rows="30"></textarea>
                 </div>
                 <input type="file" name="boardUploadName" class="boardUploadName">
                 <input type="hidden">
-            </form>
+            </div>
             <div class="btn-box">
-                <a href="">
-                    <button type="button" class="btn">답글달기</button>
-                </a>
-                <a href="">
-                    <button type="button" class="btn">수정할 내용 보기</button>
-                </a>
-                <a href="">
-                    <button type="button" class="btn">삭제</button>
-                </a>
-                <a href="">
-                    <button type="button" class="btn">목록으로</button>
-                </a>
+                
             </div>
         </div>
     </main>
-    <script src="/static/js/header.js"></script>
     <script src="/static/js/account/principal.js"></script>
-    <script src="/static/js/board/write.js"></script>
+    <script src="/static/js/header.js"></script>
+    <script src="/static/js/board/view.js"></script>
 </body>
 </html>

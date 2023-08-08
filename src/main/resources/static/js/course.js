@@ -260,7 +260,6 @@ class SearchService {
 
             nextButton.onclick = () => {
                 searchObj.page++;
-                
                 pocketObj.splice(0, pocketObj.length);
                 this.loadOpenCourse();
                 

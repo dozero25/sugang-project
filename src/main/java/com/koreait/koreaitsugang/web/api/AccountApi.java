@@ -56,7 +56,6 @@ public class AccountApi {
     @GetMapping("/user/{username}")
     public ResponseEntity<? extends CMRespDto<? extends UserMst>> getUser(@PathVariable String username, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
-
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Success", accountService.getUser(username)));
