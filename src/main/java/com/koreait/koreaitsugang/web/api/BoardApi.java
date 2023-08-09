@@ -3,15 +3,14 @@ package com.koreait.koreaitsugang.web.api;
 import com.koreait.koreaitsugang.aop.annotation.ParamsAspect;
 import com.koreait.koreaitsugang.aop.annotation.ValidAspect;
 import com.koreait.koreaitsugang.entity.BoardMst;
+import com.koreait.koreaitsugang.security.PrincipalDetails;
 import com.koreait.koreaitsugang.service.BoardService;
-import com.koreait.koreaitsugang.web.dto.BoardVisitCountDto;
-import com.koreait.koreaitsugang.web.dto.CMRespDto;
-import com.koreait.koreaitsugang.web.dto.SearchBoardGrpReqDto;
-import com.koreait.koreaitsugang.web.dto.SearchBoardReqDto;
+import com.koreait.koreaitsugang.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -101,5 +100,21 @@ public class BoardApi {
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", boardService.getSearchBoardCountByBoardGrp(searchBoardGrpReqDto)));
+    }
+
+
+    @PostMapping("/view")
+    public ResponseEntity<CMRespDto<?>> saveBoardReply(BoardReplyDto boardReplyDto, PrincipalDetails principalDetails) {
+        boardService.inputBoardReplyByBoardId(boardReplyDto);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
+    }
+
+    @GetMapping("/view/reply/{boardId}")
+    public ResponseEntity<CMRespDto<?>> getBoardReply(@PathVariable("boardId") int boardId) {
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", boardService.getBoardReplyByBoardId(boardId)));
     }
 }

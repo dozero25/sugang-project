@@ -47,17 +47,29 @@ textarea {
     padding: 15px 10px;
 }
 
-.btn-box {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-}
-
 .btn{
     padding: 8px 5px;
     margin: 0px 5px;
 }
+
+.reply-btn {
+    padding: 8px 5px;
+    margin: 0px 5px;
+}
+
 .delete-btn {
     padding: 8px 5px;
     margin: 0px 5px;
+}
+
+.reply-box{
+    margin-bottom: 30px;
+}
+
+.reply-box textarea {
+    pointer-events:fill;
+}
+
+.rep-reg-btn {
+    padding: 10px;
 }

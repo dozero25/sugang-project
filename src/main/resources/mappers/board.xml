@@ -196,7 +196,26 @@
         </if>
     </select>
 
-    <select id="">
+    <insert id="inputBoardReplyByBoardId" parameterType="com.koreait.koreaitsugang.web.dto.BoardReplyDto">
+        insert into
+        board_reply
+        values (#{boardId}, #{userId}, #{boardReply}, #{boardReplyFir}, #{boardReplySec}, #{boardReplyThi})
+    </insert>
 
+    <select id="getBoardReplyByBoardId" parameterType="list" resultType="com.koreait.koreaitsugang.web.dto.BoardReplyDto">
+        select
+        br.board_id as boardId,
+        um.name as name,
+        br.board_reply as boardReply,
+        br.board_reply_fir as boardReplyFir,
+        br.board_reply_sec as boardReplySec,
+        br.board_reply_thi as boardReplyThi
+        from
+        board_reply br
+        inner join user_mst um on (br.user_id = um.user_id)
+        where
+        br.board_id = #{boardId}
+        order by
+        br.board_reply_fir asc, br.board_reply_sec asc, br.board_reply_thi asc
     </select>
 </mapper>
