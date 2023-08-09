@@ -31,5 +31,8 @@ public interface BoardRepository {
 
     public int getSearchBoardCountByBoardGrp(SearchBoardGrpReqDto searchBoardGrpReqDto);
 
+    public void inputBoardReplyByBoardId(BoardReplyDto boardReplyDto);
+
+    public List<BoardReplyDto> getBoardReplyByBoardId(int boardId);
 }
 

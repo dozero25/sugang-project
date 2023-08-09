@@ -3,6 +3,8 @@ window.onload = () => {
     
     BoardViewService.getInstance().setBoardViewBoardId();
     BoardViewService.getInstance().loadBoardView();
+    BoardViewService.getInstance().getLoadBoardReply();
+    BoardViewService.getInstance().openloadBoardReplyWrite();
 
     ComponentEvent.getInstance().addClickEventDeleteBoardButton();
 }
@@ -16,6 +18,16 @@ const boardObj = {
     boardVisit: "",
     boardRegDate: "",
     boardGrp: ""
+}
+
+const replyObj = {
+    boardId: "",
+    userId: "",
+    name: "",
+    boardReply: "",
+    boardReplyFir: "",
+    boardReplySec: "",
+    boardReplyThi: ""
 }
 
 class BoardViewApi {
@@ -33,7 +45,7 @@ class BoardViewApi {
         $.ajax({
             async: false,
             type: "get",
-            url: `http://localhost:8000/api/board/view/${boardObj.userId}`,
+            url: `http://localhost:8000/api/board/view/${boardObj.boardId}`,
             dataType: "json",
             success: response => {
                 responseData = response.data;
@@ -64,6 +76,44 @@ class BoardViewApi {
         return returnFlag;
     }
 
+    writeBoardReply(){
+        let successFlag = false;
+
+        $.ajax({
+            async: false,
+            type: "post",
+            url: "http://localhost:8000/api/board/view",
+            contentType: "application/json",
+            data: JSON.stringify(replyObj),
+            dataType: "json",
+            success: response => {
+                successFlag = true;
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+        return successFlag;
+    }
+
+    getBoardReply(){
+        let responeseData = null;
+
+        $.ajax({
+            async: false,
+            tyep:"get",
+            url: `http://localhost:8000/api/board/view/reply/${boardObj.boardId}`,
+            dataType:"json",
+            success: response => {
+                responeseData = response.data;
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+        return responeseData;
+    }
+
 }
 
 class BoardViewService {
@@ -77,7 +127,7 @@ class BoardViewService {
 
     setBoardViewBoardId() {
         const URLSearch = new URLSearchParams(location.search);
-        boardObj.userId = URLSearch.get("boardId");
+        boardObj.boardId = URLSearch.get("boardId");
     }
 
 
@@ -111,9 +161,9 @@ class BoardViewService {
         const principal = PrincipalApi.getInstance().getPrincipal();
 
         btnBox.innerHTML += `
-            <a href="">
-                <button type="button" class="btn">답글달기</button>
-            </a>
+
+            <button type="button" class="reply-btn">댓글 쓰기</button>
+
             ${principal.user.name == responseData.name
                 ?`<a href="/board/update?boardId=${responseData.boardId}">
                 <button type="button" class="btn">수정</button>
@@ -129,6 +179,40 @@ class BoardViewService {
             </a>
         `; 
     }
+
+    getLoadBoardReply(){
+        const responeseData = BoardViewApi.getInstance().getBoardReply();
+        const replyTable = document.querySelector(".reply-table");
+
+
+        console.log(responeseData);
+
+        responeseData.forEach((data, index)=>{
+            replyTable.innerHTML += `
+                <tr>
+                    <td>${data.name}</td>
+                    <td>${data.boardReply}</td>
+                </tr>
+                <br>
+            `;
+        });
+    }
+
+    openloadBoardReplyWrite(){
+        const replyView = document.querySelector(".reply-btn");
+        const replybox = document.querySelector(".reply-box");
+
+        replyView.onclick = () => {
+            if(replybox.style.display !== "none") {
+                replybox.style.display = "none";
+            }
+            else {
+                replybox.style.display = "block";
+            }
+        }
+    }
+
+    
 }
 class ComponentEvent{
     static #instance = null;

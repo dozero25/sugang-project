@@ -61,4 +61,10 @@ public class BoardService {
     public int getSearchBoardCountByBoardGrp(SearchBoardGrpReqDto searchBoardGrpReqDto){
         return boardRepository.getSearchBoardCountByBoardGrp(searchBoardGrpReqDto);
     }
+
+
+
+    public List<BoardReplyDto> getBoardReplyByBoardId(int boardId){
+        return boardRepository.getBoardReplyByBoardId(boardId);
+    }
 }
