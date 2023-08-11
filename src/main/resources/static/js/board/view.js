@@ -7,6 +7,7 @@ window.onload = () => {
     BoardViewService.getInstance().openloadBoardReplyWrite();
 
     ComponentEvent.getInstance().addClickEventDeleteBoardButton();
+    ComponentEvent.getInstance().addClickEventReplyRegisterButton();
 }
 
 const boardObj = {
@@ -172,6 +173,13 @@ class BoardViewService {
                     <button type="button" class="delete-btn" value="${responseData.boardId}">삭제</button>
                 </a>
                 `:`
+                <a href="/board/update?boardId=${responseData.boardId}" style="display:none;">
+                <button type="button" class="btn">수정</button>
+                </a>
+                <a>
+                    <button type="button" class="delete-btn" value="${responseData.boardId}" style="display:none;">삭제</button>
+                </a>
+
                 `
             }
             <a href="/board">
@@ -184,16 +192,21 @@ class BoardViewService {
         const responeseData = BoardViewApi.getInstance().getBoardReply();
         const replyTable = document.querySelector(".reply-table");
 
-
-        console.log(responeseData);
-
         responeseData.forEach((data, index)=>{
             replyTable.innerHTML += `
-                <tr>
-                    <td>${data.name}</td>
+            <table>
+                <thead>
+                    <th>${data.name}</th>
+                </thead>
+                <tbody>
                     <td>${data.boardReply}</td>
-                </tr>
-                <br>
+                </tbody>
+                <tfoot>
+                    <td>
+                        <button type="button">답변</button>
+                    </td>
+                </tfoot>
+            </table>
             `;
         });
     }
@@ -212,6 +225,17 @@ class BoardViewService {
         }
     }
 
+    setBoardReplyContent(){
+        const writeInput = document.querySelector(".reply-textarea");
+        const principal = PrincipalApi.getInstance().getPrincipal();
+
+        replyObj.boardId = boardObj.boardId;
+        replyObj.userId = principal.user.userId;
+
+        replyObj.boardReply = writeInput.value;
+
+    }
+
     
 }
 class ComponentEvent{
@@ -226,6 +250,9 @@ class ComponentEvent{
     addClickEventDeleteBoardButton(){
         const deleteBtn = document.querySelector(".delete-btn");
 
+        
+
+
         deleteBtn.onclick = () => {
             if(confirm("정말 삭제하시겠습니까?")) {
                 boardObj.boardId = deleteBtn.value;
@@ -235,5 +262,19 @@ class ComponentEvent{
             }
             
         } 
+    }
+
+    addClickEventReplyRegisterButton() {
+        const repRegButton = document.querySelector(".rep-reg-btn");
+
+        repRegButton.onclick = () => {
+            BoardViewService.getInstance().setBoardReplyContent();
+            const successFlag = BoardViewApi.getInstance().writeBoardReply();
+
+            if(successFlag) {
+                alert("등록이 완료되었습니다.");
+                location.reload();
+            }
+        }
     }
 }

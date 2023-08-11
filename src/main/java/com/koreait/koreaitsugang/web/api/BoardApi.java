@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-
 @RestController
 @RequestMapping("/api/board")
 @RequiredArgsConstructor
@@ -102,10 +101,10 @@ public class BoardApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", boardService.getSearchBoardCountByBoardGrp(searchBoardGrpReqDto)));
     }
 
-
     @PostMapping("/view")
-    public ResponseEntity<CMRespDto<?>> saveBoardReply(BoardReplyDto boardReplyDto, PrincipalDetails principalDetails) {
+    public ResponseEntity<CMRespDto<?>> saveBoardReply(@Valid @RequestBody BoardReplyDto boardReplyDto,BindingResult bindingResult ,@AuthenticationPrincipal PrincipalDetails principalDetails) {
         boardService.inputBoardReplyByBoardId(boardReplyDto);
+
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
