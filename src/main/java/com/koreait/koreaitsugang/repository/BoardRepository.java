@@ -34,5 +34,7 @@ public interface BoardRepository {
     public void inputBoardReplyByBoardId(BoardReplyDto boardReplyDto);
 
     public List<BoardReplyDto> getBoardReplyByBoardId(int boardId);
+
+    public int getReplyCount();
 }
 

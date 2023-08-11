@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class BoardReplyDto {
+    private int boardReplyId;
     private int boardId;
     private int userId;
     private String name;

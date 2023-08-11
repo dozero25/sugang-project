@@ -62,9 +62,17 @@ public class BoardService {
         return boardRepository.getSearchBoardCountByBoardGrp(searchBoardGrpReqDto);
     }
 
+    public void inputBoardReplyByBoardId(BoardReplyDto boardReplyDto){
 
+        boardReplyDto.setBoardReplyFir(boardRepository.getReplyCount());
+        boardReplyDto.setBoardReplyFir(boardReplyDto.getBoardReplyFir());
+        boardReplyDto.setBoardReplySec(boardReplyDto.getBoardReplySec() + 1);
+        boardReplyDto.setBoardReplyThi(boardReplyDto.getBoardReplyThi() + 1);
+        boardRepository.inputBoardReplyByBoardId(boardReplyDto);
+    }
 
     public List<BoardReplyDto> getBoardReplyByBoardId(int boardId){
         return boardRepository.getBoardReplyByBoardId(boardId);
     }
+
 }

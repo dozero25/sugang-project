@@ -199,7 +199,7 @@
     <insert id="inputBoardReplyByBoardId" parameterType="com.koreait.koreaitsugang.web.dto.BoardReplyDto">
         insert into
         board_reply
-        values (#{boardId}, #{userId}, #{boardReply}, #{boardReplyFir}, #{boardReplySec}, #{boardReplyThi})
+        values (0, #{boardId}, #{userId}, #{boardReply}, #{boardReplyFir}, #{boardReplySec}, #{boardReplyThi})
     </insert>
 
     <select id="getBoardReplyByBoardId" parameterType="list" resultType="com.koreait.koreaitsugang.web.dto.BoardReplyDto">
@@ -217,5 +217,11 @@
         br.board_id = #{boardId}
         order by
         br.board_reply_fir asc, br.board_reply_sec asc, br.board_reply_thi asc
+    </select>
+
+    <select id="getReplyCount" resultType="integer">
+        select ifnull( MAX(board_reply_fir) + 1, 1 ) as Maxcnt
+        from
+        board_reply
     </select>
 </mapper>
