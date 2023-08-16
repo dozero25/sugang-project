@@ -95,3 +95,7 @@ textarea {
 .rep-reg-btn {
     padding: 10px;
 }
+
+.reply-fir-input {
+    pointer-events:fill;
+}

@@ -29,7 +29,7 @@ public class BoardService {
         return boardRepository.getSearchBoardTotalCount(searchBoardReqDto);
     }
 
-    public int setSaveBoard(BoardMst boardMst){
+    public int setSaveBoard(BoardMst boardMst) {
         return boardRepository.saveBoard(boardMst);
     }
 
@@ -67,6 +67,14 @@ public class BoardService {
         boardReplyDto.setBoardReplyFir(boardRepository.getReplyCount());
         boardReplyDto.setBoardReplyFir(boardReplyDto.getBoardReplyFir());
         boardReplyDto.setBoardReplySec(boardReplyDto.getBoardReplySec() + 1);
+        boardReplyDto.setBoardReplyThi(boardReplyDto.getBoardReplyThi() + 1);
+        boardRepository.inputBoardReplyByBoardId(boardReplyDto);
+    }
+
+    public void inputBoardReplyRepByBoardId(BoardReplyDto boardReplyDto){
+        boardReplyDto.setBoardReplySec(boardRepository.getReplySecCount(boardReplyDto.getBoardReplyFir()));
+        boardReplyDto.setBoardReplyFir(boardReplyDto.getBoardReplyFir());
+        boardReplyDto.setBoardReplySec(boardReplyDto.getBoardReplySec());
         boardReplyDto.setBoardReplyThi(boardReplyDto.getBoardReplyThi() + 1);
         boardRepository.inputBoardReplyByBoardId(boardReplyDto);
     }
