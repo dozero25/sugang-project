@@ -8,6 +8,7 @@ window.onload = () => {
 
     ComponentEvent.getInstance().addClickEventDeleteBoardButton();
     ComponentEvent.getInstance().addClickEventReplyRegisterButton();
+    ComponentEvent.getInstance().addClickEventReplyFirButton();
 }
 
 const boardObj = {
@@ -115,6 +116,26 @@ class BoardViewApi {
         return responeseData;
     }
 
+    writeBoardReplyRep(){
+        let successFlag = false;
+
+        $.ajax({
+            async: false,
+            type: "post",
+            url: `http://localhost:8000/api/board/view/rep/${replyObj.boardReplyFir}`,
+            contentType: "application/json",
+            data: JSON.stringify(replyObj),
+            dataType: "json",
+            success: response => {
+                successFlag = true;
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+        return successFlag;
+    }
+
 }
 
 class BoardViewService {
@@ -179,7 +200,6 @@ class BoardViewService {
                 <a>
                     <button type="button" class="delete-btn" value="${responseData.boardId}" style="display:none;">삭제</button>
                 </a>
-
                 `
             }
             <a href="/board">
@@ -203,10 +223,14 @@ class BoardViewService {
                 </tbody>
                 <tfoot>
                     <td>
-                        <button type="button">답변</button>
+                        <button type="button" class="reply-fir-btn" value=${data.boardReplyFir}>답변</button>
                     </td>
                 </tfoot>
             </table>
+            <div class="reply-fir-btn-box" style="display:none;" value=${data.boardReplyFir}>
+                <input class="reply-fir-input"></input>
+                <button class="reg-fir-btn" value=${data.boardReplyFir}>등록</button>
+            </div>
             `;
         });
     }
@@ -233,7 +257,23 @@ class BoardViewService {
         replyObj.userId = principal.user.userId;
 
         replyObj.boardReply = writeInput.value;
+    }
 
+    setBoardReplyFirContent(){
+        const writeInput = document.querySelector(".reply-fir-input");
+        const responeseData = document.querySelectorAll(".reply-fir-btn");
+        const principal = PrincipalApi.getInstance().getPrincipal();
+
+        replyObj.boardId = boardObj.boardId;
+        replyObj.userId = principal.user.userId;
+
+        replyObj.boardReply = writeInput.value;
+
+        console.log(responeseData[0].value);
+        console.log(responeseData[1].value);
+        replyObj.boardReplyFir = responeseData.value;
+
+        replyObj.boardReplySec = replyObj.boardReplySec;
     }
 
     
@@ -250,9 +290,6 @@ class ComponentEvent{
     addClickEventDeleteBoardButton(){
         const deleteBtn = document.querySelector(".delete-btn");
 
-        
-
-
         deleteBtn.onclick = () => {
             if(confirm("정말 삭제하시겠습니까?")) {
                 boardObj.boardId = deleteBtn.value;
@@ -266,15 +303,50 @@ class ComponentEvent{
 
     addClickEventReplyRegisterButton() {
         const repRegButton = document.querySelector(".rep-reg-btn");
+        const boardRepContent = document.querySelector(".reply-textarea");
 
         repRegButton.onclick = () => {
+            boardRepContent.focus();
             BoardViewService.getInstance().setBoardReplyContent();
             const successFlag = BoardViewApi.getInstance().writeBoardReply();
 
             if(successFlag) {
-                alert("등록이 완료되었습니다.");
                 location.reload();
             }
         }
+    }
+
+    addClickEventReplyFirButton(){
+        const repFirButton = document.querySelectorAll(".reply-fir-btn");
+        const repFirBox = document.querySelectorAll(".reply-fir-btn-box");
+        const regFirBtn = document.querySelectorAll(".reg-fir-btn");
+
+        repFirButton.forEach((button, index) => {
+            button.onclick = () => {
+                if(repFirBox[index].style.display !== "none") {
+                    repFirBox[index].style.display = "none";
+                }
+                else {
+                    repFirBox[index].style.display = "block"; 
+                }
+            }
+        });
+
+        regFirBtn.forEach((button, index)=>{
+            button.onclick = () => {
+                BoardViewService.getInstance().setBoardReplyFirContent();
+            
+                const successFlag = BoardViewApi.getInstance().writeBoardReplyRep();
+                
+                if(successFlag) {
+                    location.reload();
+                }
+            }
+        })
+
+        
+
+        
+
     }
 }

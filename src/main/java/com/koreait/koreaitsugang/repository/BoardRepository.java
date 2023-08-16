@@ -36,5 +36,7 @@ public interface BoardRepository {
     public List<BoardReplyDto> getBoardReplyByBoardId(int boardId);
 
     public int getReplyCount();
+
+    public int getReplySecCount(int boardReplyFir);
 }
 

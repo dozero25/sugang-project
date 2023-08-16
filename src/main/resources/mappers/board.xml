@@ -224,4 +224,12 @@
         from
         board_reply
     </select>
+
+    <select id="getReplySecCount" resultType="integer">
+        select MAX(board_reply_sec) + 1 as Maxcnt
+        from
+        board_reply
+        where
+        board_reply_fir = #{boardReplyFir}
+    </select>
 </mapper>

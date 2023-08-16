@@ -110,8 +110,17 @@ public class BoardApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
     }
 
+    @PostMapping("/view/rep/{boardReplyFir}")
+    public ResponseEntity<CMRespDto<?>> saveBoardReplyRep(@PathVariable("boardReplyFir") int boardId, @Valid @RequestBody BoardReplyDto boardReplyDto,BindingResult bindingResult ,@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        boardService.inputBoardReplyRepByBoardId(boardReplyDto);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
+    }
+
     @GetMapping("/view/reply/{boardId}")
     public ResponseEntity<CMRespDto<?>> getBoardReply(@PathVariable("boardId") int boardId) {
+
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", boardService.getBoardReplyByBoardId(boardId)));
