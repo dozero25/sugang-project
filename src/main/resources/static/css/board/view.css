@@ -88,14 +88,10 @@ textarea {
     margin-bottom: 30px;
 }
 
-.reply-box textarea {
+.reply-box textarea, .reply-fir-input, .reply-sec-input {
     pointer-events:fill;
 }
 
 .rep-reg-btn {
     padding: 10px;
-}
-
-.reply-fir-input {
-    pointer-events:fill;
 }

@@ -9,6 +9,7 @@ window.onload = () => {
     ComponentEvent.getInstance().addClickEventDeleteBoardButton();
     ComponentEvent.getInstance().addClickEventReplyRegisterButton();
     ComponentEvent.getInstance().addClickEventReplyFirButton();
+    ComponentEvent.getInstance().addClickEventReplySecButton();
 }
 
 const boardObj = {
@@ -116,13 +117,33 @@ class BoardViewApi {
         return responeseData;
     }
 
-    writeBoardReplyRep(){
+    writeBoardReplySec(){
         let successFlag = false;
 
         $.ajax({
             async: false,
             type: "post",
             url: `http://localhost:8000/api/board/view/rep/${replyObj.boardReplyFir}`,
+            contentType: "application/json",
+            data: JSON.stringify(replyObj),
+            dataType: "json",
+            success: response => {
+                successFlag = true;
+            },
+            error: error => {
+                console.log(error);
+            }
+        });
+        return successFlag;
+    }
+
+    writeBoardReplyThi(){
+        let successFlag = false;
+
+        $.ajax({
+            async: false,
+            type: "post",
+            url: `http://localhost:8000/api/board/view/rep/${replyObj.boardReplyFir}/${replyObj.boardReplySec}`,
             contentType: "application/json",
             data: JSON.stringify(replyObj),
             dataType: "json",
@@ -205,22 +226,29 @@ class BoardViewService {
             <a href="/board">
                 <button type="button" class="btn">목록으로</button>
             </a>
-        `; 
+        `;
     }
 
     getLoadBoardReply(){
         const responeseData = BoardViewApi.getInstance().getBoardReply();
         const replyTable = document.querySelector(".reply-table");
+        let num1 = 1;
+        let num2 = 1;
+        let num3 = 1;
 
         responeseData.forEach((data, index)=>{
+
+            
+
             replyTable.innerHTML += `
-            <table>
+            ${data.boardReplySec == 1 & data.boardReplyThi == 1
+                ?`<table>
                 <thead>
-                    <th>${data.name}</th>
+                <th>${data.name}</th>
                 </thead>
-                <tbody>
-                    <td>${data.boardReply}</td>
-                </tbody>
+                    <tbody>
+                        <td>${data.boardReply}</td>
+                    </tbody>
                 <tfoot>
                     <td>
                         <button type="button" class="reply-fir-btn" value=${data.boardReplyFir}>답변</button>
@@ -230,9 +258,48 @@ class BoardViewService {
             <div class="reply-fir-btn-box" style="display:none;" value=${data.boardReplyFir}>
                 <input class="reply-fir-input"></input>
                 <button class="reg-fir-btn" value=${data.boardReplyFir}>등록</button>
-            </div>
-            `;
+            </div>`
+                :``
+            }
+
+            ${data.boardReplySec == num2 && data.boardReplyFir == num1 && data.boardReplyThi != 1
+                ?`
+                <table style="margin-left:30px;">
+                    <thead>
+                    <th>${data.name}</th>
+                    </thead>
+                        <tbody>
+                            <td>${data.boardReply}</td>
+                        </tbody>
+                    <tfoot>
+                        <td>
+                            <button type="button" class="reply-sec-btn" value=${data.boardReplySec}>답변</button>
+                        </td>
+                    </tfoot>
+                </table>
+                <div class="reply-sec-btn-box" style="display:none; value=${data.boardReplySec}>
+                    <input class="reply-sec-input"></input>
+                    <button class="reg-sec-btn" value=${data.boardReplySec}>등록</button>
+                </div>
+                `:`
+                `
+            } 
+        `;
+        
+        if(data.boardReplySec != num2){
+            num2 +=1;
+
+            if(data.boardReplyFir != num1) {
+                num1 += 1;
+                return num2 = 1;
+            }
+            
+        }
+        console.log("num2 : "+num2);
+        console.log("num1 : "+num1);
+
         });
+        
     }
 
     openloadBoardReplyWrite(){
@@ -258,26 +325,9 @@ class BoardViewService {
 
         replyObj.boardReply = writeInput.value;
     }
-
-    setBoardReplyFirContent(){
-        const writeInput = document.querySelector(".reply-fir-input");
-        const responeseData = document.querySelectorAll(".reply-fir-btn");
-        const principal = PrincipalApi.getInstance().getPrincipal();
-
-        replyObj.boardId = boardObj.boardId;
-        replyObj.userId = principal.user.userId;
-
-        replyObj.boardReply = writeInput.value;
-
-        console.log(responeseData[0].value);
-        console.log(responeseData[1].value);
-        replyObj.boardReplyFir = responeseData.value;
-
-        replyObj.boardReplySec = replyObj.boardReplySec;
-    }
-
     
 }
+
 class ComponentEvent{
     static #instance = null;
     static getInstance() {
@@ -323,30 +373,81 @@ class ComponentEvent{
 
         repFirButton.forEach((button, index) => {
             button.onclick = () => {
+                console.log(index);
                 if(repFirBox[index].style.display !== "none") {
                     repFirBox[index].style.display = "none";
                 }
                 else {
                     repFirBox[index].style.display = "block"; 
                 }
+                
             }
         });
 
+        const writeInput = document.querySelectorAll(".reply-fir-input");
+        const responeseData = document.querySelectorAll(".reply-fir-btn");
+        const principal = PrincipalApi.getInstance().getPrincipal();
+
         regFirBtn.forEach((button, index)=>{
             button.onclick = () => {
-                BoardViewService.getInstance().setBoardReplyFirContent();
-            
-                const successFlag = BoardViewApi.getInstance().writeBoardReplyRep();
+                
+                replyObj.boardId = boardObj.boardId;
+                replyObj.userId = principal.user.userId;
+                
+                replyObj.boardReply = writeInput[index].value;
+                replyObj.boardReplyFir = responeseData[index].value;
+                replyObj.boardReplySec = replyObj.boardReplySec;
+                
+                const successFlag = BoardViewApi.getInstance().writeBoardReplySec();
                 
                 if(successFlag) {
                     location.reload();
                 }
             }
-        })
+        });
+    }
 
-        
+    addClickEventReplySecButton(){
+        const repSecButton = document.querySelectorAll(".reply-sec-btn");
+        const repSecBox = document.querySelectorAll(".reply-sec-btn-box");
+        const regSecBtn = document.querySelectorAll(".reg-sec-btn");
 
-        
+        repSecButton.forEach((button, index) => {
+            button.onclick = () => {
+                if(repSecBox[index].style.display !== "none") {
+                    repSecBox[index].style.display = "none";
+                }
+                else {
+                    repSecBox[index].style.display = "block"; 
+                }
+            }
+        });
 
+        const writeInput = document.querySelectorAll(".reply-sec-input");
+        const responeseData = document.querySelectorAll(".reply-sec-btn");
+        const boardReplyFir = document.querySelectorAll(".reply-fir-btn");
+        const principal = PrincipalApi.getInstance().getPrincipal();
+
+        regSecBtn.forEach((button, index)=>{
+            button.onclick = () => {
+                
+                const num = index;
+                replyObj.boardId = boardObj.boardId;
+                replyObj.userId = principal.user.userId;
+                
+                replyObj.boardReply = writeInput[num].value;
+                replyObj.boardReplyFir = boardReplyFir[num].value;
+                replyObj.boardReplySec = responeseData[num].value;
+                replyObj.boardReplyThi = replyObj.boardReplyThi;
+                
+                console.log(num);
+
+                const successFlag = BoardViewApi.getInstance().writeBoardReplyThi();
+                
+                // if(successFlag) {
+                //     location.reload();
+                // }
+            }
+        });
     }
 }

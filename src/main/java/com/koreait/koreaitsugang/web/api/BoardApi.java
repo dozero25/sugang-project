@@ -111,8 +111,16 @@ public class BoardApi {
     }
 
     @PostMapping("/view/rep/{boardReplyFir}")
-    public ResponseEntity<CMRespDto<?>> saveBoardReplyRep(@PathVariable("boardReplyFir") int boardId, @Valid @RequestBody BoardReplyDto boardReplyDto,BindingResult bindingResult ,@AuthenticationPrincipal PrincipalDetails principalDetails) {
-        boardService.inputBoardReplyRepByBoardId(boardReplyDto);
+    public ResponseEntity<CMRespDto<?>> saveBoardReplySec(@PathVariable("boardReplyFir") int boardReplyFir, @Valid @RequestBody BoardReplyDto boardReplyDto,BindingResult bindingResult ,@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        boardService.inputBoardReplySecByBoardId(boardReplyDto);
+        return ResponseEntity
+                .ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
+    }
+
+    @PostMapping(value = "/view/rep/{boardReplyFir}/rep/{boardReplySec}")
+    public ResponseEntity<CMRespDto<?>> saveBoardReplyThi(@PathVariable(value = "boardReplyFir") int boardReplyFir, @PathVariable(value = "boardReplySec") int boardReplySec, @Valid @RequestBody BoardReplyDto boardReplyDto,BindingResult bindingResult ,@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        boardService.inputBoardReplyThiByBoardId(boardReplyDto);
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));

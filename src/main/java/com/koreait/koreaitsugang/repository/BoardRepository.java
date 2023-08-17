@@ -38,5 +38,7 @@ public interface BoardRepository {
     public int getReplyCount();
 
     public int getReplySecCount(int boardReplyFir);
+
+    public int getReplyThiCount(int boardReplyFir, int boardReplySec);
 }
 
