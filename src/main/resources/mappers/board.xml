@@ -232,4 +232,14 @@
         where
         board_reply_fir = #{boardReplyFir}
     </select>
+
+    <select id="getReplyThiCount" resultType="integer">
+        select MAX(board_reply_thi) + 1 as Maxcnt
+        from
+        board_reply
+        where
+        board_reply_fir = #{boardReplyFir}
+        and
+        board_reply_sec = #{boardReplySec}
+    </select>
 </mapper>

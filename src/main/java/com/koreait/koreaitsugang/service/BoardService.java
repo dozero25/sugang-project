@@ -71,11 +71,19 @@ public class BoardService {
         boardRepository.inputBoardReplyByBoardId(boardReplyDto);
     }
 
-    public void inputBoardReplyRepByBoardId(BoardReplyDto boardReplyDto){
+    public void inputBoardReplySecByBoardId(BoardReplyDto boardReplyDto){
         boardReplyDto.setBoardReplySec(boardRepository.getReplySecCount(boardReplyDto.getBoardReplyFir()));
         boardReplyDto.setBoardReplyFir(boardReplyDto.getBoardReplyFir());
         boardReplyDto.setBoardReplySec(boardReplyDto.getBoardReplySec());
         boardReplyDto.setBoardReplyThi(boardReplyDto.getBoardReplyThi() + 1);
+        boardRepository.inputBoardReplyByBoardId(boardReplyDto);
+    }
+
+    public void inputBoardReplyThiByBoardId(BoardReplyDto boardReplyDto){
+        boardReplyDto.setBoardReplyThi(boardRepository.getReplyThiCount(boardReplyDto.getBoardReplyFir(), boardReplyDto.getBoardReplySec()));
+        boardReplyDto.setBoardReplyFir(boardReplyDto.getBoardReplyFir());
+        boardReplyDto.setBoardReplySec(boardReplyDto.getBoardReplySec());
+        boardReplyDto.setBoardReplyThi(boardReplyDto.getBoardReplyThi());
         boardRepository.inputBoardReplyByBoardId(boardReplyDto);
     }
 
