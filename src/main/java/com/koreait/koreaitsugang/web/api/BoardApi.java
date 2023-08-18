@@ -118,7 +118,7 @@ public class BoardApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
     }
 
-    @PostMapping(value = "/view/rep/{boardReplyFir}/rep/{boardReplySec}")
+    @PostMapping(value = "/view/rep/{boardReplyFir}/{boardReplySec}")
     public ResponseEntity<CMRespDto<?>> saveBoardReplyThi(@PathVariable(value = "boardReplyFir") int boardReplyFir, @PathVariable(value = "boardReplySec") int boardReplySec, @Valid @RequestBody BoardReplyDto boardReplyDto,BindingResult bindingResult ,@AuthenticationPrincipal PrincipalDetails principalDetails) {
         boardService.inputBoardReplyThiByBoardId(boardReplyDto);
         return ResponseEntity
