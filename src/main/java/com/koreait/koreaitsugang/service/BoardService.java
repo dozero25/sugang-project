@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +31,7 @@ public class BoardService {
         return boardRepository.getSearchBoardTotalCount(searchBoardReqDto);
     }
 
-    public int setSaveBoard(BoardMst boardMst){
+    public int setSaveBoard(BoardMst boardMst) {
         return boardRepository.saveBoard(boardMst);
     }
 
@@ -61,4 +63,48 @@ public class BoardService {
     public int getSearchBoardCountByBoardGrp(SearchBoardGrpReqDto searchBoardGrpReqDto){
         return boardRepository.getSearchBoardCountByBoardGrp(searchBoardGrpReqDto);
     }
+
+    public void inputBoardReplyByBoardId(BoardReplyDto boardReplyDto){
+        errorBoardReply(boardReplyDto);
+        boardReplyDto.setBoardReplyFir(boardRepository.getReplyCount(boardReplyDto.getBoardId()));
+        boardReplyDto.setBoardReplyFir(boardReplyDto.getBoardReplyFir());
+        boardReplyDto.setBoardReplySec(boardReplyDto.getBoardReplySec() + 1);
+        boardReplyDto.setBoardReplyThi(boardReplyDto.getBoardReplyThi() + 1);
+        boardRepository.inputBoardReplyByBoardId(boardReplyDto);
+    }
+
+    public void inputBoardReplySecByBoardId(BoardReplyDto boardReplyDto){
+        errorBoardReply(boardReplyDto);
+        boardReplyDto.setBoardReplySec(boardRepository.getReplySecCount(boardReplyDto.getBoardId(), boardReplyDto.getBoardReplyFir()));
+        boardReplyDto.setBoardReplyFir(boardReplyDto.getBoardReplyFir());
+        boardReplyDto.setBoardReplySec(boardReplyDto.getBoardReplySec());
+        boardReplyDto.setBoardReplyThi(boardReplyDto.getBoardReplyThi() + 1);
+        boardRepository.inputBoardReplyByBoardId(boardReplyDto);
+    }
+
+    public void inputBoardReplyThiByBoardId(BoardReplyDto boardReplyDto){
+        errorBoardReply(boardReplyDto);
+        boardReplyDto.setBoardReplyThi(boardRepository.getReplyThiCount(boardReplyDto.getBoardId(), boardReplyDto.getBoardReplyFir(), boardReplyDto.getBoardReplySec()));
+        boardReplyDto.setBoardReplyFir(boardReplyDto.getBoardReplyFir());
+        boardReplyDto.setBoardReplySec(boardReplyDto.getBoardReplySec());
+        boardReplyDto.setBoardReplyThi(boardReplyDto.getBoardReplyThi());
+        boardRepository.inputBoardReplyByBoardId(boardReplyDto);
+    }
+
+    public List<BoardReplyDto> getBoardReplyByBoardId(int boardId){
+        return boardRepository.getBoardReplyByBoardId(boardId);
+    }
+
+    public Map<String, Object> errorBoardReply(BoardReplyDto boardReplyDto){
+
+        Map<String, Object> map = new HashMap<>();
+
+        if (boardReplyDto.getBoardReply() == "") {
+            map.put("msg", "error");
+            throw new RuntimeException();
+        }
+
+        return map;
+    }
+
 }

@@ -196,7 +196,56 @@
         </if>
     </select>
 
-    <select id="">
+    <insert id="inputBoardReplyByBoardId" parameterType="com.koreait.koreaitsugang.web.dto.BoardReplyDto">
+        insert into
+        board_reply
+        values (0, #{boardId}, #{userId}, #{boardReply}, #{boardReplyFir}, #{boardReplySec}, #{boardReplyThi})
+    </insert>
 
+    <select id="getBoardReplyByBoardId" parameterType="list" resultType="com.koreait.koreaitsugang.web.dto.BoardReplyDto">
+        select
+        br.board_id as boardId,
+        um.name as name,
+        br.board_reply as boardReply,
+        br.board_reply_fir as boardReplyFir,
+        br.board_reply_sec as boardReplySec,
+        br.board_reply_thi as boardReplyThi
+        from
+        board_reply br
+        inner join user_mst um on (br.user_id = um.user_id)
+        where
+        br.board_id = #{boardId}
+        order by
+        br.board_reply_fir asc, br.board_reply_sec asc, br.board_reply_thi asc
+    </select>
+
+    <select id="getReplyCount" resultType="integer">
+        select ifnull( MAX(board_reply_fir) + 1, 1 ) as Maxcnt
+        from
+        board_reply
+        where
+        board_id = #{boardId}
+    </select>
+
+    <select id="getReplySecCount" resultType="integer">
+        select MAX(board_reply_sec) + 1 as Maxcnt
+        from
+        board_reply
+        where
+        board_id = #{boardId}
+        and
+        board_reply_fir = #{boardReplyFir}
+    </select>
+
+    <select id="getReplyThiCount" resultType="integer">
+        select MAX(board_reply_thi) + 1 as Maxcnt
+        from
+        board_reply
+        where
+        board_id = #{boardId}
+        and
+        board_reply_fir = #{boardReplyFir}
+        and
+        board_reply_sec = #{boardReplySec}
     </select>
 </mapper>
