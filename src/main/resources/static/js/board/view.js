@@ -151,6 +151,10 @@ class BoardViewApi {
                 successFlag = true;
             },
             error: error => {
+                if(error.msg = "error") {
+                    console.log(msg);
+                    alert("댓글창을 확인하십시오.");
+                }
                 console.log(error);
             }
         });
@@ -232,16 +236,15 @@ class BoardViewService {
     getLoadBoardReply(){
         const responeseData = BoardViewApi.getInstance().getBoardReply();
         const replyTable = document.querySelector(".reply-table");
-        let num1 = 1;
-        let num2 = 1;
-        let num3 = 1;
+        
+        let num1 = 0;
+        let num2 = 0;
+        let num3 = 0;
 
         responeseData.forEach((data, index)=>{
-
             
-
             replyTable.innerHTML += `
-            ${data.boardReplySec == 1 & data.boardReplyThi == 1
+            ${data.boardReplySec == 1 && data.boardReplyThi == 1
                 ?`<table>
                 <thead>
                 <th>${data.name}</th>
@@ -255,14 +258,14 @@ class BoardViewService {
                     </td>
                 </tfoot>
             </table>
-            <div class="reply-fir-btn-box" style="display:none;" value=${data.boardReplyFir}>
+            <div class="reply-fir-btn-box" style="display:none;">
                 <input class="reply-fir-input"></input>
                 <button class="reg-fir-btn" value=${data.boardReplyFir}>등록</button>
             </div>`
                 :``
             }
 
-            ${data.boardReplySec == num2 && data.boardReplyFir == num1 && data.boardReplyThi != 1
+            ${data.boardReplyThi == 1 && data.boardReplySec != 1 && (data.boardReplySec == num2 || data.boardReplyFir == num1)
                 ?`
                 <table style="margin-left:30px;">
                     <thead>
@@ -277,26 +280,45 @@ class BoardViewService {
                         </td>
                     </tfoot>
                 </table>
-                <div class="reply-sec-btn-box" style="display:none; value=${data.boardReplySec}>
+                <div class="reply-sec-btn-box" style="display:none; margin-left:30px;">
                     <input class="reply-sec-input"></input>
+                    <input type="hidden" class="reply-fir-value" value="${data.boardReplyFir}"></input>
                     <button class="reg-sec-btn" value=${data.boardReplySec}>등록</button>
                 </div>
                 `:`
                 `
-            } 
+            }
+
+            ${data.boardReplyThi != 1 && (data.boardReplySec == num2 || data.boardReplyThi == num3)
+                ?`
+                <table style="margin-left:60px;">
+                    <thead>
+                    <th>${data.name}</th>
+                    </thead>
+                        <tbody>
+                            <td>${data.boardReply}</td>
+                        </tbody>
+                </table>
+                `:`
+                `
+            }
         `;
         
         if(data.boardReplySec != num2){
             num2 +=1;
-
-            if(data.boardReplyFir != num1) {
-                num1 += 1;
-                return num2 = 1;
-            }
-            
         }
-        console.log("num2 : "+num2);
-        console.log("num1 : "+num1);
+        if(data.boardReplyFir != num1) { 
+            num1 += 1;
+            return num2 = 1, num3 = 1;
+        }
+
+        if(data.boardReplySec != num2 && data.boardReplyThi != num3) {
+            return num2=1, num3 = 1;
+        }
+
+        if(data.boardReplyThi != num3){ 
+            num3 +=1;
+        }
 
         });
         
@@ -373,7 +395,6 @@ class ComponentEvent{
 
         repFirButton.forEach((button, index) => {
             button.onclick = () => {
-                console.log(index);
                 if(repFirBox[index].style.display !== "none") {
                     repFirBox[index].style.display = "none";
                 }
@@ -393,7 +414,7 @@ class ComponentEvent{
                 
                 replyObj.boardId = boardObj.boardId;
                 replyObj.userId = principal.user.userId;
-                
+
                 replyObj.boardReply = writeInput[index].value;
                 replyObj.boardReplyFir = responeseData[index].value;
                 replyObj.boardReplySec = replyObj.boardReplySec;
@@ -414,6 +435,7 @@ class ComponentEvent{
 
         repSecButton.forEach((button, index) => {
             button.onclick = () => {
+                console.log(index)
                 if(repSecBox[index].style.display !== "none") {
                     repSecBox[index].style.display = "none";
                 }
@@ -425,28 +447,24 @@ class ComponentEvent{
 
         const writeInput = document.querySelectorAll(".reply-sec-input");
         const responeseData = document.querySelectorAll(".reply-sec-btn");
-        const boardReplyFir = document.querySelectorAll(".reply-fir-btn");
+        const boardReplyFirValue = document.querySelectorAll(".reply-fir-value");
         const principal = PrincipalApi.getInstance().getPrincipal();
 
         regSecBtn.forEach((button, index)=>{
             button.onclick = () => {
-                
-                const num = index;
                 replyObj.boardId = boardObj.boardId;
                 replyObj.userId = principal.user.userId;
-                
-                replyObj.boardReply = writeInput[num].value;
-                replyObj.boardReplyFir = boardReplyFir[num].value;
-                replyObj.boardReplySec = responeseData[num].value;
+
+                replyObj.boardReply = writeInput[index].value;
+                replyObj.boardReplyFir = boardReplyFirValue[index].value;
+                replyObj.boardReplySec = responeseData[index].value;
                 replyObj.boardReplyThi = replyObj.boardReplyThi;
-                
-                console.log(num);
 
                 const successFlag = BoardViewApi.getInstance().writeBoardReplyThi();
                 
-                // if(successFlag) {
-                //     location.reload();
-                // }
+                if(successFlag) {
+                    location.reload();
+                }
             }
         });
     }

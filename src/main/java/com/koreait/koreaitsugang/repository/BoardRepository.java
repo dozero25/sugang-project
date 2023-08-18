@@ -35,10 +35,10 @@ public interface BoardRepository {
 
     public List<BoardReplyDto> getBoardReplyByBoardId(int boardId);
 
-    public int getReplyCount();
+    public int getReplyCount(int boardId);
 
-    public int getReplySecCount(int boardReplyFir);
+    public int getReplySecCount(int boardId, int boardReplyFir);
 
-    public int getReplyThiCount(int boardReplyFir, int boardReplySec);
+    public int getReplyThiCount(int boardId, int boardReplyFir, int boardReplySec);
 }
 

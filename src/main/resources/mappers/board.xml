@@ -223,6 +223,8 @@
         select ifnull( MAX(board_reply_fir) + 1, 1 ) as Maxcnt
         from
         board_reply
+        where
+        board_id = #{boardId}
     </select>
 
     <select id="getReplySecCount" resultType="integer">
@@ -230,6 +232,8 @@
         from
         board_reply
         where
+        board_id = #{boardId}
+        and
         board_reply_fir = #{boardReplyFir}
     </select>
 
@@ -238,6 +242,8 @@
         from
         board_reply
         where
+        board_id = #{boardId}
+        and
         board_reply_fir = #{boardReplyFir}
         and
         board_reply_sec = #{boardReplySec}
