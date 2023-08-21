@@ -27,7 +27,7 @@
 
 
 
-[js]: /images/stack/javascript.svg
-[ts]: /images/stack/typescript.svg
-[react]: /images/stack/react.svg
-[node]: /images/stack/node.svg
+[js]: /readme.images/js.png
+[html]: /images/stack/typescript.svg
+[css]: /images/stack/react.svg
+[java]: /images/stack/node.svg
