@@ -18,10 +18,11 @@
 기존에 있었던 수강 바구니 신청 기능의 오류를 수정하고, 관리자 페이지 기능 추가, 게시판 기능 추가 등을 진행했습니다. </br>
 </p>
 
-## 사용 기술
+## 사용 기술 🛠
 |    Java   | Spring Boot |  MySql   |  JavaScript   | Html | Css |
 | :--------: | :--------: | :------: | :-----: | :--------: | :--------: |
-|   <img src="/readme.images/java.png" width="200" height="100"/>  |   <img src="/readme.images/springboot.png" width="200" height="100"/>    | <img src="/readme.images/mysql.png" width="200" height="100"/> |  <img src="/readme.images/js.png" width="200" height="100"/> |   <img src="/readme.images/html.png" width="200" height="100"/>    |   <img src="/readme.images/css.png" width="150" height="100"/>   |
+|   <img src="/readme/images/java.png" width="200" height="100"/>  |   <img src="/readme/images/springboot.png" width="200" height="100"/>    | <img src="/readme/images/mysql.png" width="200" height="100"/> |  <img src="/readme/images/js.png" width="200" height="100"/> |   <img src="/readme/images/html.png" width="200" height="100"/>    |   <img src="/readme/images/css.png" width="150" height="100"/>   |
 
-## 프로젝트 결과물
+## 화면 구성 📺 
+
 
