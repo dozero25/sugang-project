@@ -7,6 +7,7 @@
 ## 팀원 소개
 |      윤도영       |                                                                                                            
 | :-----: | 
+| <img src="/readme.images/123.jpg" width="300" height="300"/> | 
 |   [@dozero25](https://github.com/dozero25)   |
 
 
