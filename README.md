@@ -2,11 +2,21 @@
 
 </br>
 
+## 목차
+<p>
+  1. 팀원 소개</br>
+  2. 프로젝트 소개</br>
+  3. 사용 기술</br>
+  4. 화면 구성</br>
+</p>
+</br>
+
 ## 팀원 소개
 |      윤도영       |                                                                                                            
 | :-----: | 
-| <img src="/readme.images/123.jpg" width="300" height="300"/> | 
+| <img src="/readme/images/123.jpg" width="300" height="300"/> | 
 |   [@dozero25](https://github.com/dozero25)   |
+|   https://blog.naver.com/dozero25   |
 
 
 ## 프로젝트 소개
@@ -29,12 +39,17 @@
 |:---:|:---:|
 |<img src="/readme/images/1.png" width="500" height="300"/>|<img src="/readme/images/2.png" width="500" height="300"/>|
 
+</br>
+
 |마이 페이지| 게시판 페이지 |
 |:---:|:---:|
 |<img src="/readme/images/3.png" width="500" height="300"/>|<img src="/readme/images/4.png" width="500" height="300"/>|
+
+</br>
 
 |수강바구니 신청 페이지| 관리자 페이지 |
 |:---:|:---:|
 |<img src="/readme/images/5.png" width="500" height="300"/>|<img src="/readme/images/6.png" width="500" height="300"/>|
 
 </br>
+
