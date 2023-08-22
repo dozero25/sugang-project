@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 @SpringBootApplication
 public class KoreaitsugangApplication {
 
-
 	public static void main(String[] args) {
 		SpringApplication.run(KoreaitsugangApplication.class, args);
 	}
