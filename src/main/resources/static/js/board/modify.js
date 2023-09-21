@@ -140,7 +140,7 @@ class ComponentEvent {
             const successFlag = BoardModifyApi.getInstance().modifyBoard();
         
             if(successFlag) {
-                alert("등록이 완료되었습니다.");
+                alert("수정이 완료되었습니다.");
                 location.href="/board"
             } else {
                 location.reload();
