@@ -99,8 +99,7 @@
         board_upload_name = #{boardUploadName},
         board_upload_size = #{boardUploadSize},
         board_upload_trans = #{boardUploadTrans},
-        board_regdate = now(),
-        board_grp = #{boardGrp}
+        board_regdate = now()
         where
         board_id = ${boardId}
     </update>

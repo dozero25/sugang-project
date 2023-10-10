@@ -20,11 +20,11 @@ mybatis:
   mapper-locations:
     - /mappers/*
 
-file:
-  path: C:/Users/ITPS/Documents/sugang-project/images/
-
 #file:
-#  path: C:/koreaITproject/KoreaIT_Sugang/images/
+#  path: C:/Users/ITPS/Documents/sugang-project/images/
+
+file:
+  path: C:/sugang-project/images/
 #    - /mappers/*.xml
 
 
