@@ -6,6 +6,7 @@
 
     <select id="getAllBoardList" parameterType="com.koreait.koreaitsugang.web.dto.SearchBoardReqDto" resultType="com.koreait.koreaitsugang.web.dto.BoardDto">
         select
+        row_number() over(order by bm.board_id) as boardIdByRowNum,
         bm.board_id as boardId,
         bm.board_subject as boardSubject,
         um.name as name,
@@ -30,7 +31,7 @@
             )
         </if>
         order by
-        board_id desc
+        boardIdByRowNum desc
         <if test='limit == "Y"'>
             limit #{index}, #{count}
         </if>
@@ -98,8 +99,7 @@
         board_content = #{boardContent},
         board_upload_name = #{boardUploadName},
         board_upload_size = #{boardUploadSize},
-        board_upload_trans = #{boardUploadTrans},
-        board_regdate = now()
+        board_upload_trans = #{boardUploadTrans}
         where
         board_id = ${boardId}
     </update>
@@ -142,7 +142,7 @@
 
     <select id="getBoardListByBoardGrp" parameterType="List" resultType="com.koreait.koreaitsugang.web.dto.BoardDto">
         select
-        bm.board_id as boardId,
+        row_number() over(order by bm.board_id) as boardId,
         bm.board_subject as boardSubject,
         um.name as name,
         bm.board_visit as boardVisit,
@@ -166,7 +166,7 @@
             )
         </if>
         order by
-        bm.board_id desc
+        boardId DESC
         <if test='limit == "Y"'>
             limit #{index}, #{count}
         </if>

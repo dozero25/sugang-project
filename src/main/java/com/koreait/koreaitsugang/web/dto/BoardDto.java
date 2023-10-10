@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 @Data
 public class BoardDto {
+    private int boardIdByRowNum;
     private int boardId;
     private String boardSubject;
     private int userId;

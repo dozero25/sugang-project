@@ -283,7 +283,7 @@ class BoardMainService {
         responeseData.forEach((data, index) => {
             boardTable.innerHTML += `
             <tr>
-                <td>${data.boardId}</td>
+                <td>${data.boardIdByRowNum}</td>
                 <td>
                 <a href="/board/view?boardId=${data.boardId}" value=${data.boardId} id="go-writepage">${data.boardSubject}</a>
                 </td>
@@ -332,7 +332,7 @@ class BoardMainService {
         responeseData.forEach((data, index)=> {
             boardTable.innerHTML += `
             <tr>
-                <td>${data.boardId}</td>
+                <td>${data.boardIdByRowNum}</td>
                 <td>
                 <a href="/board/view?boardId=${data.boardId}" value=${data.boardId} id="go-writepage">${data.boardSubject}</a>
                 </td>
