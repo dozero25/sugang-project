@@ -56,7 +56,6 @@ public class SugangApi {
     public ResponseEntity<CMRespDto<?>> applyCourse(@RequestBody PocketMst pocketMst, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
         pocketMst.setUserId(principalDetails.getUser().getUserId());
-        System.out.println(pocketMst.getSubjectCode());
         return ResponseEntity
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", sugangService.applyCourse(pocketMst)));

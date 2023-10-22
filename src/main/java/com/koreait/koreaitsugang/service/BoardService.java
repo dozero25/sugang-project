@@ -99,7 +99,7 @@ public class BoardService {
 
         Map<String, Object> map = new HashMap<>();
 
-        if (boardReplyDto.getBoardReply() == "") {
+        if (boardReplyDto.getBoardReply() == "" || boardReplyDto.getBoardReply() == null) {
             map.put("msg", "error");
             throw new RuntimeException();
         }

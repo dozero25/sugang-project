@@ -285,7 +285,7 @@ class BoardMainService {
             <tr>
                 <td>${data.boardIdByRowNum}</td>
                 <td>
-                <a href="/board/view?boardId=${data.boardId}" value=${data.boardId} id="go-writepage">${data.boardSubject}</a>
+                <a href="/board/view?boardId=${data.boardId}" value=${data.boardId}>${data.boardSubject}</a>
                 </td>
                 <td>${data.name}</td>
                 <td>${data.boardRegDate}</td>
@@ -334,7 +334,7 @@ class BoardMainService {
             <tr>
                 <td>${data.boardIdByRowNum}</td>
                 <td>
-                <a href="/board/view?boardId=${data.boardId}" value=${data.boardId} id="go-writepage">${data.boardSubject}</a>
+                <a href="/board/view?boardId=${data.boardId}" value=${data.boardId}>${data.boardSubject}</a>
                 </td>
                 <td>${data.name}</td>
                 <td>${data.boardRegDate}</td>
