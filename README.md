@@ -68,5 +68,6 @@
   3. 관리자 기능 추가(학생 학점 등록, 수정, 삭제)
 
 ## ppt
-<a href="/readme/ppt/개인-프로젝트_윤도영.pdf">프로젝트 파일 링크</a>
-<a href="/readme/ppt/개인프로젝트_윤도영.pptx">프로젝트 파일 링크</a>
+<a href="/readme/ppt/개인-프로젝트_윤도영.pdf">ppt 파일 링크</a>
+<br>
+<a href="/readme/ppt/개인프로젝트_윤도영.pptx">ppt파일 다운로드 링크</a>
