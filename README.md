@@ -69,3 +69,4 @@
 
 ## ppt
 <a href="/readme/ppt/개인-프로젝트_윤도영.pdf">프로젝트 파일 링크</a>
+<a href="/readme/ppt/개인-프로젝트_윤도영.pptx">프로젝트 파일 링크</a>
