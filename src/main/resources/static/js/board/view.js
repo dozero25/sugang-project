@@ -182,6 +182,7 @@ class BoardViewService {
         const responseData = BoardViewApi.getInstance().getBoardView();
         const viewDetail = document.querySelector(".view-detail");
 
+
         viewDetail.innerHTML = `
             <label>제목</label>
             <div>

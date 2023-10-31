@@ -142,7 +142,8 @@
 
     <select id="getBoardListByBoardGrp" parameterType="List" resultType="com.koreait.koreaitsugang.web.dto.BoardDto">
         select
-        row_number() over(order by bm.board_id) as boardId,
+        row_number() over(order by bm.board_id) as boardIdByRowNum,
+        bm.board_id as boardId,
         bm.board_subject as boardSubject,
         um.name as name,
         bm.board_visit as boardVisit,
@@ -166,7 +167,7 @@
             )
         </if>
         order by
-        boardId DESC
+        boardIdByRowNum DESC
         <if test='limit == "Y"'>
             limit #{index}, #{count}
         </if>
