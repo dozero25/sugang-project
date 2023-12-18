@@ -94,6 +94,7 @@ class BoardWriteService {
         const boardCategory = document.querySelector(".reg-option");
         boardCategory.innerHTML = `<option value="">목록을 선택하세요</option>`;
         
+
         if(principal.user.roleDtl[0].roleId == 3){
             responeseData.forEach((data) => {
                 boardCategory.innerHTML += `

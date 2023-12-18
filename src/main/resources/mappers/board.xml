@@ -21,8 +21,6 @@
         board_mst bm
         inner join user_mst um on (bm.user_id = um.user_id)
         inner join board_category bc on (bm.board_grp = bc.board_grp)
-        where
-        bc.board_category_name not in ("자유게시판")
         <if test='searchValue != null and searchValue !=""'>
             and (
             board_id like CONCAT('%', #{searchValue}, '%')

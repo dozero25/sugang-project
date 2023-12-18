@@ -308,6 +308,7 @@ class BoardViewService {
         if(data.boardReplySec != num2){
             num2 +=1;
         }
+        
         if(data.boardReplyFir != num1) { 
             num1 += 1;
             return num2 = 1, num3 = 1;
