@@ -60,7 +60,7 @@ public class AccountApi {
                 .ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Success", accountService.getUser(username)));
     }
-    @ParamsAspect
+//    @ParamsAspect
     @GetMapping("/principal")
     public ResponseEntity<CMRespDto<? extends PrincipalDetails>> getPrincipalDetails(@AuthenticationPrincipal PrincipalDetails principalDetails) {
 
@@ -79,7 +79,7 @@ public class AccountApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Success", principalDetails));
     }
 
-    @ParamsAspect
+//    @ParamsAspect
     @GetMapping("/mypage/{userId}")
     public ResponseEntity<CMRespDto<Map<String, Object>>> mypageUser(@PathVariable int userId, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
@@ -94,7 +94,7 @@ public class AccountApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", accountService.mypageUser(userId)));
     }
 
-    @ParamsAspect
+//    @ParamsAspect
     @GetMapping("{userId}")
     public ResponseEntity<CMRespDto<? extends MypageMst>> loadUserInformation(@PathVariable int userId, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
@@ -109,7 +109,7 @@ public class AccountApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", accountService.loadUserInformation(userId)));
     }
 
-    @ParamsAspect
+//    @ParamsAspect
     @PostMapping("/user/{username}/images")
     public ResponseEntity<CMRespDto<?>> registerUserImg(@PathVariable String username, @ApiParam @RequestPart(required = false) List<MultipartFile> files) {
         accountService.registerUserImages(username, files);
@@ -118,8 +118,8 @@ public class AccountApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
     }
 
-    @ParamsAspect
-    @ValidAspect
+//    @ParamsAspect
+//    @ValidAspect
     @PatchMapping("/mypage/{username}")
     public ResponseEntity<CMRespDto<?>> modifyUser(@PathVariable("username") String username, @Valid @RequestBody MypageMstReqDto mypageMstReqDto, BindingResult bindingResult){
         accountService.modifyUSer(mypageMstReqDto);
@@ -128,7 +128,7 @@ public class AccountApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
     }
 
-    @ParamsAspect
+//    @ParamsAspect
     @PostMapping("/user/{username}/images/modification")
     public ResponseEntity<CMRespDto<?>> modifyUserImg(@PathVariable String username, @RequestPart(value="files",required = false)  List<MultipartFile> files) {
         accountService.registerUserImages(username, files);
@@ -137,7 +137,7 @@ public class AccountApi {
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
     }
 
-    @ParamsAspect
+//    @ParamsAspect
     @GetMapping("/user/{userId}/images")
     public ResponseEntity<CMRespDto<?>> getImages(@PathVariable int userId) {
         List<UserImageDto> userImageDtos = accountService.getUsers(userId);
