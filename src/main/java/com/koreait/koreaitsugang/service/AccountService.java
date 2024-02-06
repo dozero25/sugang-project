@@ -31,11 +31,9 @@ public class AccountService {
     @Value("${file.path}")
     private String filePath;
 
-    public UserMst updatePassword(UserMst userMst) {
+    public void updatePassword(UserMst userMst) {
         userMst.setPassword(new BCryptPasswordEncoder().encode(userMst.getPassword()));
         accountRepository.updatePassword(userMst);
-
-        return userMst;
     }
 
     public int saveRoleId(RoleDtl roleDtl) {
@@ -122,6 +120,8 @@ public class AccountService {
             }
         }
     }
-
+    public int registerUser(UserMst userMst) {
+        return accountRepository.registerUser(userMst);
+    }
 
 }

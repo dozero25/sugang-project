@@ -206,4 +206,10 @@
         where
             um.user_id = #{userId};
     </select>
+
+    <insert id="registerUser" parameterType="list">
+        insert into
+        user_mst
+        values (#{userId}, #{username}, #{password}, #{name}, #{phone}, #{birthDate}, #{email}, #{address}, #{departmentNumber})
+    </insert>
 </mapper>

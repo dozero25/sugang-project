@@ -35,13 +35,14 @@ public class AccountApi {
     private AccountService accountService;
 
     @PutMapping("/encodePassword/{userId}")
-    public ResponseEntity<? extends CMRespDto<?>> encodePassword(@RequestBody @Valid UserMst userMst){
+    public ResponseEntity<? extends CMRespDto<?>> encodePassword(@PathVariable int userId, @RequestBody @Valid UserMst userMst, BindingResult bindingResult
+    ){
 
         accountService.updatePassword(userMst);
 
         return ResponseEntity
                 .ok()
-                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", userMst));
     }
 
     @PostMapping("/saveRoleId")
@@ -152,5 +153,12 @@ public class AccountApi {
         accountService.removeUserImage(imageId);
         return ResponseEntity.ok()
                 .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", null));
+    }
+
+    @PostMapping("/user/register")
+    public ResponseEntity<CMRespDto<?>> registerUser(@RequestBody UserMst userMst ) {
+        accountService.registerUser(userMst);
+        return ResponseEntity.ok()
+                .body(new CMRespDto<>(HttpStatus.OK.value(), "Successfully", true));
     }
 }

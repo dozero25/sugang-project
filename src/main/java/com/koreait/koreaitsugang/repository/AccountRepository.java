@@ -40,4 +40,6 @@ public interface AccountRepository {
     public void updateUserByUsername(MypageMstReqDto mypageMstReqDto);
 
     public MypageMst loadUserInformation(int userId);
+
+    public int registerUser(UserMst userMst);
 }
