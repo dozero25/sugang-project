@@ -22,4 +22,5 @@ public class ExceptionAdvice {
         return ResponseEntity.badRequest()
                 .body(new CMRespDto<>(HttpStatus.BAD_REQUEST.value(), "ApplyCount Error", e.getErrorMap()));
     }
+
 }
