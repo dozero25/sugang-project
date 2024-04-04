@@ -1,6 +1,5 @@
 package com.koreait.koreaitsugang.config;
 
-import com.koreait.koreaitsugang.config.handler.CustomAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -42,13 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new SessionRegistryImpl();
     }
 
-    @Bean public AccessDeniedHandler accessDeniedHandler() {
 
-        CustomAccessDeniedHandler accessDeniedHandler = new CustomAccessDeniedHandler();
-        accessDeniedHandler.setErrorPage("/denied");
-
-        return accessDeniedHandler;
-    }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
